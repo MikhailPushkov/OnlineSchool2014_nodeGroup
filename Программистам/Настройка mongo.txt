@@ -1,0 +1,15 @@
+В каталоге с куда была установлена mongodb  у меня (C:\Program Files\MongoDB 2.6 Standard)
+1. создайте папку log;
+2. создайте папку db;
+2. создайте файл mongod.cfg и в нем:
+
+logpath=C:\Program Files\MongoDB 2.6 Standard\log\mongo.log
+dbpath=C:\Program Files\MongoDB 2.6 Standard\db
+
+3. путь к папке с mongo может быть другой, так что смотрите какой у вас,
+4. выполните в командной строке:
+	"C:\Program Files\MongoDB 2.6 Standard\bin\mongod" --config "C:\Program Files\MongoDB 2.6 Standard\mongod.cfg" --install
+5. Теперь нужно запустить службу (самый простой и понятный способ перезагрузить комп))) или читай дальше)
+в восьмерке нужно правой кнопкой по пуску -> управление компюьтером 
+(семерка правой кнопкой по моему компьютеру -> управление) 
+-> службы там найти mongoDB и запустить ее.
