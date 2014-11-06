@@ -52,8 +52,9 @@ define([
         };
 
         App.Success_Login = function (response) {
+
             var callback = function () {
-                App.Router.navigate('profile/' + App.Session.get("_id"), {
+                App.Router.navigate('admin/' + App.Session.get("_id"), {
                     trigger: true
                 });
             };
@@ -78,7 +79,6 @@ define([
                 .fail(function (xhr) {
                     console.log("something went wrong in logout");
                 });
-
         };
 
         App.GET_comment_editing_no_comment_fecthing = function () {

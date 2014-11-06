@@ -6,9 +6,10 @@ define(['App',
     'bb/Views/Header/Header',
     'bb/Views/Login/Login',
     'bb/Views/Signup/Signup',
-    'bb/Views/Profile/Wall'
+    'bb/Views/Profile/Wall',
+    'bb/Views/Profile/AdminPage'
 ],
-    function (App, $, _, Backbone, Profile, Header, Login, Signup, Wall) {
+    function (App, $, _, Backbone, Profile, Header, Login, Signup, Wall, AdminPage) {
         // You can access App.Router any where in the application, if you define "App" as a dependency in your modules
         var AppRouter = Backbone.Router.extend({
 
@@ -28,14 +29,15 @@ define(['App',
                 "": "start",
                 "login": "login",
                 "signup": "signup",
-                "profile/:id": "profile",
+                "admin/:id":"admin",
+                "profile/:role/:id": "profile",
                 "logout": "logout"
             },
 
             start: function () {
-                var curUserId = App.Session.get("_id")
-                if(curUserId){
-                    this.profile(curUserId);
+                var curUserId = App.Session.get("_id");
+                if (curUserId) {
+                    this.profile(curUserId,AdminPage);
                     return;
                 }
 
@@ -56,7 +58,11 @@ define(['App',
                 this.logout();
             },
 
-            profile: function (_id) {
+            admin: function (_id) {
+                this.fetch_profile(_id, AdminPage);
+            },
+
+            profile: function (role ,_id) {
                 this.fetch_profile(_id, Wall);
             },
 

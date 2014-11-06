@@ -1,0 +1,235 @@
+<div class="adminPage">
+<!-- Nav tabs -->
+<ul class="nav nav-tabs " role="tablist" id="myTab">
+    <li><a href="#teacher" role="tab" data-toggle="tab">Учителя</a></li>
+    <li class="active"><a href="#learner" role="tab" data-toggle="tab">Ученики</a></li>
+    <li><a href="#classes" role="tab" data-toggle="tab">Классы</a></li>
+    <li><a href="#lessons" role="tab" data-toggle="tab">Предметы</a></li>
+    <li><a href="#schedule" role="tab" data-toggle="tab">Рассписание</a></li>
+</ul>
+
+<div class="buttons">
+    <button class="btn btn-success">Добавить</button>
+</div>
+<!-- Tab panes -->
+<div class="tab-content">
+<div id="teacher" class="tab-pane">
+    <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+        <thead>
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>Петрова</td>
+            <td>Мария</td>
+            <td>Ивановна</td>
+        </tr>
+        <tr>
+            <td>Иванова</td>
+            <td>Наталья</td>
+            <td>Николаевна</td>
+        </tr>
+        <tr>
+            <td>Николаева</td>
+            <td>Анастасия</td>
+            <td>Михайловна</td>
+        </tr>
+        <tr>
+            <td><input type="text" class="tableText form-control " value="Николаева"/></td>
+            <td><input type="text" class="tableText form-control" value="Анастасия"/></td>
+            <td><input type="text" class="tableText form-control" value="Михайловна"/></td>
+            <td>
+            </td>
+        </tr>
+
+
+    </table>
+</div>
+<div id="learner" class="tab-pane active">
+    <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+        <thead>
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th style="width:20px">Класс</th>
+            <th>Родители</th>
+            <th>Адрес</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Иван</td>
+            <td>Иванов</td>
+            <td>Иванович</td>
+            <td>10</td>
+            <td>
+                <p><a href="">Иванов И. И.</a></p>
+
+                <p><a href="">Иванова И. И.</a></p>
+            </td>
+            <td>ул. АОВЛОА. д.2</td>
+        </tr>
+        <tr>
+            <td><input type="text" class="tableText " value="Иван"/></td>
+            <td><input type="text" class="tableText" value="Иванов"/></td>
+            <td><input type="text" class="tableText" value="Иванович"/></td>
+            <td>
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </td>
+            <td>
+                <p><a href="">Иванов И. И.</a></p>
+
+                <p><a href="">Иванова И. И.</a></p>
+            </td>
+            <td><input type="text" class="tableText" value="ул. АОВЛОА. д.2"/></td>
+            <td>
+                <button role="button" class="btn btn-danger delete">X</button>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="text" class="tableText" value="Иван"/></td>
+            <td><input type="text" class="tableText" value="Иванов"/></td>
+            <td><input type="text" class="tableText" value="Иванович"/></td>
+            <td>
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </td>
+            <td>
+                <p><a href="">Иванов И. И.</a></p>
+
+                <p><a href="">Иванова И. И.</a></p>
+            </td>
+            <td><input type="text" class="tableText" value="ул. АОВЛОА. д.2"/></td>
+            <td>
+                <button role="button" class="btn btn-danger delete">X</button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<div id="classes" class="tab-pane">
+    <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+        <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Классный руководитель</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>10 а</td>
+            <td>Петрова М.И.</td>
+        </tr>
+        <tr>
+            <td>5 б</td>
+            <td>Петрова М.И.</td>
+        </tr>
+        <tr>
+            <td>7 в</td>
+            <td>Петрова М.И.</td>
+        </tr>
+        <tr>
+            <td><input type="text" class="tableText form-control " value="7 б"/></td>
+            <td><input type="text" class="tableText form-control" value="Баранова И.И"/></td>
+            <td>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="lessons" class="tab-pane">
+    <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Учитель</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>Русский язык</td>
+            <td>Иванова н.И.</td>
+        </tr>
+        <tr>
+            <td>Математика</td>
+            <td>Иванова н.И.</td>
+        </tr>
+        <tr>
+            <td>Литература</td>
+            <td>Иванова н.И.</td>
+        </tr>
+        <tr>
+            <td>География</td>
+            <td>Иванова н.И.</td>
+        </tr>
+        <tr>
+            <td><input type="text" class="tableText form-control " value="Физика"/></td>
+            <td><input type="text" class="tableText form-control" value="Петрова Н.И"/></td>
+
+            <td>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="schedule" class="tab-pane">
+    <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+        <thead>
+        <tr>
+            <th>День недели</th>
+            <th>Начало урока</th>
+            <th>Конец урока</th>
+            <th>Предмет</th>
+            <th>Класс</th>
+            <th>Учитель</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>Понедельник</td>
+            <td>8.30</td>
+            <td>9.15</td>
+            <td>Русский язык</td>
+            <td>8 а</td>
+            <td>Иванова н.И.</td>
+        </tr>
+        <tr>
+            <td>Вторник</td>
+            <td>8.30</td>
+            <td>9.15</td>
+            <td>Математика</td>
+            <td>10 а</td>
+            <td>Петрова</td>
+        </tr>
+        <tr>
+            <td>Среда</td>
+            <td>8.30</td>
+            <td>9.15</td>
+            <td>Литература</td>
+            <td>6 в</td>
+            <td>Николаева</td>
+        <tr>
+            <td><input type="text" class="tableText form-control " value="Пятница"/></td>
+            <td><input type="text" class="tableText form-control" value="10:00"/></td>
+            <td><input type="text" class="tableText form-control" value="10:45"/></td>
+            <td><input type="text" class="tableText form-control" value="Физика"/></td>
+            <td><input type="text" class="tableText form-control" value="10 а"/></td>
+            <td><input type="text" class="tableText form-control" value="Петрова"/></td>
+            <td>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+</div>

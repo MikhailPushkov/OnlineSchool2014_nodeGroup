@@ -22,7 +22,7 @@ require.config({
         jquery: 'lib/jquery-1.11.1.min',
         underscore: 'lib/underscore-min',
         backbone: 'lib/backbone-min',
-        bootstrap: 'lib/bootstrap.min',
+      //  bootstrap: 'lib/bootstrap.min',
         handlebars: 'lib/handlebars-v1.3.0',
         text: 'lib/text',
         'jquery.cookie': 'lib/jquery.cookie',

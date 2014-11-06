@@ -31,7 +31,7 @@ define([
             },
 
             validate: function () {
-                var $input_login = $("#email", this.el);
+                var $input_login = $("#login", this.el);
                 var $input_password = $("#password", this.el);
                 var $alert = $(".alert", this.el);
 
@@ -51,7 +51,7 @@ define([
             login: function (e) {
                 e.preventDefault();
                 if (!this.validate())return;
-                var input_login = $("#email", this.el).val();
+                var input_login = $("#login", this.el).val();
                 input_login = _.escape(input_login);
                 var input_password = $("#password", this.el).val();
                 input_password = _.escape(input_password);

@@ -1,0 +1,87 @@
+@font-face {
+    font-family: Pompadur; /* Гарнитура шрифта */
+    src: url(../fonts/AvalonMedium.ttf); /* Путь к файлу со шрифтом */
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #6e9870 !important;
+}
+
+h1 {
+    font-family: Pompadur !important;
+    font-size: 7em !important;
+    text-align: center;
+    color: #ffffff !important;
+}
+
+.loginPanel {
+    width: 200px;
+    margin: 0 10px;
+    float: right;
+}
+
+.page {
+    position: relative;
+    width: 1000px;
+    height:800px;
+    margin: 10px auto;
+    background-color: rgb(60, 84, 62) !important;
+    border-radius: 20px;
+    border-bottom-style: groove;
+    padding: 15px;
+    border: 5px solid #8B4513;
+    background-image:url('../img/sikonkami.png') ;
+    background-size: cover;
+}
+
+.btnLogin {
+    float: right;
+}
+
+.loginPanel div {
+    margin: 5px;
+}
+
+.loginPanel {
+    color: white;
+}
+
+.header {
+    margin-top: 0;
+}
+/*
+#girl {
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    right: 351px;
+}
+
+#azbuka {
+    position: absolute;
+    top: 50px;
+    left: 180px;
+
+}
+
+#fotik {
+    position: absolute;
+    top: 300px;
+    left: 80px;
+}
+
+#globus {
+    position: absolute;
+    top: 50px;
+    right: 200px;
+}
+
+#palitra {
+    position: absolute;
+    top: 300px;
+    right: 100px;
+}
+*/
