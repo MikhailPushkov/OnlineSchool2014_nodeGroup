@@ -9,9 +9,9 @@ define(['App',
     'bb/Views/Profile/Wall',
     'bb/Views/Profile/AdminPage',
     'bb/Views/Learner/Learner',
-     'bb/Views/Teacher/Teacher'
+    'bb/Views/Teacher/Teacher'
 ],
-    function (App, $, _, Backbone, Profile, Header, Login, Signup, Wall, AdminPage,Learner,Teacher) {
+    function (App, $, _, Backbone, Profile, Header, Login, Signup, Wall, AdminPage, Learner, Teacher) {
         // You can access App.Router any where in the application, if you define "App" as a dependency in your modules
         var AppRouter = Backbone.Router.extend({
 
@@ -31,15 +31,14 @@ define(['App',
                 "": "start",
                 "login": "login",
                 "signup": "signup",
-                "admin/:id":"admin",
                 "profile/:role/:id": "profile",
                 "logout": "logout",
-                "Learner":"Learner",
-                "Teacher":"Teacher"
+                "Learner": "Learner",
+                "Teacher": "Teacher"
             },
 
             start: function () {
-                if(App.AlreadyLogged()) return;
+                if (App.AlreadyLogged()) return;
 
                 this.login();
             },
@@ -56,21 +55,9 @@ define(['App',
                 this.logout();
             },
 
-            admin: function (_id) {
-                this.fetch_profile(_id, AdminPage);
-            },
-
-            learner: function(_id){
-                this.fetch_profile(_id,Learner);
-            },
-
-            teacher: function(_id){
-                this.fetch_profile(_id,Teacher);
-            },
-
-            profile: function (role ,_id) {
+            profile: function (role, _id) {
                 var view
-                switch(role){
+                switch (role) {
                     case "admin":
                         view = AdminPage
                         break;
@@ -126,12 +113,6 @@ define(['App',
                     App.headerRegion.close();
                     this.header_built = false;
                 } catch (err) {
-
-                }
-                try {
-                    App.chatRegion.close();
-                } catch (err) {
-
                 }
             },
 

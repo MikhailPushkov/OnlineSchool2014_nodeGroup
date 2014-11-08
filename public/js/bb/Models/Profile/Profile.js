@@ -22,7 +22,6 @@ define([
             idAttribute: "_id",
 
             defaults: {
-                profile_pic: null,
                 role: null,
                 itemId: null,
                 match: false
