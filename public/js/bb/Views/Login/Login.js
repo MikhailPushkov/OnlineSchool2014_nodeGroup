@@ -34,12 +34,15 @@ define([
                 var $input_login = $("#login", this.el);
                 var $input_password = $("#password", this.el);
                 var $alert = $(".alert", this.el);
-
+                var $error = $("#Error",this.el);
                 if ($input_login.val() === "" && $input_password.val() === "") {
+                    $error.removeClass("hide");
                     $alert.removeClass("hide").html("Введите логин и пароль.");
                 } else if ($input_login.val() === "") {
+                    $error.removeClass("hide");
                     $alert.removeClass("hide").html("Введите логин.");
                 } else if ($input_password.val() === "") {
+                    $error.removeClass("hide");
                     $alert.removeClass("hide").html("Введите пароль.");
                 } else {
                     $alert.addClass("hide");
@@ -65,7 +68,7 @@ define([
                         App.Success_Login(response);
                     })
                     .fail(function (xhr) {
-                        $alert.removeClass("hide").html(xhr.responseText);
+                        $alert.removeClass("hide").html("Не верно введен логин или пароль");
                     });
             },
 

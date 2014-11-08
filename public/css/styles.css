@@ -52,6 +52,9 @@ h1 {
 .header {
     margin-top: 0;
 }
+.hide {
+    display:none;
+}
 /*
 #girl {
     position: absolute;
