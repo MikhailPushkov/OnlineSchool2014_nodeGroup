@@ -8,7 +8,6 @@ var _ = require('underscore');
 
 exports.Parent_findById = function (req, res) {
     var id = req.params.id;
-    console.log(id);
     Parent.findOne({ _id: id }, function (err, Parent) {
         if (err) return res.send(404, "Parent not found");
         res.send(Parent);

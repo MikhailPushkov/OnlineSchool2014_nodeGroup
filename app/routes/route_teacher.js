@@ -5,7 +5,6 @@ var _ = require('underscore');
 
 exports.Teacher_findById = function (req, res) {
     var id = req.params.id;
-    console.log(id);
     Teacher.findOne({ _id: id }, function (err, Teacher) {
         if (err) return res.send(404, "Teacher not found");
         res.send(Teacher);
