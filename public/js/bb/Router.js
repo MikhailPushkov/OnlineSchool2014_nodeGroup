@@ -35,15 +35,9 @@ define(['App',
             },
 
             start: function () {
-                var curUserId = App.Session.get("_id");
-                if (curUserId) {
-                    this.profile(curUserId,AdminPage);
-                    return;
-                }
+                if(App.AlreadyLogged()) return;
 
-                App.mainRegion.show(new Login());
-                this.close_unecessary_views();
-                this.logout();
+                this.login();
             },
 
             login: function () {
@@ -63,7 +57,13 @@ define(['App',
             },
 
             profile: function (role ,_id) {
-                this.fetch_profile(_id, Wall);
+                var view
+                switch(role){
+                    case "admin":
+                        view = AdminPage
+                        break;
+                }
+                this.fetch_profile(_id, view);
             },
 
             build_side_bar_and_main_view: function (MainView, options) {

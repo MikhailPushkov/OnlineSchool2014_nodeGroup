@@ -11,13 +11,10 @@ define([
         var App;
 
         App = new Backbone.Marionette.Application();
-        //App.io = io();
+
         App.Router = {};
         App.Header = {};
-        App.Footer = {};
-        App.Dialog = {};
         App.Session = {};
-        App.Friends = {};
         App.Profile_in_View = null;
         App.user_idle = false;
         App.logged_in = false;
@@ -52,9 +49,8 @@ define([
         };
 
         App.Success_Login = function (response) {
-
             var callback = function () {
-                App.Router.navigate('admin/' + App.Session.get("_id"), {
+                App.Router.navigate('profile/' + response.role + '/' + App.Session.get("_id"), {
                     trigger: true
                 });
             };
@@ -66,7 +62,7 @@ define([
             if (!App.logged_in)return;
             App.logged_in = false;
             App.Session.clear();
-            App.Router.navigate('', {
+            App.Router.navigate("", {
                 trigger: true
             });
             $.ajax({
@@ -81,6 +77,17 @@ define([
                 });
         };
 
+        App.AlreadyLogged = function () {
+            var curUserId = App.Session.isAuthenticated();
+
+            if (!curUserId) return false;
+
+            App.Router.navigate('profile/' + App.Session.attributes.role + '/' + curUserId, {
+                trigger: true
+            });
+
+            return true;
+        };
         App.GET_comment_editing_no_comment_fecthing = function () {
             return this.comment_editing_no_comment_fecthing;
         };
