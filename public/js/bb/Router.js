@@ -6,12 +6,11 @@ define(['App',
     'bb/Views/Header/Header',
     'bb/Views/Login/Login',
     'bb/Views/Signup/Signup',
-    'bb/Views/Profile/Wall',
-    'bb/Views/Profile/AdminPage',
+    'bb/Views/Admin/Admin',
     'bb/Views/Learner/Learner',
     'bb/Views/Teacher/Teacher'
 ],
-    function (App, $, _, Backbone, Profile, Header, Login, Signup, Wall, AdminPage, Learner, Teacher) {
+    function (App, $, _, Backbone, Profile, Header, Login, Signup, Admin, Learner, Teacher) {
         // You can access App.Router any where in the application, if you define "App" as a dependency in your modules
         var AppRouter = Backbone.Router.extend({
 
@@ -59,7 +58,7 @@ define(['App',
                 var view
                 switch (role) {
                     case "admin":
-                        view = AdminPage
+                        view = Admin
                         break;
                     case "learner":
                         view = Learner

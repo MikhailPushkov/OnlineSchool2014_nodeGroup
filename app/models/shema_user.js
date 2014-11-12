@@ -10,8 +10,8 @@ var userSchema = mongoose.Schema({
         login        : {type: String, index: {unique: true}},
         password     : {type: String, required: true, trim: true}
     },
-    role     : {type: String},
-    itemId : {type: String}
+    role     : {type: String, trim: true},
+    itemId : {type: String, trim: true}
 });
 
 // methods ======================

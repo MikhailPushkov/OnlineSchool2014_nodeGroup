@@ -23,7 +23,6 @@ exports.logOut = function (req, res) {
 
 exports.findById = function (req, res) {
     var id = req.params.id;
-    console.log(id);
     User.findOne({ _id: id }, function (err, User) {
         if (err) return res.send(404, "User not found");
         res.send(User);
@@ -36,10 +35,6 @@ exports.findAll = function (req, res) {
 
     if (_id) {
         User.find({ '_id': { $ne: _id } }, function (err, collection) {
-            _.each(collection, function (friend) {
-                friend.local = "";
-                my_array.push(friend._id.toString());
-            });
             res.send(collection);
         });
         return;

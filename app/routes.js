@@ -1,4 +1,5 @@
 var User_route = require('./routes/route_user');
+var Teacher_route = require('./routes/route_teacher');
 
 module.exports = function (app, passport) {
     // =====================================
@@ -6,6 +7,8 @@ module.exports = function (app, passport) {
     // =====================================
     app.post('/login', already_logged_in, function (req, res, next) {
         passport.authenticate('local-login', {session: true}, function (err, user, info) {
+            console.log(user);
+            console.log(info);
             if (err)return next(err);
             if (user === false) {
                 return res.send(401, info);
@@ -15,18 +18,22 @@ module.exports = function (app, passport) {
                         return res.send({'status': 'err', 'message': err.message});
                     }
                     req.app.set('user_logged_in', user._id);
+                    console.log(user);
                     return res.send(200, user);
                 });
             }
         })(req, res, next);
     });
 
-    app.post('/signup', already_logged_in, function (req, res, next) {
+    app.post('/signup', isLoggedIn, function (req, res, next) {
         passport.authenticate('local-signup', function (err, user, info) {
             if (err) return next(err);
             if (user === false) {
+                console.log(user);
+                console.log(info);
                 return res.send(404, info);
             } else {
+                console.log(user);
                 return res.send(200, user);
             }
         })(req, res, next);
@@ -42,8 +49,18 @@ module.exports = function (app, passport) {
     app.put('/user/:id', isLoggedIn, User_route.updateUser);
     app.delete('/user/:id', isLoggedIn, User_route.deleteUser);
 
+    console.log(Teacher_route.addTeacher);
+    app.post('/teacher', isLoggedIn, Teacher_route.addTeacher);
+    app.get('/teacher', isLoggedIn, Teacher_route.findAll);
+
+    /*
+    app.get('/teacher/:id', already_logged_in, Teacher_route.findById);
+    app.put('/teacher/:id', already_logged_in, Teacher_route.updateUser);
+    app.delete('/teacher/:id', already_logged_in, Teacher_route.deleteUser);
+    */
+
     // =====================================
-    // LOGOUT ==============================
+    // ============= LOGOUT ================
     // =====================================
     app.post('/loggin_out', isLoggedIn, User_route.logOut);
     //app.all('*', isLoggedIn);
@@ -51,7 +68,7 @@ module.exports = function (app, passport) {
     // route middleware to make sure
     function isLoggedIn(req, res, next) {
         console.log("isLoggedIn");
-        // if user is authenticated in the session, carry on
+        // if us/**/er is authenticated in the session, carry on
         if (req.isAuthenticated())
             return next();
 
@@ -62,6 +79,7 @@ module.exports = function (app, passport) {
 
     function already_logged_in(req, res, next) {
         if (!req.isAuthenticated()) return next();
+        console.log('You are already logged in with this Browser, please use a different one. Thanks!');
         res.send(499, 'You are already logged in with this Browser, please use a different one. Thanks!');
     }
 };

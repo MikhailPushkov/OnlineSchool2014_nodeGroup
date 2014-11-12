@@ -1,19 +1,42 @@
-<div class="adminPage">
+<div class="adminPage board">
+
 <!-- Nav tabs -->
 <ul class="nav nav-tabs " role="tablist" id="myTab">
-    <li><a href="#teacher" role="tab" data-toggle="tab">Учителя</a></li>
-    <li class="active"><a href="#learner" role="tab" data-toggle="tab">Ученики</a></li>
-    <li><a href="#classes" role="tab" data-toggle="tab">Классы</a></li>
-    <li><a href="#lessons" role="tab" data-toggle="tab">Предметы</a></li>
-    <li><a href="#schedule" role="tab" data-toggle="tab">Рассписание</a></li>
+    <li class="active"><a role="tab" data-toggle="tab">Учителя</a></li>
+    <li><a role="tab" data-toggle="tab">Ученики</a></li>
+    <li><a role="tab" data-toggle="tab">Классы</a></li>
+    <li><a role="tab" data-toggle="tab">Предметы</a></li>
+    <li><a role="tab" data-toggle="tab">Рассписание</a></li>
 </ul>
-
 <div class="buttons">
-    <button class="btn btn-success">Добавить</button>
+    <button class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg">Создать</button>
+    <table class="createTable table table-bordered table-striped table-striped" style="background-color: #ffffff">
+        <thead>
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>e-mail</th>
+            <th>Логин</th>
+            <th>Пароль</th>
+        </tr>
+        </thead>
+        <tr>
+            <td><input id="firstName" type="text" class="form-control"/></td>
+            <td><input id="lastName" type="text" class="form-control"/></td>
+            <td><input id="patronymic" type="text" class="form-control"/></td>
+            <td><input id="email" type="text" class="form-control"/></td>
+            <td><input id="login" type="text" class="form-control"/></td>
+            <td><input id="pass" type="password" class="form-control"/></td>
+            <td>
+                <button id="create" type="role" class=" btn btn-primary"/>
+            </td>
+        </tr>
+    </table>
+
 </div>
-<!-- Tab panes -->
 <div class="tab-content">
-<div id="teacher" class="tab-pane">
+<div id="teacher" class="tab-pane active">
     <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>
@@ -44,18 +67,16 @@
             <td>
             </td>
         </tr>
-
-
     </table>
 </div>
-<div id="learner" class="tab-pane active">
+<div id="learner" class="tab-pane">
     <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>
             <th>Фамилия</th>
             <th>Имя</th>
             <th>Отчество</th>
-            <th style="width:20px">Класс</th>
+            <th>Класс</th>
             <th>Родители</th>
             <th>Адрес</th>
         </tr>
@@ -149,7 +170,6 @@
         </tr>
     </table>
 </div>
-
 <div id="lessons" class="tab-pane">
     <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
@@ -177,7 +197,6 @@
         <tr>
             <td><input type="text" class="tableText form-control " value="Физика"/></td>
             <td><input type="text" class="tableText form-control" value="Петрова Н.И"/></td>
-
             <td>
             </td>
         </tr>

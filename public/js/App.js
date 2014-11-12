@@ -59,18 +59,21 @@ define([
         };
 
         App.Log_User_Out = function () {
-            if (!App.logged_in)return;
+            console.log("Log_User_Out");
+            if (!App.logged_in) return;
+            console.log("Log_User_Out start");
             App.logged_in = false;
             App.Session.clear();
             App.Router.navigate("", {
                 trigger: true
             });
+
             $.ajax({
                 type: "POST",
                 url: "/loggin_out"
             })
                 .done(function (response) {
-                    //console.log("user has been logout");
+                    console.log("user has been logout");
                 })
                 .fail(function (xhr) {
                     console.log("something went wrong in logout");
@@ -88,6 +91,7 @@ define([
 
             return true;
         };
+
         App.GET_comment_editing_no_comment_fecthing = function () {
             return this.comment_editing_no_comment_fecthing;
         };

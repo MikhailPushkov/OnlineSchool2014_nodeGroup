@@ -3,7 +3,7 @@ var Teacher = require('../models/shema_teacher');
 var fs = require("fs");
 var _ = require('underscore');
 
-exports.Teacher_findById = function (req, res) {
+exports.findById = function (req, res) {
     var id = req.params.id;
     Teacher.findOne({ _id: id }, function (err, Teacher) {
         if (err) return res.send(404, "Teacher not found");
@@ -12,16 +12,12 @@ exports.Teacher_findById = function (req, res) {
 };
 
 
-exports.Teacher_findAll = function (req, res) {
+exports.findAll = function (req, res) {
     var _id = req.query.user_id;
     var my_array = [];
 
     if (_id) {
         Teacher.find({ '_id': { $ne: _id } }, function (err, collection) {
-            _.each(collection, function (friend) {
-                friend.local = "";
-                my_array.push(friend._id.toString());
-            });
             res.send(collection);
         });
         return;

@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
     teacherSchema = new Schema({
         "firstName": String,
         "lastName": String,
-        "patronymic": String
+        "patronymic": String,
+        "email":String
     }),
 
     teacher = mongoose.model('Teacher', teacherSchema);
