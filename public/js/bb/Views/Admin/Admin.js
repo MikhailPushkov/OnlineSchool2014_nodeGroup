@@ -15,8 +15,15 @@ define([
 
                 template: Handlebars.compile(Template),
 
-                events: {"click #create": "create"},
+                events: {
+                    "click #pushToServer": "create",
+                    "click #createBtn": "showCreateTable"
+                },
 
+                showCreateTable: function(){
+                    $('#createTable').removeClass("hide");
+                    $('#createBtn').addClass("hide");
+                },
                 initialize: function (options) {
                     this.user_logged_in = App.Session;
                     this.listenTo(App, "user_idle", this.is_user_idle);
@@ -74,6 +81,9 @@ define([
                                         statusCode : {
                                             200 : function (e){
                                                 console.log('ok');
+                                                $('#createTable').addClass("hide");
+                                                $('#createBtn').removeClass("hide");
+                                                alert('Учитель успешно создан');
                                             },
                                             500 : function (e){
                                                 console.log(e);

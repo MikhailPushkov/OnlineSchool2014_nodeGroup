@@ -9,8 +9,8 @@
     <li><a role="tab" data-toggle="tab">Рассписание</a></li>
 </ul>
 <div class="buttons">
-    <button class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg">Создать</button>
-    <table class="createTable table table-bordered table-striped table-striped" style="background-color: #ffffff">
+    <button id="createBtn" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>Создать</button>
+    <table id="createTable" class="createTable table table-bordered table-striped table-striped hide" style="background-color: #ffffff">
         <thead>
         <tr>
             <th>Фамилия</th>
@@ -29,7 +29,11 @@
             <td><input id="login" type="text" class="form-control"/></td>
             <td><input id="pass" type="password" class="form-control"/></td>
             <td>
-                <button id="create" type="role" class=" btn btn-primary"/>
+                <button id="pushToServer"    type="role" class=" btn btn-primary">
+                    <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+
+
+                    </button>
             </td>
         </tr>
     </table>
