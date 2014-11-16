@@ -135,7 +135,6 @@ define([
             }
             if (!message)return;
             $("#app_modal .modal-body b").html(message);
-            $("#app_modal").modal('show');
         };
 
         App.get_user_from_qookies = function () {

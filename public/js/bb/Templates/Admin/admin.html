@@ -1,16 +1,22 @@
 <div class="adminPage board">
-
 <!-- Nav tabs -->
-<ul class="nav nav-tabs " role="tablist" id="myTab">
-    <li class="active"><a role="tab" data-toggle="tab">Учителя</a></li>
-    <li><a role="tab" data-toggle="tab">Ученики</a></li>
-    <li><a role="tab" data-toggle="tab">Классы</a></li>
-    <li><a role="tab" data-toggle="tab">Предметы</a></li>
-    <li><a role="tab" data-toggle="tab">Рассписание</a></li>
+<ul class="nav nav-tabs" role="tablist" id="myTab">
+    <li id="teacherTab" class="active"><a class="tab" role="tab" data-toggle="tab">Учителя</a></li>
+    <li id="learnerTab" ><a class="tab" role="tab" data-toggle="tab">Ученики</a></li>
+    <li id="classTab" ><a class="tab" role="tab" data-toggle="tab">Классы</a></li>
+    <li id="lessonsTab"  ><a class="tab" role="tab" data-toggle="tab">Предметы</a></li>
+    <li id="scheduleTab" ><a class="tab" role="tab" data-toggle="tab">Рассписание</a></li>
 </ul>
 <div class="buttons">
-    <button id="createBtn" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>Создать</button>
-    <table id="createTable" class="createTable table table-bordered table-striped table-striped hide" style="background-color: #ffffff">
+    <button id="createBtn" class="btn btn-success">
+        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+        Создать
+    </button>
+</div>
+<div class="tab-content">
+<div id="teacherTable" class="tab-pane active">
+    <table id="createTable" class="createTable table table-bordered table-striped table-striped hide"
+           style="background-color: #ffffff">
         <thead>
         <tr>
             <th>Фамилия</th>
@@ -29,18 +35,12 @@
             <td><input id="login" type="text" class="form-control"/></td>
             <td><input id="pass" type="password" class="form-control"/></td>
             <td>
-                <button id="pushToServer"    type="role" class=" btn btn-primary">
+                <button id="pushToServer" type="role" class=" btn btn-primary">
                     <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
-
-
-                    </button>
+                </button>
             </td>
         </tr>
     </table>
-
-</div>
-<div class="tab-content">
-<div id="teacher" class="tab-pane active">
     <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>
@@ -60,7 +60,7 @@
         </tr>
     </table>
 </div>
-<div id="learner" class="tab-pane">
+<div id="learnerTable" class="tab-pane">
     <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>
@@ -133,7 +133,7 @@
         </tbody>
     </table>
 </div>
-<div id="classes" class="tab-pane">
+<div id="classesTable" class="tab-pane">
     <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>
@@ -161,7 +161,7 @@
         </tr>
     </table>
 </div>
-<div id="lessons" class="tab-pane">
+<div id="lessonsTable" class="tab-pane">
     <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>
@@ -193,8 +193,7 @@
         </tr>
     </table>
 </div>
-
-<div id="schedule" class="tab-pane">
+<div id="scheduleTable" class="tab-pane">
     <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>

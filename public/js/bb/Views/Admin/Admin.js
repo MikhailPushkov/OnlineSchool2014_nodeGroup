@@ -15,15 +15,41 @@ define([
 
                 template: Handlebars.compile(Template),
 
+                selectedTab: null,
+
                 events: {
                     "click #pushToServer": "create",
-                    "click #createBtn": "showCreateTable"
+                    "click #createBtn": "showCreateTable",
+                    "click .tab": "clickTab"
                 },
 
-                showCreateTable: function(){
+                clickTab: function (e) {
+                    var selectedObjectNmae = e.currentTarget.parentElement.id.replace("Tab","");
+                    this.selectedTab = selectedObjectNmae;
+
+                    $("#teacherTable").removeClass("active");
+                    $("#learnerTable").removeClass("active");
+                    $("#classesTable").removeClass("active");
+                    $("#lessonsTable").removeClass("active");
+                    $("#scheduleTable").removeClass("active");
+
+                    $("#teacherTab").removeClass("active");
+                    $("#learnerTab").removeClass("active");
+                    $("#classTab").removeClass("active");
+                    $("#lessonsTab").removeClass("active");
+                    $("#scheduleTab").removeClass("active");
+
+                    $("#" + selectedObjectNmae+"Tab").addClass("active");
+                    $("#" + selectedObjectNmae+"Table").addClass("active");
+
+                    this.selectedTab = selectedObjectNmae;
+                },
+
+                showCreateTable: function () {
                     $('#createTable').removeClass("hide");
                     $('#createBtn').addClass("hide");
                 },
+
                 initialize: function (options) {
                     this.user_logged_in = App.Session;
                     this.listenTo(App, "user_idle", this.is_user_idle);
@@ -32,7 +58,7 @@ define([
                     this.Interval = null;
                     this.childViews = [];      //GARBAGE COLLECTION
                     this.view_is_alive = true;
-                    this.FindAllteacher();
+                    this.selectedTab = "teacher";
                 },
 
                 render: function () {
@@ -93,17 +119,17 @@ define([
                                 .done(function (user) {
                                     user.role = 'teacher';
                                     $.ajax({
-                                        url     : '/user/'+user._id,
-                                        method  : 'PUT',
-                                        data    : user,
-                                        statusCode : {
-                                            200 : function (e){
+                                        url: '/user/' + user._id,
+                                        method: 'PUT',
+                                        data: user,
+                                        statusCode: {
+                                            200: function (e) {
                                                 console.log('ok');
                                                 $('#createTable').addClass("hide");
                                                 $('#createBtn').removeClass("hide");
                                                 alert('Учитель успешно создан');
                                             },
-                                            500 : function (e){
+                                            500: function (e) {
                                                 console.log(e);
                                             }
                                         }
@@ -112,8 +138,8 @@ define([
                                     // App.Success_SignUp(response);
                                 })
                                 .fail(function (xhr) {
-                                   // console.log(xhr);
-                                   // $alert.removeClass("hide").html(xhr.responseText);
+                                    // console.log(xhr);
+                                    // $alert.removeClass("hide").html(xhr.responseText);
                                 });
                         })
                         .fail(function (xhr) {
