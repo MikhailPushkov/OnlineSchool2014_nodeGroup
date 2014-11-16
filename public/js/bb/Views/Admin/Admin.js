@@ -32,6 +32,7 @@ define([
                     this.Interval = null;
                     this.childViews = [];      //GARBAGE COLLECTION
                     this.view_is_alive = true;
+                    this.FindAllteacher();
                 },
 
                 render: function () {
@@ -50,6 +51,23 @@ define([
                         }
                     });
                 },
+            
+              FindAllteacher: function(){
+                      $.ajax({
+                        type: "GET",
+                        url: "/teacher"
+                    }).done(function(response){
+                          function OutputItem (Arr){
+               //         console.log(Arr.firstName);
+               //         console.log(Arr.lastName);
+               //         console.log(Arr.patronymic);
+               //         console.log(Arr.email) 
+                         console.log(Arr);
+                          };
+                    response.forEach(OutputItem);
+                       
+                   });
+                },        
                 create: function () {
                     var teacher = {
                         "firstName": $("#firstName").val(),
