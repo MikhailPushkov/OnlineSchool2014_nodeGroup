@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
         "patronymic": String,
         "parents": Array,
         "class": String,
-        "address": String
+        "adress": String
     }),
 
     Learner = mongoose.model('Learner', learnerSchema);

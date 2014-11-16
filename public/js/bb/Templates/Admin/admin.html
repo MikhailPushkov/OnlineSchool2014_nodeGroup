@@ -15,7 +15,7 @@
 </div>
 <div class="tab-content">
 <div id="teacherTable" class="tab-pane active">
-    <table id="createTable" class="createTable table table-bordered table-striped table-striped hide"
+    <table id="createTableTeacher" class="createTable table table-bordered table-striped table-striped"
            style="background-color: #ffffff">
         <thead>
         <tr>
@@ -28,14 +28,14 @@
         </tr>
         </thead>
         <tr>
-            <td><input id="firstName" type="text" class="form-control"/></td>
-            <td><input id="lastName" type="text" class="form-control"/></td>
-            <td><input id="patronymic" type="text" class="form-control"/></td>
-            <td><input id="email" type="text" class="form-control"/></td>
-            <td><input id="login" type="text" class="form-control"/></td>
-            <td><input id="pass" type="password" class="form-control"/></td>
+            <td><input id="firstNameTeacher" type="text" class="form-control"/></td>
+            <td><input id="lastNameTeacher" type="text" class="form-control"/></td>
+            <td><input id="patronymicTeacher" type="text" class="form-control"/></td>
+            <td><input id="emailTeacher" type="text" class="form-control"/></td>
+            <td><input id="loginTeacher" type="text" class="form-control"/></td>
+            <td><input id="passTeacher" type="password" class="form-control"/></td>
             <td>
-                <button id="pushToServer" type="role" class=" btn btn-primary">
+                <button id="pushToServerTeacher" type="role" class=" btn btn-primary">
                     <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
                 </button>
             </td>
@@ -61,6 +61,36 @@
     </table>
 </div>
 <div id="learnerTable" class="tab-pane">
+    <table id="createTableLearner" class="createTable table table-bordered table-striped table-striped"
+           style="background-color: #ffffff">
+        <thead>
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Класс</th>
+            <th>Родители</th>
+            <th>Адресс</th>
+            <th>Логин</th>
+            <th>Пароль</th>
+        </tr>
+        </thead>
+        <tr>
+            <td><input id="firstNameLearner" type="text" class="form-control"/></td>
+            <td><input id="lastNameLearner" type="text" class="form-control"/></td>
+            <td><input id="patronymicLearner" type="text" class="form-control"/></td>
+            <td><input id="classLearner" type="text" class="form-control"/></td>
+            <td><input id="parentLearner" type="text" class="form-control"/></td>
+            <td><input id="adressLearner" type="text" class="form-control"/></td>
+            <td><input id="loginLearner" type="text" class="form-control"/></td>
+            <td><input id="passLearner" type="password" class="form-control"/></td>
+            <td>
+                <button id="pushToServerLearner" type="role" class=" btn btn-primary">
+                    <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                </button>
+            </td>
+        </tr>
+    </table>
     <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>

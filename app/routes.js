@@ -1,5 +1,6 @@
 var User_route = require('./routes/route_user');
 var Teacher_route = require('./routes/route_teacher');
+var Learner_route = require('./routes/route_learner');
 
 module.exports = function (app, passport) {
     // =====================================
@@ -53,6 +54,9 @@ module.exports = function (app, passport) {
     app.post('/teacher', isLoggedIn, Teacher_route.addTeacher);
     app.get('/teacher', isLoggedIn, Teacher_route.findAll);
 
+    console.log(Learner_route.addLearner);
+    app.post('/learner', isLoggedIn, Learner_route.addLearner);
+    app.get('/learner', isLoggedIn, Learner_route.findAll);
     /*
     app.get('/teacher/:id', already_logged_in, Teacher_route.findById);
     app.put('/teacher/:id', already_logged_in, Teacher_route.updateUser);

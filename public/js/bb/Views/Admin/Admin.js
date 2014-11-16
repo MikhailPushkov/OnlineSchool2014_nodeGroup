@@ -18,9 +18,10 @@ define([
                 selectedTab: null,
 
                 events: {
-                    "click #pushToServer": "create",
+                    "click #pushToServerTeacher": "createTeacher",
                     "click #createBtn": "showCreateTable",
-                    "click .tab": "clickTab"
+                    "click .tab": "clickTab",
+                    "click #pushToServerLearner": "createLearner"
                 },
 
                 clickTab: function (e) {
@@ -94,12 +95,12 @@ define([
                        
                    });
                 },        
-                create: function () {
+                createTeacher: function () {
                     var teacher = {
-                        "firstName": $("#firstName").val(),
-                        "lastName": $('#lastName').val(),
-                        "patronymic": $("#patronymic").val(),
-                        "email": $("#email").val()
+                        "firstName": $("#firstNameTeacher").val(),
+                        "lastName": $('#lastNameTeacher').val(),
+                        "patronymic": $("#patronymicTeacher").val(),
+                        "email": $("#emailTeacher").val()
                     };
 
                     $.ajax({
@@ -112,8 +113,8 @@ define([
                                 type: "POST",
                                 url: "/signup",
                                 data: {
-                                    login: $('#login').val(),
-                                    password: $('#pass').val()
+                                    login: $('#loginTeacher').val(),
+                                    password: $('#passTeacher').val()
                                 }
                             })
                                 .done(function (user) {
@@ -125,7 +126,7 @@ define([
                                         statusCode: {
                                             200: function (e) {
                                                 console.log('ok');
-                                                $('#createTable').addClass("hide");
+                                                $('#createTableTeacher').addClass("hide");
                                                 $('#createBtn').removeClass("hide");
                                                 alert('Учитель успешно создан');
                                             },
@@ -145,7 +146,62 @@ define([
                         .fail(function (xhr) {
                             $alert.removeClass("hide").html(xhr.responseText);
                         });
+                },
+                createLearner: function () {
+                    var learner = {
+                        "firstName": $("#firstNameLearner").val(),
+                        "lastName": $('#lastNameLearner').val(),
+                        "patronymic": $("#patronymicLearner").val(),
+                        "class": $("#classLearner").val(),
+                        "adress": $("#adressLearner").val(),
+                        "parents": ["adsfsadfasf","asdfasfasdf"]
+                    };
+                    console.log(learner);
+                    $.ajax({
+                        type: "POST",
+                        url: "/learner",
+                        data: learner
+                    }).done(function (response) {
+                        console.log(response);
+                        $.ajax({
+                            type: "POST",
+                            url: "/signup",
+                            data: {
+                                login: $('#loginLearner').val(),
+                                password: $('#passLearner').val()
+                            }
+                        })
+                            .done(function (user) {
+                                user.role = 'learner';
+                                $.ajax({
+                                    url     : '/user/'+user._id,
+                                    method  : 'PUT',
+                                    data    : user,
+                                    statusCode : {
+                                        200 : function (e){
+                                            console.log('ok');
+                                            $('#createTableLearner').addClass("hide");
+                                            $('#createBtn').removeClass("hide");
+                                            alert('Ученик успешно создан');
+                                        },
+                                        500 : function (e){
+                                            console.log(e);
+                                        }
+                                    }
+                                })
+                                // console.log('ok');
+                                // App.Success_SignUp(response);
+                            })
+                            .fail(function (xhr) {
+                                // console.log(xhr);
+                                // $alert.removeClass("hide").html(xhr.responseText);
+                            });
+                    })
+                        .fail(function (xhr) {
+                            $alert.removeClass("hide").html(xhr.responseText);
+                        });
                 }
+
             })
             ;
         return AdminPage;
