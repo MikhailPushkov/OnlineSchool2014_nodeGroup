@@ -2,10 +2,10 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist" id="myTab">
     <li id="teacherTab" class="active"><a class="tab" role="tab" data-toggle="tab">Учителя</a></li>
-    <li id="learnerTab" ><a class="tab" role="tab" data-toggle="tab">Ученики</a></li>
-    <li id="classTab" ><a class="tab" role="tab" data-toggle="tab">Классы</a></li>
-    <li id="lessonsTab"  ><a class="tab" role="tab" data-toggle="tab">Предметы</a></li>
-    <li id="scheduleTab" ><a class="tab" role="tab" data-toggle="tab">Рассписание</a></li>
+    <li id="learnerTab"><a class="tab" role="tab" data-toggle="tab">Ученики</a></li>
+    <li id="classTab"><a class="tab" role="tab" data-toggle="tab">Классы</a></li>
+    <li id="lessonsTab"><a class="tab" role="tab" data-toggle="tab">Предметы</a></li>
+    <li id="scheduleTab"><a class="tab" role="tab" data-toggle="tab">Рассписание</a></li>
 </ul>
 <div class="buttons">
     <button id="createBtn" class="btn btn-success">
@@ -14,7 +14,7 @@
     </button>
 </div>
 <div class="tab-content">
-<div id="teacherTable" class="tab-pane active">
+<div id="teacherTabContent" class="tab-pane active">
     <table id="createTableTeacher" class="createTable table table-bordered table-striped table-striped"
            style="background-color: #ffffff">
         <thead>
@@ -41,7 +41,7 @@
             </td>
         </tr>
     </table>
-    <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+    <table id="teacherTable" class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>
             <th>Фамилия</th>
@@ -50,17 +50,11 @@
             <th>Email</th>
         </tr>
         </thead>
-
-        <tr>
-            <th>Николаева</th>
-            <th>Анастасия</th>
-            <th>Михайловна</th>
-            <th>opa@mail.ru</th>
-
-        </tr>
+        <tbody>
+        </tbody>
     </table>
 </div>
-<div id="learnerTable" class="tab-pane">
+<div id="learnerTabContent" class="tab-pane">
     <table id="createTableLearner" class="createTable table table-bordered table-striped table-striped"
            style="background-color: #ffffff">
         <thead>
@@ -163,7 +157,7 @@
         </tbody>
     </table>
 </div>
-<div id="classesTable" class="tab-pane">
+<div id="classesTabContent" class="tab-pane">
     <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>
@@ -191,7 +185,7 @@
         </tr>
     </table>
 </div>
-<div id="lessonsTable" class="tab-pane">
+<div id="lessonsTabContent" class="tab-pane">
     <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>
@@ -223,7 +217,7 @@
         </tr>
     </table>
 </div>
-<div id="scheduleTable" class="tab-pane">
+<div id="scheduleTabContent" class="tab-pane">
     <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>
