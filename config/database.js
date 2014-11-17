@@ -1,5 +1,5 @@
 // config/database.js
 module.exports = {
-	'url' : 'mongodb://localhost/elecscool' // looks like mongodb://<user>:<pass>@mongo.onmodulus.net:27017/Mikha4ot
-    //'url'  :  'mongodb://heroku_app30169851:hb2e33450fia67t7pp5nb6jc73@ds041150.mongolab.com:41150/heroku_app30169851'
+	// 'url' : 'mongodb://localhost/elecscool' // looks like mongodb://<user>:<pass>@mongo.onmodulus.net:27017/Mikha4ot
+    'url'  :  'mongodb://dimkaipx:159357b@ds051980.mongolab.com:51980/heroku_app31690046'
 };
