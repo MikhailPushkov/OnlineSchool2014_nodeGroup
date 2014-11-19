@@ -38,8 +38,8 @@ define([
                     this.loadTeachers();
                 },
                 clickTab: function (e) {
-                    var selectedObjectNmae = e.currentTarget.parentElement.id.replace("Tab", "");
-                    this.selectedTab = selectedObjectNmae;
+                    var selectedObjectName = e.currentTarget.parentElement.id.replace("Tab", "");
+                    this.selectedTab = selectedObjectName;
 
                     $("#teacherTabContent").removeClass("active");
                     $("#learnerTabContent").removeClass("active");
@@ -53,15 +53,72 @@ define([
                     $("#lessonsTab").removeClass("active");
                     $("#scheduleTab").removeClass("active");
 
-                    $("#" + selectedObjectNmae + "Tab").addClass("active");
-                    $("#" + selectedObjectNmae + "TabContent").addClass("active");
+                    $("#" + selectedObjectName + "Tab").addClass("active");
+                    $("#" + selectedObjectName + "TabContent").addClass("active");
+                    $("#createTableTeacher").addClass("hide");
+                    $("#createTableLearner").addClass("hide");
+                    $("#createBtn").removeClass("hide");
 
-                    this.selectedTab = selectedObjectNmae;
+                    this.selectedTab = selectedObjectName;
+
+                    switch (this.selectedTab) {
+                        case "teacher":
+                            this.clearDataTable();
+                            this.loadTeachers();
+                             $(".alert").addClass("hide");
+                            break;
+                        case "learner":
+                            this.clearDataTableLearner();
+                            this.loadLearner();
+                            $(".alert").addClass("hide");
+                            break;
+                        default:
+                            break;
+                                          }
                 },
+
                 showCreateTable: function () {
-                    $('#createTabContent').removeClass("hide");
-                    $('#createBtn').addClass("hide");
+                    $('.createTable').removeClass("hide");
+
                 },
+
+                validateTeacher: function () {
+                    var $alert = $(".alert", this.el);
+                    var $error = $("#ErrorTeacher",this.el);
+                    if ($("#firstNameTeacher").val() === "" ||   $("#lastNameTeacher").val() === ""  ||
+                        $("#patronymicTeacher").val() === "" ||
+                        $("#classTeacher").val() === ""||
+                        $("#adressTeacher").val() === "" ||
+                        $("#loginTeacher").val() === "" ||
+                        $("#pasTteacher").val() === "" ) {
+                        $error.removeClass("hide");
+                        $alert.removeClass("hide").html("Заполните все поля");}
+                    else {
+                            $alert.addClass("hide");
+                            return true;
+                        }
+                    return false;
+                },
+
+                validateLearner: function () {
+                    var $alert = $(".alert", this.el);
+                    var $error = $("#ErrorLearner",this.el);
+                    if ($("#firstNameLearner").val() === "" ||   $("#lastNameLearner").val() === ""  ||
+                        $("#patronymicLearner").val() === "" ||
+                        $("#classLearner").val() === ""||
+                        $("#adressLearner").val() === "" ||
+                        $("#loginLearner").val() === "" ||
+                        $("#passLearner").val() === "" ) {
+                        $error.removeClass("hide");
+                        $alert.removeClass("hide").html("Заполните все поля")}
+                    else {
+                            $alert.addClass("hide");
+                            return true;
+                        }
+
+                    return false;
+                },
+
                 render: function () {
                     $(this.el).html(this.template(this.model.toJSON()));
                     return this;
@@ -79,6 +136,7 @@ define([
                     });
                 },
                 loadTeachers: function () {
+
                     $.ajax({
                         type: "GET",
                         url: "/teacher"
@@ -89,12 +147,28 @@ define([
                             });
                         });
                 },
+                loadLearner: function () {
+                    $.ajax({
+                        type: "GET",
+                        url: "/learner"
+                    }).done(function (learner) {
+                        learner.forEach(function(learner){
+                            var row = "<tr><td>" + learner.lastName + "</td><td>"+learner.firstName+"</td><td>"+ learner.patronymic + "</td><td>"+ learner.class + "</td><td>"+ learner.adress+"</td><td>"+ learner.parents+"</tr>" ;
+                            $("#learnerTable tbody").append(row);
+                        });
+                    });
+                },
+
+                clearDataTableLearner: function(){
+                    $("#learnerTable tbody").empty();
+                },
 
                 clearDataTable: function(){
                     $("#teacherTable tbody").empty();
                 },
 
                 createTeacher: function () {
+                    if (!this.validateTeacher())return;
                     var teacher = {
                         "firstName": $("#firstNameTeacher").val(),
                         "lastName": $('#lastNameTeacher').val(),
@@ -148,6 +222,7 @@ define([
                         });
                 },
                 createLearner: function () {
+                    if (!this.validateLearner())return;
                     var learner = {
                         "firstName": $("#firstNameLearner").val(),
                         "lastName": $('#lastNameLearner').val(),
