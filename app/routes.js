@@ -8,8 +8,6 @@ module.exports = function (app, passport) {
     // =====================================
     app.post('/login', already_logged_in, function (req, res, next) {
         passport.authenticate('local-login', {session: true}, function (err, user, info) {
-            console.log(user);
-            console.log(info);
             if (err)return next(err);
             if (user === false) {
                 return res.send(401, info);
@@ -19,7 +17,6 @@ module.exports = function (app, passport) {
                         return res.send({'status': 'err', 'message': err.message});
                     }
                     req.app.set('user_logged_in', user._id);
-                    console.log(user);
                     return res.send(200, user);
                 });
             }
@@ -50,11 +47,9 @@ module.exports = function (app, passport) {
     app.put('/user/:id', isLoggedIn, User_route.updateUser);
     app.delete('/user/:id', isLoggedIn, User_route.deleteUser);
 
-    console.log(Teacher_route.addTeacher);
     app.post('/teacher', isLoggedIn, Teacher_route.addTeacher);
     app.get('/teacher', isLoggedIn, Teacher_route.findAll);
 
-    console.log(Learner_route.addLearner);
     app.post('/learner', isLoggedIn, Learner_route.addLearner);
     app.get('/learner', isLoggedIn, Learner_route.findAll);
     /*
