@@ -9,5 +9,5 @@ var passport = require('passport');
 var flash    = require('connect-flash');
 var configDB = require('./config/database.js');
 
-mongoose.connect("mongodb://dimkaipx91:84178811e7325b2711fd6513c4b3b1f3@ds053080.mongolab.com:53080/heroku_app31763119");
+mongoose.connect("mongodb://dimkaipx91:84178811e7325b2711fd6513c4b3b1f3@ds053080.mongolab.com:53081/heroku_app31763119");
 console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKKKKKKKKKKKK");
