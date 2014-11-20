@@ -27,11 +27,8 @@ module.exports = function (app, passport) {
         passport.authenticate('local-signup', function (err, user, info) {
             if (err) return next(err);
             if (user === false) {
-                console.log(user);
-                console.log(info);
                 return res.send(404, info);
             } else {
-                console.log(user);
                 return res.send(200, user);
             }
         })(req, res, next);
@@ -66,7 +63,6 @@ module.exports = function (app, passport) {
 
     // route middleware to make sure
     function isLoggedIn(req, res, next) {
-        console.log("isLoggedIn");
         // if us/**/er is authenticated in the session, carry on
         if (req.isAuthenticated())
             return next();
