@@ -1,14 +1,13 @@
 console.log("!!!!!!!!!!!!!!!");
 var express  = require('express');
-console.log(">>>> error1 >>>");
+
 var MongoStore = require('connect-mongo')(express);
-console.log(">>>> error2 >>>");
 var app      = express();
 var port     = process.env.PORT || 8080;
-console.log(">>>> error3 >>>");
 var mongoose = require('mongoose');
-console.log(">>>> error4 >>>");
 var passport = require('passport');
-console.log(">>>> error5 >>>");
 var flash    = require('connect-flash');
+var configDB = require('./config/database.js');
+
+mongoose.connect("mongodb://heroku_app31763119:31nopdab5dgq7c934i0hvksivs@ds053080.mongolab.com:53080/heroku_app31763119");
 console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKKKKKKKKKKKK");
