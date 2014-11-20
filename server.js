@@ -1,13 +1,14 @@
 console.log("!!!!!!!!!!!!!!!");
 var express  = require('express');
-
+console.log(">>>> error1 >>>");
 var MongoStore = require('connect-mongo')(express);
+console.log(">>>> error2 >>>");
 var app      = express();
 var port     = process.env.PORT || 8080;
+console.log(">>>> error3 >>>");
 var mongoose = require('mongoose');
+console.log(">>>> error4 >>>");
 var passport = require('passport');
+console.log(">>>> error5 >>>");
 var flash    = require('connect-flash');
-var configDB = require('./config/database.js');
-console.log(">>>> Connect");
-mongoose.connect(configDB.url);
 console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKKKKKKKKKKKK");
