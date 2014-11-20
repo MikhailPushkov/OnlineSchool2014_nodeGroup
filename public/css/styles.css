@@ -29,6 +29,7 @@ h1 {
     background-image:url('../img/sikonkami.png') ;
     background-size: cover;
 }
+
 .board {
     background-color: rgb(60, 84, 62) !important;
     position: relative;
@@ -55,9 +56,14 @@ h1 {
 .header {
     margin-top: 0;
 }
+
+.header *{
+	color:white;
+}
 .hide {
     display:none;
 }
+
 /*
 #girl {
     position: absolute;
