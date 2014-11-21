@@ -15,7 +15,7 @@
 </div>
 <div class="tab-content">
 <div id="teacherTabContent" class="tab-pane active">
-    <table id="createTableTeacher" class="createTable table table-bordered table-striped table-striped"
+    <table id="createTableTeacher" class="createTable table table-bordered table-striped table-striped hide"
            style="background-color: #ffffff">
         <thead>
         <tr>
@@ -41,6 +41,7 @@
             </td>
         </tr>
     </table>
+    <div  id="ErrorTeacher" class="alert alert-danger hide"  role="alert"></div>
     <table id="teacherTable" class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>
@@ -64,14 +65,14 @@
             <th>Отчество</th>
             <th>Класс</th>
             <th>Родители</th>
-            <th>Адресс</th>
+            <th>Адрес</th>
             <th>Логин</th>
             <th>Пароль</th>
         </tr>
         </thead>
         <tr>
-            <td><input id="firstNameLearner" type="text" class="form-control"/></td>
             <td><input id="lastNameLearner" type="text" class="form-control"/></td>
+            <td><input id="firstNameLearner" type="text" class="form-control"/></td>
             <td><input id="patronymicLearner" type="text" class="form-control"/></td>
             <td><input id="classLearner" type="text" class="form-control"/></td>
             <td><input id="parentLearner" type="text" class="form-control"/></td>
@@ -85,74 +86,19 @@
             </td>
         </tr>
     </table>
-    <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+    <div  id="ErrorLearner" class="alert alert-danger hide"  role="alert"></div>
+    <table id="learnerTable"   class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
         <thead>
         <tr>
             <th>Фамилия</th>
             <th>Имя</th>
             <th>Отчество</th>
             <th>Класс</th>
-            <th>Родители</th>
             <th>Адрес</th>
+            <th>Родители</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Иван</td>
-            <td>Иванов</td>
-            <td>Иванович</td>
-            <td>10</td>
-            <td>
-                <p><a href="">Иванов И. И.</a></p>
-
-                <p><a href="">Иванова И. И.</a></p>
-            </td>
-            <td>ул. АОВЛОА. д.2</td>
-        </tr>
-        <tr>
-            <td><input type="text" class="tableText " value="Иван"/></td>
-            <td><input type="text" class="tableText" value="Иванов"/></td>
-            <td><input type="text" class="tableText" value="Иванович"/></td>
-            <td>
-                <select>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
-            </td>
-            <td>
-                <p><a href="">Иванов И. И.</a></p>
-
-                <p><a href="">Иванова И. И.</a></p>
-            </td>
-            <td><input type="text" class="tableText" value="ул. АОВЛОА. д.2"/></td>
-            <td>
-                <button role="button" class="btn btn-danger delete">X</button>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="text" class="tableText" value="Иван"/></td>
-            <td><input type="text" class="tableText" value="Иванов"/></td>
-            <td><input type="text" class="tableText" value="Иванович"/></td>
-            <td>
-                <select>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
-            </td>
-            <td>
-                <p><a href="">Иванов И. И.</a></p>
-
-                <p><a href="">Иванова И. И.</a></p>
-            </td>
-            <td><input type="text" class="tableText" value="ул. АОВЛОА. д.2"/></td>
-            <td>
-                <button role="button" class="btn btn-danger delete">X</button>
-            </td>
-        </tr>
 
         </tbody>
     </table>

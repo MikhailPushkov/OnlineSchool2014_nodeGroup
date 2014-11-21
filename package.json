@@ -11,7 +11,7 @@
     "bcrypt-nodejs": "latest",
     "mongodb": "~1.4.17",
     "moment": "~2.8.3",
-    "connect-mongo": "2.2.9",
+    "connect-mongo": "latest",
     "underscore": "latest"
   },
   "devDependencies": {
