@@ -3,6 +3,11 @@
     src: url(../fonts/AvalonMedium.ttf); /* Путь к файлу со шрифтом */
 }
 
+.itemTool {
+    margin-left: -82px;
+    margin-top: 2px;
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -22,11 +27,12 @@ h1 {
     margin: 0 10px;
     float: right;
 }
+
 .loginPage {
     width: 1000px;
-    height:800px;
+    height: 800px;
     margin: 10px auto;
-    background-image:url('../img/sikonkami.png') ;
+    background-image: url('../img/sikonkami.png');
     background-size: cover;
 }
 
@@ -57,11 +63,12 @@ h1 {
     margin-top: 0;
 }
 
-.header *{
-	color:white;
+.header * {
+    color: white;
 }
+
 .hide {
-    display:none;
+    display: none;
 }
 
 /*
