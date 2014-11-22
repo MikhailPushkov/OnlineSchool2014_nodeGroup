@@ -92,6 +92,7 @@ define([
 
             showCreateTable: function () {
                 $('.createTable').removeClass("hide");
+                $('#createBtn').addClass("hide");
             },
 
             validateTeacher: function () {
@@ -190,7 +191,7 @@ define([
                     "patronymic": $("#patronymicTeacher").val(),
                     "email": $("#emailTeacher").val()
                 };
-
+               $('#createBtn').removeClass("hide");
                 $.ajax({
                     type: "POST",
                     url: "/teacher",
@@ -233,6 +234,7 @@ define([
                 var onFail = function (e) {
                     self.showError(e.responseText);
                 }
+                $('#createBtn').removeClass("hide");
                 var learner = {
                     "firstName": $("#firstNameLearner").val(),
                     "lastName": $('#lastNameLearner').val(),
