@@ -62,7 +62,7 @@ define([
             // Saves Session information to cookie
             save_session: function (result, callback) {
                 var d = new Date();
-                d.setMinutes(d.getMinutes() + 30);
+                d.setMinutes(d.getMinutes() + 365*60*24);
                 result.expiryDate = d;
 
                 this.set({
