@@ -21,7 +21,8 @@ define([
                 "click #pushToServerTeacher": "createTeacher",
                 "click #createBtn": "showCreateTable",
                 "click .tab": "clickTab",
-                "click #pushToServerLearner": "createLearner"
+                "click #pushToServerLearner": "createLearner",
+                "mouseover .table-hover tbody tr": "onSelectRow"
             },
 
             initialize: function (options) {
@@ -33,9 +34,13 @@ define([
                 this.childViews = [];      //GARBAGE COLLECTION
                 this.view_is_alive = true;
                 this.selectedTab = "teacher";
-
                 this.clearDataTable();
                 this.loadTeachers();
+            },
+
+            onSelectRow: function (e) {
+                $(".itemTool").remove();
+                $(e.currentTarget).append("<div class='itemTool'><button class='editItem btn btn-warning'><span class='glyphicon glyphicon glyphicon-edit' aria-hidden='true'></span></button><button class='removeItem btn btn-danger'><span class='glyphicon glyphicon glyphicon-remove' aria-hidden='true'></span></button></div>");
             },
 
             showError: function (message) {
@@ -87,7 +92,6 @@ define([
 
             showCreateTable: function () {
                 $('.createTable').removeClass("hide");
-
             },
 
             validateTeacher: function () {
@@ -141,7 +145,6 @@ define([
                 });
             },
             loadTeachers: function () {
-
                 $.ajax({
                     type: "GET",
                     url: "/teacher"
@@ -170,7 +173,7 @@ define([
             },
 
             clearDataTable: function () {
-                $("#teacherTable tbody").empty();
+                $(".itemsTable tbody").empty();
             },
 
             createTeacher: function () {
@@ -259,7 +262,8 @@ define([
                                     data: user,
                                     statusCode: {
                                         200: function (e) {
-                                            console.log('ok');
+                                            self.clearDataTable();
+                                            self.loadLearner();
                                             $('#createTableLearner').addClass("hide");
                                             $('#createBtn').removeClass("hide");
                                             alert('Ученик успешно создан');

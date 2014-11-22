@@ -13,10 +13,10 @@
         Создать
     </button>
 </div>
-<div  id="error" class="alert alert-danger hide"  role="alert"></div>
+<div id="error" class="alert alert-danger hide" role="alert"></div>
 <div class="tab-content">
 <div id="teacherTabContent" class="tab-pane active">
-    <table id="createTableTeacher" class="createTable table table-bordered table-striped table-striped hide"
+    <table id="createTableTeacher" class="createTable table hide"
            style="background-color: #ffffff">
         <thead>
         <tr>
@@ -42,7 +42,7 @@
             </td>
         </tr>
     </table>
-    <table id="teacherTable" class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+    <table id="teacherTable" class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
         <thead>
         <tr>
             <th>Фамилия</th>
@@ -56,7 +56,7 @@
     </table>
 </div>
 <div id="learnerTabContent" class="tab-pane">
-    <table id="createTableLearner" class="createTable table table-bordered table-striped table-striped"
+    <table id="createTableLearner" class="createTable table hide"
            style="background-color: #ffffff">
         <thead>
         <tr>
@@ -80,13 +80,13 @@
             <td><input id="loginLearner" type="text" class="form-control"/></td>
             <td><input id="passLearner" type="password" class="form-control"/></td>
             <td>
-                <button id="pushToServerLearner" type="role" class=" btn btn-primary">
+                <button id="pushToServerLearner" class=" btn btn-primary">
                     <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
                 </button>
             </td>
         </tr>
     </table>
-    <table id="learnerTable"   class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+    <table id="learnerTable" class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
         <thead>
         <tr>
             <th>Фамилия</th>
@@ -98,12 +98,11 @@
         </tr>
         </thead>
         <tbody>
-
         </tbody>
     </table>
 </div>
 <div id="classesTabContent" class="tab-pane">
-    <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+    <table class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
         <thead>
         <tr>
             <th>Номер</th>
@@ -131,7 +130,7 @@
     </table>
 </div>
 <div id="lessonsTabContent" class="tab-pane">
-    <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+    <table class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
         <thead>
         <tr>
             <th>Название</th>
@@ -163,7 +162,7 @@
     </table>
 </div>
 <div id="scheduleTabContent" class="tab-pane">
-    <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+    <table class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
         <thead>
         <tr>
             <th>День недели</th>
