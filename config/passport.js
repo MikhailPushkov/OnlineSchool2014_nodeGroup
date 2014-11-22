@@ -53,7 +53,7 @@ module.exports = function(passport , app) {
 
             // check to see if theres already a user with that login
             if (user) {
-                return done(null, false, 'That login is already taken.');
+                return done(null, false, 'Данный пользователь уже зарегистрирован в системе');
             } else {
 
 				// if there is no user with that login
