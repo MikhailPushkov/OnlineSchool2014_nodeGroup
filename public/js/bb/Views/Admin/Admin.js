@@ -97,9 +97,11 @@ define([
 
             validateTeacher: function () {
 
+
                 if ($("#firstNameTeacher").val() === "" || $("#lastNameTeacher").val() === "" ||
                     $("#patronymicTeacher").val() === "" ||
                     $("#classTeacher").val() === "" ||
+                    $("#phoneTeacher").val() === "" ||
                     $("#emailTeacher").val() === "" ||
                     $("#loginTeacher").val() === "" ||
                     $("#passTeacher").val() === "") {
@@ -107,8 +109,6 @@ define([
                     return false;
                 }
                 // Остальные проверки записывайте здесь отдельными if-ами
-
-
                 else if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameTeacher").val()) ){
                   this.showError("Имя не должно содержать латинских символов и начинаться с заглавной буквы");
                  return false;
@@ -119,6 +119,15 @@ define([
                 }
                 else if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicTeacher").val()) ){
                     this.showError("Отчество не должно содержать латинских символов и начинаться с заглавной буквы");
+                    return false;
+                }
+
+                else if (!/^8[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/.test($("#phoneTeacher").val()) ){
+                    this.showError("Не корректно введен телефон.Номер должен начинаться с 8");
+                    return false;
+                }
+                else if (!/.*@[A-Za-z]*\..*/.test($("#emailTeacher").val()) ){
+                    this.showError("Не корректно введен email");
                     return false;
                 }
                 else if ($("#loginTeacher").val().length <6 || $("#loginTeacher").val().length>20  ){
@@ -206,7 +215,7 @@ define([
                     url: "/teacher"
                 }).done(function (teachers) {
                         teachers.forEach(function (teacher) {
-                            var row = "<tr><td>" + teacher.lastName + "</td><td>" + teacher.firstName + "</td><td>" + teacher.patronymic + "</td><td>" + teacher.email + "</tr>";
+                            var row = "<tr><td>" + teacher.lastName + "</td><td>" + teacher.firstName + "</td><td>" + teacher.patronymic + "</td><td>" + teacher.phone + "</td><td>" + teacher.email + "</tr>";
                             $("#teacherTable tbody").append(row);
                         });
                     });
@@ -244,6 +253,7 @@ define([
                     "firstName": $("#firstNameTeacher").val(),
                     "lastName": $('#lastNameTeacher').val(),
                     "patronymic": $("#patronymicTeacher").val(),
+                    "phone": $("#phoneTeacher").val(),
                     "email": $("#emailTeacher").val()
                 };
                $('#createBtn').removeClass("hide");

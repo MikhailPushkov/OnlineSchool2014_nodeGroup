@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
         "firstName": String,
         "lastName": String,
         "patronymic": String,
+        "phone": String,
         "email":String
     }),
 
