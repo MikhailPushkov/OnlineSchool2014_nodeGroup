@@ -37,12 +37,16 @@ h1 {
 }
 
 .board {
-    background-color: rgb(60, 84, 62) !important;
-    position: relative;
-    border-radius: 20px;
-    border-bottom-style: groove;
-    padding: 15px;
-    border: 5px solid #8B4513;
+   position: relative;
+	width: 1000px;
+	height: 600px;
+	margin: 10px auto;
+	background-color: rgb(60, 84, 62) !important;
+	border-radius: 20px;
+	border-bottom-style: groove;
+	padding: 15px;
+	border: 5px solid #8B4513;
+	margin: auto;
 }
 
 .loginPage
@@ -70,6 +74,28 @@ h1 {
 .hide {
     display: none;
 }
+#imgOtchet {
+	position: absolute;
+	top: 190px;
+	right: 70px;
+	text-align: center;
+}
+#imgRaspisanie {
+	position: absolute;
+	top: 180px;
+	right: 410px;
+	text-align: center;
+}
+
+
+
+#imgKlass {
+	position: absolute;
+	top: 180px;
+	right: 700px;
+	text-align: center;
+}
+
 
 /*
 #girl {
