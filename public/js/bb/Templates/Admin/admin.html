@@ -6,7 +6,7 @@
     <li id="learnerTab"><a class="tab" role="tab" data-toggle="tab">Ученики</a></li>
     <li id="classTab"><a class="tab" role="tab" data-toggle="tab">Классы</a></li>
     <li id="lessonsTab"><a class="tab" role="tab" data-toggle="tab">Предметы</a></li>
-    <li id="scheduleTab"><a class="tab" role="tab" data-toggle="tab">Рассписание</a></li>
+    <li id="scheduleTab"><a class="tab" role="tab" data-toggle="tab">Расписание</a></li>
 </ul>
 <div class="buttons">
     <button id="createBtn" class="btn btn-success">
@@ -165,52 +165,52 @@
         </tr>
     </table>
 </div>
-<div id="scheduleTabContent" class="tab-pane">
-    <table class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
-        <thead>
-        <tr>
-            <th>День недели</th>
-            <th>Начало урока</th>
-            <th>Конец урока</th>
-            <th>Предмет</th>
-            <th>Класс</th>
-            <th>Учитель</th>
-        </tr>
-        </thead>
-        <tr>
-            <td>Понедельник</td>
-            <td>8.30</td>
-            <td>9.15</td>
-            <td>Русский язык</td>
-            <td>8 а</td>
-            <td>Иванова н.И.</td>
-        </tr>
-        <tr>
-            <td>Вторник</td>
-            <td>8.30</td>
-            <td>9.15</td>
-            <td>Математика</td>
-            <td>10 а</td>
-            <td>Петрова</td>
-        </tr>
-        <tr>
-            <td>Среда</td>
-            <td>8.30</td>
-            <td>9.15</td>
-            <td>Литература</td>
-            <td>6 в</td>
-            <td>Николаева</td>
-        <tr>
-            <td><input type="text" class="tableText form-control " value="Пятница"/></td>
-            <td><input type="text" class="tableText form-control" value="10:00"/></td>
-            <td><input type="text" class="tableText form-control" value="10:45"/></td>
-            <td><input type="text" class="tableText form-control" value="Физика"/></td>
-            <td><input type="text" class="tableText form-control" value="10 а"/></td>
-            <td><input type="text" class="tableText form-control" value="Петрова"/></td>
-            <td>
-            </td>
-        </tr>
-    </table>
-</div>
+     <div id="scheduleTabContent" class="tab-pane">
+            <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+                 
+                <tr>
+                    <th rowspan="2">Время урока</th>
+                    <th colspan="2">Понедельник</th>
+                    <th colspan="2">Вторник</th>
+                    <th colspan="2">Среда</th>
+                    <th colspan="2">Четверг</th>
+                    <th colspan="2">Пятница</th>
+                    </tr>
+            
+                <tr>
+                    <td>Предмет</td><td>Учитель</td><td>Предмет</td><td>Учитель</td><td>Предмет</td><td>Учитель</td><td>Предмет</td><td>Учитель</td><td>Предмет</td><td>Учитель</td>
+                </tr>
+                <tr align="center">
+    <td>8:00-8:45</td>
+    <td>Физика</td><td>Петрова</td><td>Русский язык</td><td>Иванова</td><td>Литература</td><td>Иванов</td><td>Математика</td><td>Николаева</td><td>История</td><td>Смирнова</td>
+   </tr>
+                <tr align="center">
+    <td>8:55-9:40</td>
+    <td>Физика</td><td>Петрова</td><td>Русский язык</td><td>Иванова</td><td>Литература</td><td>Иванов</td><td>Математика</td><td>Николаева</td><td>История</td><td>Смирнова</td>
+   </tr>
+                <tr align="center">
+    <td>9:50-10:35</td>
+    <td>Физика</td><td>Петрова</td><td>Русский язык</td><td>Иванова</td><td>Литература</td><td>Иванов</td><td>Математика</td><td>Николаева</td><td>История</td><td>Смирнова</td>
+   </tr>
+                
+               
+            
+                
+                     
+                     <tr>
+                    <td><input type="text" class="tableText form-control " value="8:55-9:40"/></td>
+                    <td><input type="text" class="tableText form-control" value="Биология"/></td>
+                    <td><input type="text" class="tableText form-control" value="Афанасова"/></td>
+                    <td><input type="text" class="tableText form-control" value="Физика"/></td>
+                    <td><input type="text" class="tableText form-control" value="Петрова"/></td>
+                    <td><input type="text" class="tableText form-control" value="Петрова"/></td>
+                    
+                    <td>
+                    </td>
+                    </tr>
+                 
+            </table>
+        </div>  
+
 </div>
 </div>
