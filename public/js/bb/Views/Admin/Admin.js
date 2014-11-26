@@ -47,6 +47,13 @@ define([
                 $("#error").removeClass("hide").html(message);
             },
 
+            showSucces: function (succes) {
+                $("#succes").fadeIn(1);
+                $("#succes").removeClass("hide").html(succes);
+                $("#succes").fadeOut(5000);
+            },
+
+
             hideError: function () {
                 $("#error").addClass("hide");
             },
@@ -248,6 +255,9 @@ define([
                 var onFail = function (e) {
                     self.showError(e.responseText);
                 }
+                var onSucces = function (e) {
+                    self.showSucces(e);
+                }
 
                 var teacher = {
                     "firstName": $("#firstNameTeacher").val(),
@@ -282,7 +292,7 @@ define([
                                             self.loadTeachers();
                                             $('#createTableTeacher').addClass("hide");
                                             $('#createBtn').removeClass("hide");
-                                            alert('Учитель успешно создан');
+                                            onSucces("Учитель успешно создан");
                                         },
                                         500: onFail
                                     }
@@ -296,6 +306,9 @@ define([
             createLearner: function () {
                 if (!this.validateLearner())return;
                 var self = this;
+                var onSucces = function (e) {
+                    self.showSucces(e);
+                }
                 var onFail = function (e) {
                     self.showError(e.responseText);
                 }
@@ -333,7 +346,7 @@ define([
                                             self.loadLearner();
                                             $('#createTableLearner').addClass("hide");
                                             $('#createBtn').removeClass("hide");
-                                            alert('Ученик успешно создан');
+                                            onSucces("Ученик успешно создан");
                                         },
                                         500: onFail
                                     }
