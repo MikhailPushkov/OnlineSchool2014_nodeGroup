@@ -37,16 +37,12 @@ h1 {
 }
 
 .board {
-   position: relative;
-	width: 1000px;
-	height: 600px;
-	margin: 10px auto;
-	background-color: rgb(60, 84, 62) !important;
-	border-radius: 20px;
-	border-bottom-style: groove;
-	padding: 15px;
-	border: 5px solid #8B4513;
-	margin: auto;
+    position: relative;
+    background-color: rgb(60, 84, 62) !important;
+    border-radius: 20px;
+    padding: 15px;
+    border: 5px solid #8B4513;
+    margin: auto;
 }
 
 .loginPage
@@ -74,51 +70,64 @@ h1 {
 .hide {
     display: none;
 }
+
 #imgOtchet {
-	position: absolute;
-	top: 190px;
-	right: 70px;
-	text-align: center;
+    position: absolute;
+    top: 190px;
+    right: 70px;
+    text-align: center;
 }
+
 #imgRaspisanie {
-	position: absolute;
-	top: 180px;
-	right: 410px;
-	text-align: center;
+    position: absolute;
+    top: 180px;
+    right: 410px;
+    text-align: center;
 }
-
-
 
 #imgKlass {
-	position: absolute;
-	top: 180px;
-	right: 700px;
-	text-align: center;
+    position: absolute;
+    top: 180px;
+    right: 700px;
+    text-align: center;
 }
+
 #dnevnik {
-	position: absolute;
-	top: 180px;
-	right: 600px;
-	text-align: center;
+    position: absolute;
+    top: 180px;
+    right: 600px;
+    text-align: center;
 }
 
 #reting {
-	position: absolute;
-	top: 190px;
-	right: 200px;
-	text-align: center;
+    position: absolute;
+    top: 190px;
+    right: 200px;
+    text-align: center;
 }
-#logotip {position: absolute;
-	top: 10px;
-	right: 300px;
-	text-align: center;
+
+#logotip {
+    width: 100px;
+    height: 100px;
 }
 
 #imgFoto {
     position: absolute;
-    top: 50px;
-	left: 220px;
-    height="120";
+    height: 120px;
+    float: left;
+}
+
+.profil {
+    position: relative;
+    width: 500px;
+    margin:auto;
+}
+
+.profText{
+    float: right;
+}
+
+
 /*
 #girl {
     position: absolute;
