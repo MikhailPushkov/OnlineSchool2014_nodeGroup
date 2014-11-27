@@ -22,7 +22,9 @@ define([
                 "click #createBtn": "showCreateTable",
                 "click .tab": "clickTab",
                 "click #pushToServerLearner": "createLearner",
-                "mouseover .table-hover tbody tr": "onSelectRow"
+                "mouseenter .table-hover tbody tr": "onSelectRow",
+                "click #editButton": "editBtnClick",
+                "click #removeButton": "removeBtnClick"
             },
 
             initialize: function (options) {
@@ -34,13 +36,30 @@ define([
                 this.childViews = [];      //GARBAGE COLLECTION
                 this.view_is_alive = true;
                 this.selectedTab = "teacher";
-                this.clearDataTable();
-                this.loadTeachers();
+                this.loadTeacher();
+            },
+
+            editBtnClick: function (e) {
+                console.log("edit");
+            },
+
+            removeBtnClick: function (e) {
+                console.log("remove");
+                var self = this;
+
+                $.ajax({
+                    type: "DELETE",
+                    url: "/" + self.selectedTab + '/' + e.currentTarget.parentElement.parentElement.id
+                }).done(function (teachers) {
+                        console.log("ok");
+                        var selTap = self.selectedTab;
+                        self["load" + selTap[0].toUpperCase() + selTap.substr(1,selTap.length-1)]();
+                    });
             },
 
             onSelectRow: function (e) {
                 $(".itemTool").remove();
-                $(e.currentTarget).append("<div class='itemTool'><button class='editItem btn btn-warning'><span class='glyphicon glyphicon glyphicon-edit' aria-hidden='true'></span></button><button class='removeItem btn btn-danger'><span class='glyphicon glyphicon glyphicon-remove' aria-hidden='true'></span></button></div>");
+                $(e.currentTarget).append("<div class='itemTool'><button id='editButton' class='btn btn-warning'><span class='glyphicon glyphicon glyphicon-edit' aria-hidden='true'></span></button><button id='removeButton' class='btn btn-danger'><span class='glyphicon glyphicon glyphicon-remove' aria-hidden='true'></span></button></div>");
             },
 
             showError: function (message) {
@@ -85,11 +104,9 @@ define([
 
                 switch (this.selectedTab) {
                     case "teacher":
-                        this.clearDataTable();
-                        this.loadTeachers();
+                        this.loadTeacher();
                         break;
                     case "learner":
-                        this.clearDataTableLearner();
                         this.loadLearner();
                         break;
                     default:
@@ -103,8 +120,6 @@ define([
             },
 
             validateTeacher: function () {
-
-
                 if ($("#firstNameTeacher").val() === "" || $("#lastNameTeacher").val() === "" ||
                     $("#patronymicTeacher").val() === "" ||
                     $("#classTeacher").val() === "" ||
@@ -116,34 +131,34 @@ define([
                     return false;
                 }
                 // Остальные проверки записывайте здесь отдельными if-ами
-                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameTeacher").val()) ){
-                  this.showError("Имя не должно содержать латинских символов и начинаться с заглавной буквы");
-                 return false;
-               }
-                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameTeacher").val()) ){
+                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameTeacher").val())) {
+                    this.showError("�?мя не должно содержать латинских символов и начинаться с заглавной буквы");
+                    return false;
+                }
+                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameTeacher").val())) {
                     this.showError("Фамилия не должна содержать латинских символов и начинаться с заглавной буквы");
                     return false;
                 }
-                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicTeacher").val()) ){
+                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicTeacher").val())) {
                     this.showError("Отчество не должно содержать латинских символов и начинаться с заглавной буквы");
                     return false;
                 }
 
-                else if (!/^8[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/.test($("#phoneTeacher").val()) ){
+                else if (!/^8[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/.test($("#phoneTeacher").val())) {
                     this.showError("Не корректно введен телефон.Номер должен начинаться с 8");
                     return false;
                 }
-                else if (!/.*@[A-Za-z]*\..*/.test($("#emailTeacher").val()) ){
+                else if (!/.*@[A-Za-z]*\..*/.test($("#emailTeacher").val())) {
                     this.showError("Не корректно введен email");
                     return false;
                 }
-                else if ($("#loginTeacher").val().length <6 || $("#loginTeacher").val().length>20  ){
+                else if ($("#loginTeacher").val().length < 6 || $("#loginTeacher").val().length > 20) {
                     this.showError("Не корректно введен логин. Логин должен содержать от 6 до 20 символов");
                     return false;
                 }
                 else if (!/^\s*(\w+)\s*$/.test($("#passTeacher").val())
-                    || $("#passTeacher").val().length>20
-                    || $("#passTeacher").val().length<6){
+                    || $("#passTeacher").val().length > 20
+                    || $("#passTeacher").val().length < 6) {
                     this.showError("Не корректно введен пароль.Пароль должен содержать от 6 до 20 латинских букв и цифр");
                     return false;
                 }
@@ -151,8 +166,8 @@ define([
                 else {
                     this.hideError();
                     return true;
-                      }
-                },
+                }
+            },
 
             validateLearner: function () {
                 if ($("#firstNameLearner").val() === "" ||
@@ -167,29 +182,29 @@ define([
                 }
                 // Остальные проверки записывайте здесь отдельными if-ами
 
-                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameLearner").val()) ){
+                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameLearner").val())) {
                     this.showError("Имя не должно содержать латинских символов и начинаться с заглавной буквы");
                     return false;
                 }
-                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameLearner").val()) ){
+                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameLearner").val())) {
                     this.showError("Фамилия не должна содержать латинских символов и начинаться с заглавной буквы");
                     return false;
                 }
-                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicLearner").val()) ){
+                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicLearner").val())) {
                     this.showError("Отчество не должно содержать латинских символов и начинаться с заглавной буквы");
                     return false;
                 }
-                else if (!/^[А-ЯЁа-я1-9.-]/.test($("#adressLearner").val()) ||$("#adressLearner").val().length>50){
+                else if (!/^[А-ЯЁа-я1-9.-]/.test($("#adressLearner").val()) || $("#adressLearner").val().length > 50) {
                     this.showError("Адресс должен состоять из букв русского алфавита или цифр");
                     return false;
                 }
-                else if ($("#loginLearner").val().length <6 || $("#loginLearner").val().length>20  ){
+                else if ($("#loginLearner").val().length < 6 || $("#loginLearner").val().length > 20) {
                     this.showError("Не корректно введен логин. Логин должен содержать от 6 до 20 символов");
                     return false;
                 }
                 else if (!/^\s*(\w+)\s*$/.test($("#passLearner").val())
-                    || $("#passLearner").val().length>20
-                    || $("#passLearner").val().length<6){
+                    || $("#passLearner").val().length > 20
+                    || $("#passLearner").val().length < 6) {
                     this.showError("Не корректно введен пароль.Пароль должен содержать от 6 до 20 латинских букв и цифр");
                     return false;
                 }
@@ -216,32 +231,30 @@ define([
                     }
                 });
             },
-            loadTeachers: function () {
+            loadTeacher: function () {
+                this.clearDataTable();
                 $.ajax({
                     type: "GET",
                     url: "/teacher"
                 }).done(function (teachers) {
                         teachers.forEach(function (teacher) {
-                            var row = "<tr><td>" + teacher.lastName + "</td><td>" + teacher.firstName + "</td><td>" + teacher.patronymic + "</td><td>" + teacher.phone + "</td><td>" + teacher.email + "</tr>";
+                            var row = "<tr id='" + teacher._id + "'><td>" + teacher.lastName + "</td><td>" + teacher.firstName + "</td><td>" + teacher.patronymic + "</td><td>" + teacher.phone + "</td><td>" + teacher.email + "</tr>";
                             $("#teacherTable tbody").append(row);
                         });
                     });
             },
 
             loadLearner: function () {
+                this.clearDataTable();
                 $.ajax({
                     type: "GET",
                     url: "/learner"
                 }).done(function (learner) {
                         learner.forEach(function (learner) {
-                            var row = "<tr><td>" + learner.lastName + "</td><td>" + learner.firstName + "</td><td>" + learner.patronymic + "</td><td>" + learner.class + "</td><td>" + learner.adress + "</td><td>" + learner.parents + "</tr>";
+                            var row = "<tr id='" + learner._id + "'><td>" + learner.lastName + "</td><td>" + learner.firstName + "</td><td>" + learner.patronymic + "</td><td>" + learner.class + "</td><td>" + learner.adress + "</td><td>" + learner.parents + "</tr>";
                             $("#learnerTable tbody").append(row);
                         });
                     });
-            },
-
-            clearDataTableLearner: function () {
-                $("#learnerTable tbody").empty();
             },
 
             clearDataTable: function () {
@@ -266,7 +279,7 @@ define([
                     "phone": $("#phoneTeacher").val(),
                     "email": $("#emailTeacher").val()
                 };
-               $('#createBtn').removeClass("hide");
+                $('#createBtn').removeClass("hide");
                 $.ajax({
                     type: "POST",
                     url: "/teacher",
@@ -288,8 +301,7 @@ define([
                                     data: user,
                                     statusCode: {
                                         200: function (e) {
-                                            self.clearDataTable();
-                                            self.loadTeachers();
+                                            self.loadTeacher();
                                             $('#createTableTeacher').addClass("hide");
                                             $('#createBtn').removeClass("hide");
                                             onSucces("Учитель успешно создан");
@@ -342,7 +354,6 @@ define([
                                     data: user,
                                     statusCode: {
                                         200: function (e) {
-                                            self.clearDataTable();
                                             self.loadLearner();
                                             $('#createTableLearner').addClass("hide");
                                             $('#createBtn').removeClass("hide");
@@ -358,5 +369,4 @@ define([
             }
         });
         return AdminPage;
-    })
-;
+    });
