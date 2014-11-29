@@ -32,6 +32,7 @@ define([
                 this.childViews = [];      //GARBAGE COLLECTION
                 this.warning_is_up = false;
                 self.collec_legth = 0;
+                this.loadHeader(this.model.attributes.itemId,this.model.attributes.role);
                 this.listenTo(this.model, "change:profile_pic", this.render);
             },
 
@@ -46,6 +47,28 @@ define([
 
             logout: function(){
                 App.Log_User_Out();
+            },
+
+            loadHeader: function (id,role) {
+              if (role === "teacher") {
+                    $.ajax({
+                        type: "GET",
+                        url: "/teacher/" + id
+                    }).done(function (teachers) {
+                        console.log(teachers);
+                    });
+                }
+               else if (role === "learner") {
+                    $.ajax({
+                        type: "GET",
+                        url: "/learner/" + id
+                    }).done(function (learner) {
+                        console.log(learner);
+                        var row = "<h3> </h3>"+ learner.firstName;
+                        $("#profText").append(row);
+                    });
+                }
+
             },
 
             onClose: function() {
