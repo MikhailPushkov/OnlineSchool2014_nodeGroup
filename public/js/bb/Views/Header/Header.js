@@ -64,9 +64,7 @@ define([
                         url: "/learner/" + id
                     }).done(function (learner) {
                         console.log(learner);
-                        var row = "<h3> </h3>"+ learner.firstName;
-                        $("#profText").append(row);
-                    });
+                       });
                 }
 
             },
