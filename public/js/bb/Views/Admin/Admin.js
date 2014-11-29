@@ -295,6 +295,7 @@ define([
                         })
                             .done(function (user) {
                                 user.role = 'teacher';
+                                user.itemId = response._id;
                                 $.ajax({
                                     url: '/user/' + user._id,
                                     method: 'PUT',
@@ -348,6 +349,7 @@ define([
                             }
                         }).done(function (user) {
                                 user.role = 'learner';
+                                user.itemId = response._id;
                                  $.ajax({
                                     url: '/user/' + user._id,
                                     method: 'PUT',
