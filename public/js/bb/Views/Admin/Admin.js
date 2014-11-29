@@ -348,7 +348,7 @@ define([
                             }
                         }).done(function (user) {
                                 user.role = 'learner';
-                                $.ajax({
+                                 $.ajax({
                                     url: '/user/' + user._id,
                                     method: 'PUT',
                                     data: user,
