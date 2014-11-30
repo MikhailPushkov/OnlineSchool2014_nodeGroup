@@ -107,10 +107,11 @@ h1 {
 }
 
 #logotip {
-    width: 100px;
-    height: 100px;
+    position:relative ;
+	top: 2px;
+	right: -100px;
+	
 }
-
 #imgFoto {
     position: absolute;
     height: 120px;
