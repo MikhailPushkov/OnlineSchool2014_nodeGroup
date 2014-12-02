@@ -42,7 +42,7 @@ exports.addlessonOfTeacher = function(req, res) {
     });
 };
 
-exports.updatejournal = function(req, res) {
+exports.updatelessonOfTeacher = function(req, res) {
     var _id = req.params.id;
     var lessonOfTeacher = req.body;
     delete lessonOfTeacher._id;  /// I need to remove this here, I need to figure out why this is happening, must be a MongoDB configuration
