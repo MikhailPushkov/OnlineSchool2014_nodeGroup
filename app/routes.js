@@ -1,6 +1,13 @@
 var User_route = require('./routes/route_user');
 var Teacher_route = require('./routes/route_teacher');
 var Learner_route = require('./routes/route_learner');
+var Class_route = require('./routes/route_class');
+var Homework_route = require('./routes/route_homework');
+var Journal_route = require('./routes/route_journal');
+var Lesson_route = require('./routes/route_lesson');
+var LessonOfTeacher_route = require('./routes/route_lessonOfTeacher');
+var Parent_route = require('./routes/route_parent');
+var Schedule_route = require('./routes/route_schedule');
 
 module.exports = function (app, passport) {
     // =====================================
@@ -47,12 +54,57 @@ module.exports = function (app, passport) {
     app.post('/teacher', isLoggedIn, Teacher_route.addTeacher);
     app.get('/teacher/:id', isLoggedIn, Teacher_route.findById);
     app.get('/teacher', isLoggedIn, Teacher_route.findAll);
+    app.put('/teacher/:id', isLoggedIn, Teacher_route.updateTeacher);
     app.delete('/teacher/:id', isLoggedIn, Teacher_route.deleteTeacher);
 
     app.post('/learner', isLoggedIn, Learner_route.addLearner);
     app.get('/learner', isLoggedIn, Learner_route.findAll);
     app.get('/learner/:id', isLoggedIn, Learner_route.findById);
+    app.put('/learner/:id', isLoggedIn, Learner_route.updateLearner);
     app.delete('/learner/:id', isLoggedIn, Learner_route.deleteLearner);
+    
+    app.post('/class', isLoggedIn, Class_route.addClass);
+    app.get('/class', isLoggedIn, Class_route.findAll);
+    app.get('/class/:id', isLoggedIn, Class_route.findById);
+    app.put('/class/:id', isLoggedIn, Class_route.updateClass);
+    app.delete('/class/:id', isLoggedIn, Class_route.deleteClass);
+    
+    app.post('/homework', isLoggedIn, Homework_route.addHomework);
+    app.get('/homework', isLoggedIn, Homework_route.findAll);
+    app.get('/homework/:id', isLoggedIn, Homework_route.findById);
+    app.put('/homework/:id', isLoggedIn, Homework_route.updateHomework);
+    app.delete('/homework/:id', isLoggedIn, Homework_route.deleteHomework);
+    
+    app.post('/journal', isLoggedIn, Journal_route.addLearner);
+    app.get('/journal', isLoggedIn, Journal_route.findAll);
+    app.get('/journal/:id', isLoggedIn, Journal_route.findById);
+    app.put('/journal/:id', isLoggedIn, Journal_route.updatejournal);
+    app.delete('/journal/:id', isLoggedIn, Journal_route.deleteLearner);
+    
+    app.post('/lesson', isLoggedIn, Lesson_route.addLesson);
+    app.get('/lesson', isLoggedIn, Lesson_route.findAll);
+    app.get('/lesson/:id', isLoggedIn, Lesson_route.findById);
+    app.put('/lesson/:id', isLoggedIn, Lesson_route.updateLesson);
+    app.delete('/lesson/:id', isLoggedIn, Lesson_route.deleteLesson);
+    
+    app.post('/lessonOfTeacher', isLoggedIn, LessonOfTeacher_route.addlessonOfTeacher);
+    app.get('/lessonOfTeacher', isLoggedIn, LessonOfTeacher_route.findAll);
+    app.get('/lessonOfTeacher/:id', isLoggedIn, LessonOfTeacher_route.findById);
+    app.put('/lessonOfTeacher/:id', isLoggedIn, LessonOfTeacher_route.updatelessonOfTeacher);
+    app.delete('/lessonOfTeacher/:id', isLoggedIn, LessonOfTeacher_route.deletelessonOfTeacher);
+    
+    app.post('/parent', isLoggedIn, Parent_route.addParent);
+    app.get('/parent', isLoggedIn, Parent_route.findAll);
+    app.get('/parent/:id', isLoggedIn, Parent_route.findById);
+    app.put('/parent/:id', isLoggedIn, Parent_route.updateParent);
+    app.delete('/parent/:id', isLoggedIn, Parent_route.deleteParent);
+    
+    app.post('/schedule', isLoggedIn, Schedule_route.addschedule);
+    app.get('/schedule', isLoggedIn, Schedule_route.findAll);
+    app.get('/schedule/:id', isLoggedIn, Schedule_route.findById);
+    app.put('/schedule/:id', isLoggedIn, Schedule_route.updateschedule);
+    app.delete('/schedule/:id', isLoggedIn, Schedule_route.deleteschedule);
+        
     /*
     app.get('/teacher/:id', already_logged_in, Teacher_route.findById);
     app.put('/teacher/:id', already_logged_in, Teacher_route.updateUser);
