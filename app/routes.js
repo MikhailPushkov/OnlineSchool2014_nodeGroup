@@ -1,6 +1,7 @@
 var User_route = require('./routes/route_user');
 var Teacher_route = require('./routes/route_teacher');
 var Learner_route = require('./routes/route_learner');
+var Lesson_route = require('./routes/route_lesson');
 
 module.exports = function (app, passport) {
     // =====================================
@@ -53,7 +54,16 @@ module.exports = function (app, passport) {
     app.get('/learner', isLoggedIn, Learner_route.findAll);
     app.get('/learner/:id', isLoggedIn, Learner_route.findById);
     app.delete('/learner/:id', isLoggedIn, Learner_route.deleteLearner);
-  
+
+    app.post('/lesson', isLoggedIn, Lesson_route.addLesson);
+    app.get('/lesson', isLoggedIn, Lesson_route.findAll);
+
+    /*
+    app.get('/teacher/:id', already_logged_in, Teacher_route.findById);
+    app.put('/teacher/:id', already_logged_in, Teacher_route.updateUser);
+    app.delete('/teacher/:id', already_logged_in, Teacher_route.deleteUser);
+    */
+
     // =====================================
     // ============= LOGOUT ================
     // =====================================

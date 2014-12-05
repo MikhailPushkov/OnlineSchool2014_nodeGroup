@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Shedule = require('../models/shema_lesson');
+var Lesson = require('../models/shema_lesson');
 var fs = require("fs");
 var _ = require('underscore');
 
@@ -35,7 +35,7 @@ exports.findAll = function (req, res) {
 
 exports.addLesson = function(req, res) {
     var lesson = req.body;
-    var Lesson_model = new lesson(lesson);
+    var Lesson_model = new Lesson(lesson);
     Lesson_model.save(function (err, new_lesson) {
       if (err) return console.error(err);
       res.send(new_lesson);

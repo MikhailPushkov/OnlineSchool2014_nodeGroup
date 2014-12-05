@@ -134,35 +134,36 @@
     </table>
 </div>
 <div id="lessonsTabContent" class="tab-pane">
-    <table class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
+    <table id="createTableLesson" class="createTable table "
+           style="background-color: #ffffff">
         <thead>
         <tr>
-            <th>Название</th>
+            <th>Наименование</th>
             <th>Учитель</th>
+
         </tr>
         </thead>
         <tr>
-            <td>Русский язык</td>
-            <td>Иванова н.И.</td>
-        </tr>
-        <tr>
-            <td>Математика</td>
-            <td>Иванова н.И.</td>
-        </tr>
-        <tr>
-            <td>Литература</td>
-            <td>Иванова н.И.</td>
-        </tr>
-        <tr>
-            <td>География</td>
-            <td>Иванова н.И.</td>
-        </tr>
-        <tr>
-            <td><input type="text" class="tableText form-control " value="Физика"/></td>
-            <td><input type="text" class="tableText form-control" value="Петрова Н.И"/></td>
+            <td><input id="NameLesson" type="text" class="form-control"/></td>
+            <td><input id="TeacherID" type="text" class="form-control"/></td>
+
             <td>
+                <button id="pushToServerLesson" type="role" class=" btn btn-primary">
+                    <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                </button>
             </td>
         </tr>
+    </table>
+    <table id="lessonTable" class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
+        <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>Учитель</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
     </table>
 </div>
      <div id="scheduleTabContent" class="tab-pane">
