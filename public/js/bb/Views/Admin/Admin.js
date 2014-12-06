@@ -405,6 +405,7 @@ define([
                 "lesson": $('#NameLesson').val()
 
             };
+            console.log(lesson);
             $('#createBtn').removeClass("hide");
             $.ajax({
                 type: "POST",

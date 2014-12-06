@@ -1,11 +1,11 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
 
-    lessonsOfTeacherShema = new Schema({
+    lessons = new Schema({
         "teacherId": String,
-        "lessonId": String
+        "lesson": String
     }),
 
-    lessonsOfTeacher = mongoose.model('LessonsOfTeacher', lessonsOfTeacherShema);
+    lessons = mongoose.model('Lessons', lessons);
 
-module.exports = lessonsOfTeacher;
+module.exports = lessons;
