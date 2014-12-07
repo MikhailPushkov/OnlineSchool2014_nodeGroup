@@ -128,6 +128,15 @@ h1 {
     float: right;
 }
 
+.dnevnik * {
+    text-align: center;  
+}
+.dnevnik {
+    float:left;
+    background-color: #ffffff;
+    width:45%;
+    border:2px; 
+}
 
 /*
 #girl {
