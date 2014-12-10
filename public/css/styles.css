@@ -138,6 +138,14 @@ h1 {
     border:2px; 
 }
 
+#succes{
+    position: fixed;
+    top:150px;
+    left:33%;
+    right:33%;
+    width: 34%;
+}
+
 /*
 #girl {
     position: absolute;

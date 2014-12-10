@@ -42,7 +42,14 @@ define([
             },
 
             editBtnClick: function (e) {
-                console.log("edit");
+                var self = this;
+                $.ajax({
+                    type: "GET",
+                    url: "/" + self.selectedTab + '/' + e.currentTarget.parentElement.parentElement.id
+                }).done(function (item) {
+                        var selTap = self.selectedTab;
+                        self["edit" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)](item);
+                    });
             },
 
             removeBtnClick: function (e) {
@@ -55,7 +62,7 @@ define([
                 }).done(function (teachers) {
                         console.log("ok");
                         var selTap = self.selectedTab;
-                        self["load" + selTap[0].toUpperCase() + selTap.substr(1,selTap.length-1)]();
+                        self["load" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)]();
                     });
             },
 
@@ -69,11 +76,10 @@ define([
             },
 
             showSucces: function (succes) {
-                $("#succes").fadeIn(1);
+                $("#succes").fadeIn(1000);
                 $("#succes").removeClass("hide").html(succes);
-                $("#succes").fadeOut(5000);
+                $("#succes").fadeOut(3000);
             },
-
 
             hideError: function () {
                 $("#error").addClass("hide");
@@ -104,7 +110,7 @@ define([
                 $("#createBtn").removeClass("hide");
 
                 this.selectedTab = selectedObjectName;
-                   switch (this.selectedTab) {
+                switch (this.selectedTab) {
                     case "teacher":
                         this.loadTeacher();
                         break;
@@ -136,43 +142,41 @@ define([
                     this.showError("Не все поля заполненны.");
                     return false;
                 }
-                // Остальные проверки записывайте здесь отдельными if-ами
-                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameTeacher").val())) {
-                    this.showError("�?мя не должно содержать латинских символов и начинаться с заглавной буквы");
-                    return false;
-                }
-                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameTeacher").val())) {
-                    this.showError("Фамилия не должна содержать латинских символов и начинаться с заглавной буквы");
-                    return false;
-                }
-                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicTeacher").val())) {
-                    this.showError("Отчество не должно содержать латинских символов и начинаться с заглавной буквы");
-                    return false;
-                }
+//                // Остальные проверки записывайте здесь отдельными if-ами
+//                if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameTeacher").val())) {
+//                    this.showError("Имя не должно содержать латинских символов и начинаться с заглавной буквы");
+//                    return false;
+//                }
+//                if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameTeacher").val())) {
+//                    this.showError("Фамилия не должна содержать латинских символов и начинаться с заглавной буквы");
+//                    return false;
+//                }
+//                if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicTeacher").val())) {
+//                    this.showError("Отчество не должно содержать латинских символов и начинаться с заглавной буквы");
+//                    return false;
+//                }
+//
+//                if (!/^8[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/.test($("#phoneTeacher").val())) {
+//                    this.showError("Не корректно введен телефон.Номер должен начинаться с 8");
+//                    return false;
+//                }
+//                if (!/.*@[A-Za-z]*\..*/.test($("#emailTeacher").val())) {
+//                    this.showError("Не корректно введен email");
+//                    return false;
+//                }
+//                if ($("#loginTeacher").val().length < 6 || $("#loginTeacher").val().length > 20) {
+//                    this.showError("Не корректно введен логин. Логин должен содержать от 6 до 20 символов");
+//                    return false;
+//                }
+//                if (!/^\s*(\w+)\s*$/.test($("#passTeacher").val())
+//                    || $("#passTeacher").val().length > 20
+//                    || $("#passTeacher").val().length < 6) {
+//                    this.showError("Не корректно введен пароль.Пароль должен содержать от 6 до 20 латинских букв и цифр");
+//                    return false;
+//                }
 
-                else if (!/^8[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/.test($("#phoneTeacher").val())) {
-                    this.showError("Не корректно введен телефон.Номер должен начинаться с 8");
-                    return false;
-                }
-                else if (!/.*@[A-Za-z]*\..*/.test($("#emailTeacher").val())) {
-                    this.showError("Не корректно введен email");
-                    return false;
-                }
-                else if ($("#loginTeacher").val().length < 6 || $("#loginTeacher").val().length > 20) {
-                    this.showError("Не корректно введен логин. Логин должен содержать от 6 до 20 символов");
-                    return false;
-                }
-                else if (!/^\s*(\w+)\s*$/.test($("#passTeacher").val())
-                    || $("#passTeacher").val().length > 20
-                    || $("#passTeacher").val().length < 6) {
-                    this.showError("Не корректно введен пароль.Пароль должен содержать от 6 до 20 латинских букв и цифр");
-                    return false;
-                }
-
-                else {
-                    this.hideError();
-                    return true;
-                }
+                this.hideError();
+                return true;
             },
 
             validateLearner: function () {
@@ -186,38 +190,38 @@ define([
                     this.showError("Не все поля заполненны.");
                     return false;
                 }
-                // Остальные проверки записывайте здесь отдельными if-ами
+                /* // Остальные проверки записывайте здесь отдельными if-ами
 
-                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameLearner").val())) {
-                    this.showError("Имя не должно содержать латинских символов и начинаться с заглавной буквы");
-                    return false;
-                }
-                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameLearner").val())) {
-                    this.showError("Фамилия не должна содержать латинских символов и начинаться с заглавной буквы");
-                    return false;
-                }
-                else if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicLearner").val())) {
-                    this.showError("Отчество не должно содержать латинских символов и начинаться с заглавной буквы");
-                    return false;
-                }
-                else if (!/^[А-ЯЁа-я1-9.-]/.test($("#adressLearner").val()) || $("#adressLearner").val().length > 50) {
-                    this.showError("Адресс должен состоять из букв русского алфавита или цифр");
-                    return false;
-                }
-                else if ($("#loginLearner").val().length < 6 || $("#loginLearner").val().length > 20) {
-                    this.showError("Не корректно введен логин. Логин должен содержать от 6 до 20 символов");
-                    return false;
-                }
-                else if (!/^\s*(\w+)\s*$/.test($("#passLearner").val())
-                    || $("#passLearner").val().length > 20
-                    || $("#passLearner").val().length < 6) {
-                    this.showError("Не корректно введен пароль.Пароль должен содержать от 6 до 20 латинских букв и цифр");
-                    return false;
-                }
-                else {
-                    this.hideError();
-                    return true;
-                }
+                 else if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameLearner").val())) {
+                 this.showError("Имя не должно содержать латинских символов и начинаться с заглавной буквы");
+                 return false;
+                 }
+                 else if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameLearner").val())) {
+                 this.showError("Фамилия не должна содержать латинских символов и начинаться с заглавной буквы");
+                 return false;
+                 }
+                 else if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicLearner").val())) {
+                 this.showError("Отчество не должно содержать латинских символов и начинаться с заглавной буквы");
+                 return false;
+                 }
+                 else if (!/^[А-ЯЁа-я1-9.-]/.test($("#adressLearner").val()) || $("#adressLearner").val().length > 50) {
+                 this.showError("Адресс должен состоять из букв русского алфавита или цифр");
+                 return false;
+                 }
+                 else if ($("#loginLearner").val().length < 6 || $("#loginLearner").val().length > 20) {
+                 this.showError("Не корректно введен логин. Логин должен содержать от 6 до 20 символов");
+                 return false;
+                 }
+                 else if (!/^\s*(\w+)\s*$/.test($("#passLearner").val())
+                 || $("#passLearner").val().length > 20
+                 || $("#passLearner").val().length < 6) {
+                 this.showError("Не корректно введен пароль.Пароль должен содержать от 6 до 20 латинских букв и цифр");
+                 return false;
+                 }
+                 else {
+                 this.hideError();
+                 return true;
+                 }*/
             },
 
             render: function () {
@@ -237,6 +241,7 @@ define([
                     }
                 });
             },
+
             loadTeacher: function () {
                 this.clearDataTable();
                 $.ajax({
@@ -249,19 +254,19 @@ define([
                         });
                     });
             },
+
             loadLesson: function () {
                 this.clearDataTable();
-
-                    $.ajax({
+                $.ajax({
                     type: "GET",
                     url: "/lesson"
                 }).done(function (lesson) {
                         lesson.forEach(function (lesson) {
 
-                        var row = "<tr id='" + lesson._id + "'><td>" + lesson.lesson + "</td><td>" + lesson.teacherId + "</tr>";
-                        $("#lessonTable tbody").append(row);
+                            var row = "<tr id='" + lesson._id + "'><td>" + lesson.lesson + "</td><td>" + lesson.teacherId + "</tr>";
+                            $("#lessonTable tbody").append(row);
+                        });
                     });
-                });
             },
 
             loadLearner: function () {
@@ -299,7 +304,6 @@ define([
                     "phone": $("#phoneTeacher").val(),
                     "email": $("#emailTeacher").val()
                 };
-                $('#createBtn').removeClass("hide");
                 $.ajax({
                     type: "POST",
                     url: "/teacher",
@@ -323,8 +327,8 @@ define([
                                     statusCode: {
                                         200: function (e) {
                                             self.loadTeacher();
-                                            $('#createTableTeacher').addClass("hide");
                                             $('#createBtn').removeClass("hide");
+                                            $('#createTableTeacher').addClass("hide");
                                             onSucces("Учитель успешно создан");
                                         },
                                         500: onFail
@@ -336,6 +340,36 @@ define([
                     .fail(onFail);
             },
 
+            editTeacher: function (teacher) {
+                //if (!this.validateTeacher())return;
+                console.log(teacher);
+                var self = this;
+
+                var onFail = function (e) {
+                    self.showError(e.responseText);
+                }
+                var onSucces = function (e) {
+                    self.showSucces(e);
+                };
+
+                this.showCreateTable();
+                $('#loginTeacher').prop('disabled', true);
+                $('#passTeacher').prop('disabled', true);
+                $("#firstNameTeacher").val(teacher.firstName);
+                $('#lastNameTeacher').val(teacher.lastName);
+                $("#patronymicTeacher").val(teacher.patronymic);
+                $("#phoneTeacher").val(teacher.phone);
+                $("#emailTeacher").val(teacher.email);
+
+               /* $.ajax({
+                    type: "PUT",
+                    url: "/teacher/id="+ teacher.id,
+                    data: teacher
+                }).done(function (response) {
+                    update();
+                    }).fail(onFail);*/
+            },
+
             createLearner: function () {
                 if (!this.validateLearner())return;
                 var self = this;
@@ -345,7 +379,6 @@ define([
                 var onFail = function (e) {
                     self.showError(e.responseText);
                 }
-                $('#createBtn').removeClass("hide");
                 var learner = {
                     "firstName": $("#firstNameLearner").val(),
                     "lastName": $('#lastNameLearner').val(),
@@ -370,15 +403,15 @@ define([
                         }).done(function (user) {
                                 user.role = 'learner';
                                 user.itemId = response._id;
-                                 $.ajax({
+                                $.ajax({
                                     url: '/user/' + user._id,
                                     method: 'PUT',
                                     data: user,
                                     statusCode: {
                                         200: function (e) {
                                             self.loadLearner();
-                                            $('#createTableLearner').addClass("hide");
                                             $('#createBtn').removeClass("hide");
+                                            $('#createTableLearner').addClass("hide");
                                             onSucces("Ученик успешно создан");
                                         },
                                         500: onFail
@@ -390,42 +423,38 @@ define([
                     .fail(onFail);
             },
 
-
-        createLesson: function () {
-        // if (!this.validateTeacher())return;
-           var self = this;
-            var onFail = function (e) {
-               self.showError(e.responseText);
-           }
-            var onSucces = function (e) {
-               self.showSucces(e);
-            }
-            var lesson = {
-                "teacherId": $("#TeacherID").val(),
-                "lesson": $('#NameLesson').val()
-
-            };
-            console.log(lesson);
-            $('#createBtn').removeClass("hide");
-            $.ajax({
-                type: "POST",
-                url: "/lesson",
-                data: lesson,
-                statusCode: {
-                    200: function (e) {
-                        self.loadLesson();
-                        $('#createTableLesson').addClass("hide");
-                        $('#createBtn').removeClass("hide");
-                        onSucces("Предмет успешно создан");
-                    },
-                    500: onFail
+            createLesson: function () {
+                // if (!this.validateTeacher())return;
+                var self = this;
+                var onFail = function (e) {
+                    self.showError(e.responseText);
                 }
-            }).done(function (response) {
-                console.log(response);
-            })
-                ;
-        }
+                var onSucces = function (e) {
+                    self.showSucces(e);
+                }
+                var lesson = {
+                    "teacherId": $("#TeacherID").val(),
+                    "lesson": $('#NameLesson').val()
 
-          });
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/lesson",
+                    data: lesson,
+                    statusCode: {
+                        200: function (e) {
+                            self.loadLesson();
+                            $('#createBtn').removeClass("hide");
+                            $('#createTableLesson').addClass("hide");
+                            onSucces("Предмет успешно создан");
+                        },
+                        500: onFail
+                    }
+                }).done(function (response) {
+                        console.log(response);
+                    });
+            }
+        });
         return AdminPage;
     });
