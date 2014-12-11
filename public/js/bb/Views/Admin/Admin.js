@@ -47,23 +47,36 @@ define([
                     type: "GET",
                     url: "/" + self.selectedTab + '/' + e.currentTarget.parentElement.parentElement.id
                 }).done(function (item) {
-                    var selTap = self.selectedTab;
-                    self["edit" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)](item);
+                    $.ajax({
+                        type: "GET",
+                        url: "/userItem/" + e.currentTarget.parentElement.parentElement.id
+                    }).done(function (user) {
+                        item.login = user.local.login;
+                        var selTap = self.selectedTab;
+                        self["edit" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)](item);
+                    });
                 });
             },
 
             removeBtnClick: function (e) {
-                console.log("remove");
                 var self = this;
-
                 $.ajax({
                     type: "DELETE",
                     url: "/" + self.selectedTab + '/' + e.currentTarget.parentElement.parentElement.id
                 }).done(function (teachers) {
-                    console.log("ok");
+                    console.log("RemoveOk");
+                    $.ajax({
+                        type: "DELETE",
+                        url: "/user" + '/' + e.currentTarget.parentElement.parentElement.id
+                    }).done(function (teachers) {
+                        console.log("UserDeleting");
+                    });
+
                     var selTap = self.selectedTab;
                     self["load" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)]();
                 });
+
+
             },
 
             onSelectRow: function (e) {
@@ -129,6 +142,7 @@ define([
             showCreateTable: function () {
                 $('.createTable').removeClass("hide");
                 $('#createBtn').addClass("hide");
+                this.editId = null;
             },
 
             validateTeacher: function () {
@@ -137,8 +151,7 @@ define([
                     $("#classTeacher").val() === "" ||
                     $("#phoneTeacher").val() === "" ||
                     $("#emailTeacher").val() === "" ||
-                    (( $("#loginTeacher").val() === "" || $("#passTeacher").val() === "") && !this.editId))
-                {
+                    (( $("#loginTeacher").val() === "" || $("#passTeacher").val() === "") && !this.editId)) {
                     this.showError("Не все поля заполненны.");
                     return false;
                 }
@@ -185,8 +198,7 @@ define([
                     $("#patronymicLearner").val() === "" ||
                     $("#classLearner").val() === "" ||
                     $("#adressLearner").val() === "" ||
-                    $("#loginLearner").val() === "" ||
-                    $("#passLearner").val() === "") {
+                    (( $("#loginLearner").val() === "" || $("#passLearner").val() === "") && !this.editId)) {
                     this.showError("Не все поля заполненны.");
                     return false;
                 }
@@ -305,7 +317,25 @@ define([
                     "email": $("#emailTeacher").val()
                 };
                 if (this.editId) {
+                    $.ajax({
+                        type: "PUT",
+                        url: "/teacher/" + this.editId,
+                        data: teacher,
+                        statusCode: {
+                            200: function (e) {
+                                self.loadTeacher();
+                                $('#createBtn').removeClass("hide");
+                                $('#createTableTeacher').addClass("hide");
+                                onSucces("Учитель успешно изменен");
+                            },
+                            500: onFail
+                        }
+                    }).done(function (response) {
+
+                    })
+                        .fail(onFail);
                     this.editId = null;
+
                 } else {
                     $.ajax({
                         type: "POST",
@@ -346,7 +376,7 @@ define([
 
             editTeacher: function (teacher) {
                 this.showCreateTable();
-                $('#loginTeacher').prop('disabled', true);
+                $('#loginTeacher').val(teacher.login);
                 $('#passTeacher').prop('disabled', true);
                 $("#firstNameTeacher").val(teacher.firstName);
                 $('#lastNameTeacher').val(teacher.lastName);
@@ -363,7 +393,19 @@ define([
                  update();
                  }).fail(onFail);*/
             },
+            editLearner: function (learner) {
+                this.showCreateTable();
+                $('#loginLearner').val(learner.login);
+                $('#passLearner').prop('disabled', true);
+                $("#firstNameLearner").val(learner.firstName);
+                $('#lastNameLearner').val(learner.lastName);
+                $("#patronymicLearner").val(learner.patronymic);
+                $("#classLearner").val(learner.class);
+                $("#parentLearner").val(learner.parents);
+                $("#adressLearner").val(learner.adress);
+                this.editId = learner._id;
 
+            },
             createLearner: function () {
                 if (!this.validateLearner())return;
                 var self = this;
@@ -381,40 +423,63 @@ define([
                     "adress": $("#adressLearner").val(),
                     "parents": ["adsfsadfasf", "asdfasfasdf"]
                 };
-
-                $.ajax({
-                    type: "POST",
-                    url: "/learner",
-                    data: learner
-                }).done(function (response) {
+                if (this.editId) {
                     $.ajax({
-                        type: "POST",
-                        url: "/signup",
-                        data: {
-                            login: $('#loginLearner').val(),
-                            password: $('#passLearner').val()
+                        type: "PUT",
+                        url: "/learner/" + this.editId,
+                        data: learner,
+                        statusCode: {
+                            200: function (e) {
+                                self.loadTeacher();
+                                $('#createBtn').removeClass("hide");
+                                $('#createTableLearner').addClass("hide");
+                                onSucces("Ученик успешно изменен");
+                            },
+                            500: onFail
                         }
-                    }).done(function (user) {
-                        user.role = 'learner';
-                        user.itemId = response._id;
-                        $.ajax({
-                            url: '/user/' + user._id,
-                            method: 'PUT',
-                            data: user,
-                            statusCode: {
-                                200: function (e) {
-                                    self.loadLearner();
-                                    $('#createBtn').removeClass("hide");
-                                    $('#createTableLearner').addClass("hide");
-                                    onSucces("Ученик успешно создан");
-                                },
-                                500: onFail
-                            }
-                        })
+                    }).done(function (response) {
+                        console.log(response)
                     })
                         .fail(onFail);
-                })
-                    .fail(onFail);
+                    this.loadLearner();
+                    this.editId = null;
+
+                }
+                else {
+                    $.ajax({
+                        type: "POST",
+                        url: "/learner",
+                        data: learner
+                    }).done(function (response) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/signup",
+                            data: {
+                                login: $('#loginLearner').val(),
+                                password: $('#passLearner').val()
+                            }
+                        }).done(function (user) {
+                            user.role = 'learner';
+                            user.itemId = response._id;
+                            $.ajax({
+                                url: '/user/' + user._id,
+                                method: 'PUT',
+                                data: user,
+                                statusCode: {
+                                    200: function (e) {
+                                        self.loadLearner();
+                                        $('#createBtn').removeClass("hide");
+                                        $('#createTableLearner').addClass("hide");
+                                        onSucces("Ученик успешно создан");
+                                    },
+                                    500: onFail
+                                }
+                            })
+                        })
+                            .fail(onFail);
+                    })
+                        .fail(onFail);
+                }
             },
 
             createLesson: function () {

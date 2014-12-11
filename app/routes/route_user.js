@@ -28,6 +28,13 @@ exports.findById = function (req, res) {
         res.send(User);
     });
 };
+exports.findByItemId = function (req, res) {
+    var id = req.params.id;
+    User.findOne({ itemId: id }, function (err, User) {
+        if (err) return res.send(404, "User not found");
+        res.send(User);
+    });
+};
 
 exports.findAll = function (req, res) {
     var _id = req.query.user_id;
@@ -89,7 +96,7 @@ exports.updateUser = function (req, res) {
 exports.deleteUser = function (req, res) {
     var id = req.params.id;
 
-    User.findOneAndRemove({'_id': id }, {safe: true}, function (err, result) {
+    User.findOneAndRemove({'itemId': id }, {safe: true}, function (err, result) {
         if (err) {
             res.send({'error': 'An error has occurred - ' + err});
         } else {

@@ -41,6 +41,7 @@ module.exports = function (app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/user', isLoggedIn, User_route.findAll);
+    app.get('/userItem/:id', isLoggedIn, User_route.findByItemId);
     app.get('/user/:id', isLoggedIn, User_route.findById);
     app.put('/user/:id', isLoggedIn, User_route.updateUser);
     app.delete('/user/:id', isLoggedIn, User_route.deleteUser);
@@ -48,11 +49,13 @@ module.exports = function (app, passport) {
     app.post('/teacher', isLoggedIn, Teacher_route.addTeacher);
     app.get('/teacher/:id', isLoggedIn, Teacher_route.findById);
     app.get('/teacher', isLoggedIn, Teacher_route.findAll);
+    app.put('/teacher/:id', isLoggedIn, Teacher_route.updateTeacher);
     app.delete('/teacher/:id', isLoggedIn, Teacher_route.deleteTeacher);
 
     app.post('/learner', isLoggedIn, Learner_route.addLearner);
     app.get('/learner', isLoggedIn, Learner_route.findAll);
     app.get('/learner/:id', isLoggedIn, Learner_route.findById);
+    app.put('/learner/:id', isLoggedIn, Learner_route.updateLearner);
     app.delete('/learner/:id', isLoggedIn, Learner_route.deleteLearner);
 
     app.post('/lesson', isLoggedIn, Lesson_route.addLesson);
