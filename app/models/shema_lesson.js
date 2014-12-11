@@ -2,7 +2,6 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
 
     lessons = new Schema({
-        "teacherId": String,
         "lesson": String
     }),
 

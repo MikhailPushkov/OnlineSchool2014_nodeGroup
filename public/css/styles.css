@@ -131,6 +131,7 @@ h1 {
 .dnevnik * {
     text-align: center;  
 }
+
 .dnevnik {
     float:left;
     background-color: #ffffff;
@@ -138,12 +139,13 @@ h1 {
     border:2px; 
 }
 
-#succes{
+#succes {
     position: fixed;
-    top:150px;
+    text-outline: 10px;
     left:33%;
     right:33%;
     width: 34%;
+    z-index: 1000;
 }
 
 /*

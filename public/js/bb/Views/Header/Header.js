@@ -7,15 +7,7 @@ define([
         'handlebars',
         'text!bb/Templates/Header/Header.html'
     ],
-    function(
-        App,
-        $,
-        Marionette,
-        _,
-        Backbone,
-        Handlebars,
-        Template
-    ) {
+    function (App, $, Marionette, _, Backbone, Handlebars, Template) {
 
         var Header = Marionette.View.extend({
 
@@ -23,7 +15,7 @@ define([
 
             template: Handlebars.compile(Template),
 
-            initialize: function() {
+            initialize: function () {
                 this.model = App.Session;
                 this.listenTo(App, "user_idle", this.is_user_idle);
                 this.user_idle = false;
@@ -32,53 +24,57 @@ define([
                 this.childViews = [];      //GARBAGE COLLECTION
                 this.warning_is_up = false;
                 self.collec_legth = 0;
-                this.loadHeader(this.model.attributes.itemId,this.model.attributes.role);
                 this.listenTo(this.model, "change:profile_pic", this.render);
             },
 
             events: {
-                "click #logout"      : "logout"
+                "click #logout": "logout"
             },
 
-            render: function() {
-                $(this.el).html(this.template(this.model.toJSON()));
+            render: function () {
+                $(this.el).html(this.template());
+                this.loadHeader(this.model.attributes.itemId, this.model.attributes.role);
+                //$(this.el).html(this.template(this.model.toJSON()));
                 return this;
             },
 
-            logout: function(){
+            logout: function () {
                 App.Log_User_Out();
             },
 
-            loadHeader: function (id,role) {
-              if (role === "teacher") {
-                    $.ajax({
-                        type: "GET",
-                        url: "/teacher/" + id
-                    }).done(function (teachers) {
-                        console.log(teachers);
-                    });
-                }
-               else if (role === "learner") {
-                    $.ajax({
-                        type: "GET",
-                        url: "/learner/" + id
-                    }).done(function (learner) {
-                        console.log(learner);
-                       });
-                }
+            loadHeader: function (id, role) {
+                var self = this;
+                if( role == "admin") return;
+                $.ajax({
+                    type: "GET",
+                    url: "/" + role + "/" + id
+                }).done(function (item) {
+                    $(self.el).find('#fio').removeClass("hide").html(item.lastName+" "+item.firstName +" "+ item.patronymic );
+                    if (role == 'teacher'){
+                        $(self.el).find('#role').removeClass("hide").html("Учитель");
+                        $(self.el).find('#imgFoto').removeClass("hide");
+                        return;
+                    }
 
+                    if (role == 'learner'){
+                        $(self.el).find('#role').removeClass("hide").html("Ученик");
+                        $(self.el).find('#class').removeClass("hide").html(item.class);
+                        $(self.el).find('#imgFoto').removeClass("hide");
+                        return;
+                    }
+                });
             },
 
-            onClose: function() {
+            onClose: function () {
                 this.view_is_alive = false;
-               if(this.Interval){
-                  clearInterval(this.Interval);
-                  this.Interval = null;
+                if (this.Interval) {
+                    clearInterval(this.Interval);
+                    this.Interval = null;
                 }
-                _.each(this.childViews, function(childView){
-                      if (childView.close){
+                _.each(this.childViews, function (childView) {
+                    if (childView.close) {
                         childView.close();
-                      }
+                    }
                 });
             }
         });
