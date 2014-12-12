@@ -5,7 +5,7 @@
     <li id="teacherTab" class="active"><a class="tab" role="tab" data-toggle="tab">Учителя</a></li>
     <li id="learnerTab"><a class="tab" role="tab" data-toggle="tab">Ученики</a></li>
     <li id="classTab"><a class="tab" role="tab" data-toggle="tab">Классы</a></li>
-    <li id="lessonsTab"><a class="tab" role="tab" data-toggle="tab">Предметы</a></li>
+    <li id="lessonTab"><a class="tab" role="tab" data-toggle="tab">Предметы</a></li>
     <li id="scheduleTab"><a class="tab" role="tab" data-toggle="tab">Расписание</a></li>
 </ul>
 <div class="buttons">
@@ -133,7 +133,7 @@
         </tr>
     </table>
 </div>
-<div id="lessonsTabContent" class="tab-pane">
+<div id="lessonTabContent" class="tab-pane">
     <table id="createTableLesson" class="createTable table "
            style="background-color: #ffffff">
         <thead>
@@ -142,30 +142,20 @@
         </tr>
         </thead>
         <tr>
-
             <td><input id="NameLesson" type="text" class="form-control"/></td>
-            <td> <select class="combobox">
-                <option></option>
-                <option value="PA">Pennsylvania</option>
-                <option value="CT">Connecticut</option>
-                <option value="NY">New York</option>
-                <option value="MD">Maryland</option>
-                <option value="VA">Virginia</option>
-                </select> </td>
-            <td><input id="TeacherID" type="text" class="form-control"/></td>
-
             <td>
                 <button id="pushToServerLesson" type="role" class=" btn btn-primary">
                     <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
                 </button>
             </td>
+
         </tr>
     </table>
     <table id="lessonTable" class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
         <thead>
         <tr>
             <th>Наименование</th>
-            <th>Учитель</th>
+
 
         </tr>
         </thead>

@@ -47,15 +47,19 @@ define([
                     type: "GET",
                     url: "/" + self.selectedTab + '/' + e.currentTarget.parentElement.parentElement.id
                 }).done(function (item) {
-                    $.ajax({
-                        type: "GET",
-                        url: "/userItem/" + e.currentTarget.parentElement.parentElement.id
-                    }).done(function (user) {
-                        item.login = user.local.login;
+
+                    if(self.selectedTab=== "teacher" || self.selectedTab==="learner") {
+                        $.ajax({
+                            type: "GET",
+                            url: "/userItem/" + e.currentTarget.parentElement.parentElement.id
+                        }).done(function (user) {
+                            item.login = user.local.login;
+                            var selTap = self.selectedTab;
+                            self["edit" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)](item);
+                        });
+                    }else{
                         var selTap = self.selectedTab;
-                        self["edit" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)](item);
-                    });
-                });
+                        self["edit" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)](item); } });
             },
 
             removeBtnClick: function (e) {
@@ -63,12 +67,12 @@ define([
                 $.ajax({
                     type: "DELETE",
                     url: "/" + self.selectedTab + '/' + e.currentTarget.parentElement.parentElement.id
-                }).done(function (teachers) {
+                }).done(function () {
                     console.log("RemoveOk");
                     $.ajax({
                         type: "DELETE",
                         url: "/user" + '/' + e.currentTarget.parentElement.parentElement.id
-                    }).done(function (teachers) {
+                    }).done(function () {
                         console.log("UserDeleting");
                     });
 
@@ -106,13 +110,13 @@ define([
                 $("#teacherTabContent").removeClass("active");
                 $("#learnerTabContent").removeClass("active");
                 $("#classesTabContent").removeClass("active");
-                $("#lessonsTabContent").removeClass("active");
+                $("#lessonTabContent").removeClass("active");
                 $("#scheduleTabContent").removeClass("active");
 
                 $("#teacherTab").removeClass("active");
                 $("#learnerTab").removeClass("active");
                 $("#classTab").removeClass("active");
-                $("#lessonsTab").removeClass("active");
+                $("#lessonTab").removeClass("active");
                 $("#scheduleTab").removeClass("active");
 
                 $("#" + selectedObjectName + "Tab").addClass("active");
@@ -130,7 +134,7 @@ define([
                     case "learner":
                         this.loadLearner();
                         break;
-                    case "lessons":
+                    case "lesson":
                         this.loadLesson();
                         break;
                     default:
@@ -275,7 +279,7 @@ define([
                 }).done(function (lesson) {
                     lesson.forEach(function (lesson) {
 
-                        var row = "<tr id='" + lesson._id + "'><td>" + lesson.lesson + "</td><td>" + lesson.teacherId + "</tr>";
+                        var row = "<tr id='" + lesson._id + "'><td>" + lesson.lesson + "</tr>";
                         $("#lessonTable tbody").append(row);
                     });
                 });
@@ -406,6 +410,11 @@ define([
                 this.editId = learner._id;
 
             },
+            editLesson: function (lesson) {
+                this.showCreateTable();
+                $('#NameLesson').val(lesson.lesson);
+                this.editId = lesson._id;
+            },
             createLearner: function () {
                 if (!this.validateLearner())return;
                 var self = this;
@@ -438,7 +447,7 @@ define([
                             500: onFail
                         }
                     }).done(function (response) {
-                        console.log(response)
+
                     })
                         .fail(onFail);
                     this.loadLearner();
@@ -494,7 +503,29 @@ define([
                 var lesson = {
                     "lesson": $('#NameLesson').val()
                 };
+                if (this.editId) {
+                    $.ajax({
+                        type: "PUT",
+                        url: "/lesson/" + this.editId,
+                        data: lesson,
+                        statusCode: {
+                            200: function (e) {
+                                self.loadTeacher();
+                                $('#createBtn').removeClass("hide");
+                                $('#createTableLesson').addClass("hide");
+                                onSucces("Предмет успешно изменен");
+                            },
+                            500: onFail
+                        }
+                    }).done(function (response) {
+                    })
+                        .fail(onFail);
+                    this.loadLesson();
+                    this.editId = null;
 
+                }
+                else
+                {
                 $.ajax({
                     type: "POST",
                     url: "/lesson",
@@ -509,8 +540,8 @@ define([
                         500: onFail
                     }
                 }).done(function (response) {
-                    console.log(response);
                 });
+                }
             }
         });
         return AdminPage;

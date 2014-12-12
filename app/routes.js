@@ -60,6 +60,9 @@ module.exports = function (app, passport) {
 
     app.post('/lesson', isLoggedIn, Lesson_route.addLesson);
     app.get('/lesson', isLoggedIn, Lesson_route.findAll);
+    app.get('/lesson/:id', isLoggedIn, Lesson_route.findById);
+    app.put('/lesson/:id', isLoggedIn, Lesson_route.updateLesson);
+    app.delete('/lesson/:id', isLoggedIn, Lesson_route.deleteLesson);
 
     /*
     app.get('/teacher/:id', already_logged_in, Teacher_route.findById);
