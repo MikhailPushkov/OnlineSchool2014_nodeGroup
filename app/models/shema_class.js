@@ -1,10 +1,10 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
 
-    classSchema = new Schema({
-        "name": String,
-        "teacher": String
+    classesSchema = new Schema({
+        "nameClass": String,
+        "teacherID": String
     }),
-    clazz = mongoose.model('Class', classSchema);
+    classes = mongoose.model('Classes', classesSchema);
 
-module.exports = clazz;
+module.exports =classes;

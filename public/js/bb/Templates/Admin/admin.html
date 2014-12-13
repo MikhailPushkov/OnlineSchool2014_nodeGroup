@@ -105,36 +105,38 @@
         </tbody>
     </table>
 </div>
-<div id="classesTabContent" class="tab-pane">
-    <table class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
+<div id="classTabContent" class="tab-pane">
+    <table id="createTableClass" class="createTable table hide"
+           style="background-color: #ffffff">
         <thead>
         <tr>
-            <th>Номер</th>
+            <th>Класс</th>
             <th>Классный руководитель</th>
         </tr>
         </thead>
         <tr>
-            <td>10 а</td>
-            <td>Петрова М.И.</td>
-        </tr>
-        <tr>
-            <td>5 б</td>
-            <td>Петрова М.И.</td>
-        </tr>
-        <tr>
-            <td>7 в</td>
-            <td>Петрова М.И.</td>
-        </tr>
-        <tr>
-            <td><input type="text" class="tableText form-control " value="7 б"/></td>
-            <td><input type="text" class="tableText form-control" value="Баранова И.И"/></td>
+            <td><input id="nameClass" type="text" class="form-control"/></td>
+            <td><input id="teacherId" type="text" class="form-control"/></td>
             <td>
+                <button id="pushToServerClass" type="role" class=" btn btn-primary">
+                    <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                </button>
             </td>
         </tr>
     </table>
+    <table id="classTable" class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
+        <thead>
+        <tr>
+            <th>Класс</th>
+            <th>Классный руководитель</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </div>
 <div id="lessonTabContent" class="tab-pane">
-    <table id="createTableLesson" class="createTable table "
+    <table id="createTableLesson" class="createTable table hide "
            style="background-color: #ffffff">
         <thead>
         <tr>
@@ -148,15 +150,12 @@
                     <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
                 </button>
             </td>
-
         </tr>
     </table>
     <table id="lessonTable" class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
         <thead>
         <tr>
             <th>Наименование</th>
-
-
         </tr>
         </thead>
         <tbody>

@@ -2,6 +2,7 @@ var User_route = require('./routes/route_user');
 var Teacher_route = require('./routes/route_teacher');
 var Learner_route = require('./routes/route_learner');
 var Lesson_route = require('./routes/route_lesson');
+var Class_route = require('./routes/route_class');
 
 module.exports = function (app, passport) {
     // =====================================
@@ -64,11 +65,12 @@ module.exports = function (app, passport) {
     app.put('/lesson/:id', isLoggedIn, Lesson_route.updateLesson);
     app.delete('/lesson/:id', isLoggedIn, Lesson_route.deleteLesson);
 
-    /*
-    app.get('/teacher/:id', already_logged_in, Teacher_route.findById);
-    app.put('/teacher/:id', already_logged_in, Teacher_route.updateUser);
-    app.delete('/teacher/:id', already_logged_in, Teacher_route.deleteUser);
-    */
+    app.post('/class', isLoggedIn, Class_route.addClass);
+    app.get('/class', isLoggedIn, Class_route.findAll);
+    app.get('/class/:id', isLoggedIn, Class_route.findById);
+    app.put('/class/:id', isLoggedIn, Class_route.updateClass);
+    app.delete('/class/:id', isLoggedIn, Class_route.deleteClass);
+
 
     // =====================================
     // ============= LOGOUT ================

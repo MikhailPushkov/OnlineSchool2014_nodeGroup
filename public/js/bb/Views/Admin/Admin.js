@@ -25,7 +25,8 @@ define([
                 "mouseenter .table-hover tbody tr": "onSelectRow",
                 "click #editButton": "editBtnClick",
                 "click #removeButton": "removeBtnClick",
-                "click #pushToServerLesson": "createLesson"
+                "click #pushToServerLesson": "createLesson",
+                "click #pushToServerClass": "createClass"
 
             },
 
@@ -54,6 +55,7 @@ define([
                             url: "/userItem/" + e.currentTarget.parentElement.parentElement.id
                         }).done(function (user) {
                             item.login = user.local.login;
+                            item.password = user.local.password;
                             var selTap = self.selectedTab;
                             self["edit" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)](item);
                         });
@@ -109,7 +111,7 @@ define([
                 this.hideError();
                 $("#teacherTabContent").removeClass("active");
                 $("#learnerTabContent").removeClass("active");
-                $("#classesTabContent").removeClass("active");
+                $("#classTabContent").removeClass("active");
                 $("#lessonTabContent").removeClass("active");
                 $("#scheduleTabContent").removeClass("active");
 
@@ -124,8 +126,8 @@ define([
                 $("#createTableTeacher").addClass("hide");
                 $("#createTableLearner").addClass("hide");
                 $("#createTableLesson").addClass("hide");
+                $("#createTableClass").addClass("hide");
                 $("#createBtn").removeClass("hide");
-
                 this.selectedTab = selectedObjectName;
                 switch (this.selectedTab) {
                     case "teacher":
@@ -137,9 +139,11 @@ define([
                     case "lesson":
                         this.loadLesson();
                         break;
+                    case "class":
+                        this.loadClass();
+                        break;
                     default:
                         break;
-
                 }
             },
 
@@ -284,6 +288,18 @@ define([
                     });
                 });
             },
+            loadClass: function () {
+                this.clearDataTable();
+                $.ajax({
+                    type: "GET",
+                    url: "/class"
+                }).done(function (classes) {
+                    classes.forEach(function (classes) {
+                        var row = "<tr id='" + classes._id + "'><td>" + classes.nameClass +"</td><td>" + classes.teacherID + "</tr>";
+                        $("#classTable tbody").append(row);
+                    });
+                });
+            },
 
             loadLearner: function () {
                 this.clearDataTable();
@@ -381,7 +397,7 @@ define([
             editTeacher: function (teacher) {
                 this.showCreateTable();
                 $('#loginTeacher').val(teacher.login);
-                $('#passTeacher').prop('disabled', true);
+                $('#passTeacher').val(teacher.password);
                 $("#firstNameTeacher").val(teacher.firstName);
                 $('#lastNameTeacher').val(teacher.lastName);
                 $("#patronymicTeacher").val(teacher.patronymic);
@@ -400,7 +416,7 @@ define([
             editLearner: function (learner) {
                 this.showCreateTable();
                 $('#loginLearner').val(learner.login);
-                $('#passLearner').prop('disabled', true);
+                $('#passLearner').val(learner.password);
                 $("#firstNameLearner").val(learner.firstName);
                 $('#lastNameLearner').val(learner.lastName);
                 $("#patronymicLearner").val(learner.patronymic);
@@ -414,6 +430,12 @@ define([
                 this.showCreateTable();
                 $('#NameLesson').val(lesson.lesson);
                 this.editId = lesson._id;
+            },
+            editClass: function (classes) {
+                this.showCreateTable();
+                $('#nameClass').val(classes.nameClass);
+                $('#teacherId').val(classes.teacherID);
+                this.editId = classes._id;
             },
             createLearner: function () {
                 if (!this.validateLearner())return;
@@ -490,7 +512,6 @@ define([
                         .fail(onFail);
                 }
             },
-
             createLesson: function () {
                 // if (!this.validateTeacher())return;
                 var self = this;
@@ -510,7 +531,7 @@ define([
                         data: lesson,
                         statusCode: {
                             200: function (e) {
-                                self.loadTeacher();
+                                self.loadLesson();
                                 $('#createBtn').removeClass("hide");
                                 $('#createTableLesson').addClass("hide");
                                 onSucces("Предмет успешно изменен");
@@ -520,7 +541,6 @@ define([
                     }).done(function (response) {
                     })
                         .fail(onFail);
-                    this.loadLesson();
                     this.editId = null;
 
                 }
@@ -541,6 +561,59 @@ define([
                     }
                 }).done(function (response) {
                 });
+                }
+            },
+            createClass: function () {
+                // if (!this.validateTeacher())return;
+                var self = this;
+                var onFail = function (e) {
+                    self.showError(e.responseText);
+                }
+                var onSucces = function (e) {
+                    self.showSucces(e);
+                }
+                var classes = {
+                    "nameClass": $('#nameClass').val(),
+                    "teacherID": $('#teacherId').val()
+                };
+                if (this.editId) {
+                    $.ajax({
+                        type: "PUT",
+                        url: "/class/" + this.editId,
+                        data: classes,
+                        statusCode: {
+                            200: function (e) {
+                              //  self.loadTeacher();
+                                $('#createBtn').removeClass("hide");
+                                $('#createTableClass').addClass("hide");
+                                onSucces("Классный руководитель успешно изменен");
+                            },
+                            500: onFail
+                        }
+                    }).done(function (response) {
+                    })
+                        .fail(onFail);
+                    this.loadClass();
+                    this.editId = null;
+
+                }
+                else
+                {
+                    $.ajax({
+                        type: "POST",
+                        url: "/class",
+                        data: classes,
+                        statusCode: {
+                            200: function (e) {
+                                self.loadClass();
+                                $('#createBtn').removeClass("hide");
+                                $('#createTableClass').addClass("hide");
+                                onSucces("Классный руководитель успешно создан");
+                            },
+                            500: onFail
+                        }
+                    }).done(function (response) {
+                    });
                 }
             }
         });
