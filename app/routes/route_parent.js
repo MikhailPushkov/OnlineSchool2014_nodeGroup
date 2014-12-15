@@ -6,7 +6,7 @@ var _ = require('underscore');
 
 
 
-exports.Parent_findById = function (req, res) {
+exports.findById = function (req, res) {
     var id = req.params.id;
     Parent.findOne({ _id: id }, function (err, Parent) {
         if (err) return res.send(404, "Parent not found");
@@ -14,7 +14,7 @@ exports.Parent_findById = function (req, res) {
     });
 };
 
-exports.Parent_findAll = function (req, res) {
+exports.findAll = function (req, res) {
     var _id = req.query.user_id;
     var my_array = [];
 

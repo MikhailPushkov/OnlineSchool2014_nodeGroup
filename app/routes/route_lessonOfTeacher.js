@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Homework = require('../models/shema_lessonOfTeacher');
+var lessonOfTeacher = require('../models/shema_lessonOfTeacher');
 var fs = require("fs");
 var _ = require('underscore');
 
@@ -7,9 +7,9 @@ var _ = require('underscore');
 
 exports.findById = function (req, res) {
     var id = req.params.id;
-    lessonOfTeacher.findOne({ _id: id }, function (err, journal) {
+    lessonOfTeacher.findOne({ _id: id }, function (err, lessonOfTeacher) {
         if (err) return res.send(404, "lessonOfTeacher not found");
-        res.send(journal);
+        res.send(lessonOfTeacher);
     });
 };
 
@@ -48,7 +48,7 @@ exports.updatelessonOfTeacher = function(req, res) {
     delete lessonOfTeacher._id;  /// I need to remove this here, I need to figure out why this is happening, must be a MongoDB configuration
         lessonOfTeacher.findOneAndUpdate({'_id':_id}, lessonOfTeacher, {safe:true}, function(err, result) {
             if (err) {
-                console.log('Error updating journal: ' + err);
+                console.log('Error updating lessonOfTeacher: ' + err);
                 res.send(500,{'error':'An error updating lessonOfTeacher'});
             } else {
                 res.send(lessonOfTeacher);

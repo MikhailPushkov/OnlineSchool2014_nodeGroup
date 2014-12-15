@@ -6,6 +6,6 @@ var mongoose = require('mongoose'),
         "lessonId": String
     }),
 
-    lessonsOfTeacher = mongoose.model('LessonsOfTeacher', lessonsOfTeacherShema);
+    lessonsOfTeacher = mongoose.model('lessonsOfTeacher', lessonsOfTeacherShema);
 
 module.exports = lessonsOfTeacher;
