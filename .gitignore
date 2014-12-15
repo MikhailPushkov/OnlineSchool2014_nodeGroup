@@ -2,3 +2,4 @@ heroku_ssh
 heroku_ssh.pub
 /.idea/
 /node_modules/
+/npm-debug.log
