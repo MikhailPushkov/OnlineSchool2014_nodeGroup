@@ -107,11 +107,12 @@ h1 {
 }
 
 #logotip {
-    position:relative ;
-	top: 2px;
-	right: -100px;
-	
+    position: relative;
+    top: 2px;
+    right: -100px;
+
 }
+
 #imgFoto {
     position: absolute;
     height: 120px;
@@ -121,31 +122,53 @@ h1 {
 .profil {
     position: relative;
     width: 500px;
-    margin:auto;
+    margin: auto;
 }
 
-.profText{
+.profText {
     float: right;
 }
 
 .dnevnik * {
-    text-align: center;  
+    text-align: center;
 }
 
 .dnevnik {
-    float:left;
+    float: left;
     background-color: #ffffff;
-    width:45%;
-    border:2px; 
+    width: 45%;
+    border: 2px;
 }
 
 #succes {
     position: fixed;
     text-outline: 10px;
-    left:33%;
-    right:33%;
+    left: 33%;
+    right: 33%;
     width: 34%;
     z-index: 1000;
+}
+
+#modalWithSchedule .modal-dialog {
+    width: 90% !important;
+}
+
+#modalWithSchedule .modal-body {
+    overflow: auto;
+}
+
+#modalWithSchedule td {
+    padding: 0;
+    text-align: center;
+    vertical-align: baseline;
+}
+
+.dropdown button {
+    width:100%
+}
+
+#lessonsList, #teachersList {
+    position: fixed;
 }
 
 /*

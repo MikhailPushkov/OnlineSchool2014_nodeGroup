@@ -16,192 +16,1117 @@
 </div>
 <div id="error" class="alert alert-danger hide" role="alert"></div>
 <div class="tab-content">
-<div id="teacherTabContent" class="tab-pane active">
-    <table id="createTableTeacher" class="createTable table hide"
-           style="background-color: #ffffff">
-        <thead>
-        <tr>
-            <th>Фамилия</th>
-            <th>Имя</th>
-            <th>Отчество</th>
-            <th>Телефон</th>
-            <th>e-mail</th>
-            <th>Логин</th>
-            <th>Пароль</th>
-        </tr>
-        </thead>
-        <tr>
-            <td><input id="lastNameTeacher" type="text" class="form-control"/></td>
-            <td><input id="firstNameTeacher" type="text" class="form-control"/></td>
-            <td><input id="patronymicTeacher" type="text" class="form-control"/></td>
-            <td><input id="phoneTeacher" type="text" class="form-control"/></td>
-            <td><input id="emailTeacher" type="text" class="form-control"/></td>
-            <td><input id="loginTeacher" type="text"  class="form-control"/></td>
-            <td><input id="passTeacher" type="password" class="form-control"/></td>
-            <td>
-                <button id="pushToServerTeacher" type="role" class=" btn btn-primary">
-                    <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
-                </button>
-            </td>
-        </tr>
-    </table>
-    <table id="teacherTable" class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
-        <thead>
-        <tr>
-            <th>Фамилия</th>
-            <th>Имя</th>
-            <th>Отчество</th>
-            <th>Телефон</th>
-            <th>Email</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <div id="teacherTabContent" class="tab-pane active">
+        <table id="createTableTeacher" class="createTable table hide"
+               style="background-color: #ffffff">
+            <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>??мя</th>
+                <th>Отчество</th>
+                <th>Телефон</th>
+                <th>e-mail</th>
+                <th>Логин</th>
+                <th>Пароль</th>
+            </tr>
+            </thead>
+            <tr>
+                <td><input id="lastNameTeacher" type="text" class="form-control"/></td>
+                <td><input id="firstNameTeacher" type="text" class="form-control"/></td>
+                <td><input id="patronymicTeacher" type="text" class="form-control"/></td>
+                <td><input id="phoneTeacher" type="text" class="form-control"/></td>
+                <td><input id="emailTeacher" type="text" class="form-control"/></td>
+                <td><input id="loginTeacher" type="text" class="form-control"/></td>
+                <td><input id="passTeacher" type="password" class="form-control"/></td>
+                <td>
+                    <button id="pushToServerTeacher" type="role" class=" btn btn-primary">
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <table id="teacherTable" class="itemsTable table table-bordered table-striped table-hover"
+               style="background-color: #ffffff">
+            <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>??мя</th>
+                <th>Отчество</th>
+                <th>Телефон</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div id="learnerTabContent" class="tab-pane">
+        <table id="createTableLearner" class="createTable table hide"
+               style="background-color: #ffffff">
+            <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>??мя</th>
+                <th>Отчество</th>
+                <th>Класс</th>
+                <th>Родители</th>
+                <th>Адрес</th>
+                <th>Логин</th>
+                <th>Пароль</th>
+            </tr>
+            </thead>
+            <tr>
+                <td><input id="lastNameLearner" type="text" class="form-control"/></td>
+                <td><input id="firstNameLearner" type="text" class="form-control"/></td>
+                <td><input id="patronymicLearner" type="text" class="form-control"/></td>
+                <td><input id="classLearner" type="text" class="form-control"/></td>
+                <td><input id="parentLearner" type="text" class="form-control"/></td>
+                <td><input id="adressLearner" type="text" class="form-control"/></td>
+                <td><input id="loginLearner" type="text" class="form-control"/></td>
+                <td><input id="passLearner" type="password" class="form-control"/></td>
+                <td>
+                    <button id="pushToServerLearner" class=" btn btn-primary">
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <table id="learnerTable" class="itemsTable table table-bordered table-striped table-hover"
+               style="background-color: #ffffff">
+            <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Класс</th>
+                <th>Адрес</th>
+                <th>Родители</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div id="classTabContent" class="tab-pane">
+        <table id="createTableClass" class="createTable table hide"
+               style="background-color: #ffffff">
+            <thead>
+            <tr>
+                <th>Класс</th>
+                <th>Классный руководитель</th>
+            </tr>
+            </thead>
+            <tr>
+                <td><input id="nameClass" type="text" class="form-control"/></td>
+                <td><input id="teacherId" type="text" class="form-control"/></td>
+                <td>
+                    <button id="pushToServerClass" type="role" class=" btn btn-primary">
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <table id="classTable" class="itemsTable table table-bordered table-striped table-hover"
+               style="background-color: #ffffff">
+            <thead>
+            <tr>
+                <th>Класс</th>
+                <th>Классный руководитель</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div id="lessonTabContent" class="tab-pane">
+        <table id="createTableLesson" class="createTable table hide "
+               style="background-color: #ffffff">
+            <thead>
+            <tr>
+                <th>Наименование</th>
+            </tr>
+            </thead>
+            <tr>
+                <td><input id="NameLesson" type="text" class="form-control"/></td>
+                <td>
+                    <button id="pushToServerLesson" type="role" class=" btn btn-primary">
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <table id="lessonTable" class="itemsTable table table-bordered table-striped table-hover"
+               style="background-color: #ffffff">
+            <thead>
+            <tr>
+                <th>Наименование</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div id="scheduleTabContent" class="tab-pane">
+        <div style="background: #ffffff">
+            <a href="#" class="list-group-item disabled">
+                Классы:
+            </a>
+            <div id="scheduleContent" class="list-group"></div>
+        </div>
+    </div>
 </div>
-<div id="learnerTabContent" class="tab-pane">
-    <table id="createTableLearner" class="createTable table hide"
-           style="background-color: #ffffff">
-        <thead>
-        <tr>
-            <th>Фамилия</th>
-            <th>Имя</th>
-            <th>Отчество</th>
-            <th>Класс</th>
-            <th>Родители</th>
-            <th>Адрес</th>
-            <th>Логин</th>
-            <th>Пароль</th>
-        </tr>
-        </thead>
-        <tr>
-            <td><input id="lastNameLearner" type="text" class="form-control"/></td>
-            <td><input id="firstNameLearner" type="text" class="form-control"/></td>
-            <td><input id="patronymicLearner" type="text" class="form-control"/></td>
-            <td><input id="classLearner" type="text" class="form-control"/></td>
-            <td><input id="parentLearner" type="text" class="form-control"/></td>
-            <td><input id="adressLearner" type="text" class="form-control"/></td>
-            <td><input id="loginLearner" type="text" class="form-control"/></td>
-            <td><input id="passLearner" type="password" class="form-control"/></td>
-            <td>
-                <button id="pushToServerLearner" class=" btn btn-primary">
-                    <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
-                </button>
-            </td>
-        </tr>
-    </table>
-    <table id="learnerTable" class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
-        <thead>
-        <tr>
-            <th>Фамилия</th>
-            <th>Имя</th>
-            <th>Отчество</th>
-            <th>Класс</th>
-            <th>Адрес</th>
-            <th>Родители</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+<!-- Modal -->
+<div class="modal fade" id="modalWithSchedule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+            class="sr-only"></span></button>
+    <h4 class="modal-title" id="myModalLabel">Рассписание</h4>
 </div>
-<div id="classTabContent" class="tab-pane">
-    <table id="createTableClass" class="createTable table hide"
-           style="background-color: #ffffff">
-        <thead>
-        <tr>
-            <th>Класс</th>
-            <th>Классный руководитель</th>
-        </tr>
-        </thead>
-        <tr>
-            <td><input id="nameClass" type="text" class="form-control"/></td>
-            <td><input id="teacherId" type="text" class="form-control"/></td>
-            <td>
-                <button id="pushToServerClass" type="role" class=" btn btn-primary">
-                    <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
-                </button>
-            </td>
-        </tr>
-    </table>
-    <table id="classTable" class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
-        <thead>
-        <tr>
-            <th>Класс</th>
-            <th>Классный руководитель</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-</div>
-<div id="lessonTabContent" class="tab-pane">
-    <table id="createTableLesson" class="createTable table hide "
-           style="background-color: #ffffff">
-        <thead>
-        <tr>
-            <th>Наименование</th>
-        </tr>
-        </thead>
-        <tr>
-            <td><input id="NameLesson" type="text" class="form-control"/></td>
-            <td>
-                <button id="pushToServerLesson" type="role" class=" btn btn-primary">
-                    <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
-                </button>
-            </td>
-        </tr>
-    </table>
-    <table id="lessonTable" class="itemsTable table table-bordered table-striped table-hover" style="background-color: #ffffff">
-        <thead>
-        <tr>
-            <th>Наименование</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-</div>
-     <div id="scheduleTabContent" class="tab-pane">
-            <table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
-                 
-                <tr>
-                    <th rowspan="2">Время урока</th>
-                    <th colspan="2">Понедельник</th>
-                    <th colspan="2">Вторник</th>
-                    <th colspan="2">Среда</th>
-                    <th colspan="2">Четверг</th>
-                    <th colspan="2">Пятница</th>
-                    </tr>
-            
-                <tr>
-                    <td>Предмет</td><td>Учитель</td><td>Предмет</td><td>Учитель</td><td>Предмет</td><td>Учитель</td><td>Предмет</td><td>Учитель</td><td>Предмет</td><td>Учитель</td>
-                </tr>
-                <tr align="center">
+<div class="modal-body">
+<table class="table table-bordered table-striped table-striped" style="background-color: #ffffff">
+<thead>
+<tr>
+    <th rowspan="2">
+        <p>Время</p>
+        <p>урока</p>
+    </th>
+    <th colspan="2">Понедельник</th>
+    <th colspan="2">Вторник</th>
+    <th colspan="2">Среда</th>
+    <th colspan="2">Четверг</th>
+    <th colspan="2">Пятница</th>
+    <th colspan="2">Суббота</th>
+</tr>
+<tr>
+    <th>Предмет</th>
+    <th>Учитель</th>
+    <th>Предмет</th>
+    <th>Учитель</th>
+    <th>Предмет</th>
+    <th>Учитель</th>
+    <th>Предмет</th>
+    <th>Учитель</th>
+    <th>Предмет</th>
+    <th>Учитель</th>
+    <th>Предмет</th>
+    <th>Учитель</th>
+</tr>
+</thead>
+<tbody>
+<tr>
     <td>8:00-8:45</td>
-    <td>Физика</td><td>Петрова</td><td>Русский язык</td><td>Иванова</td><td>Литература</td><td>Иванов</td><td>Математика</td><td>Николаева</td><td>История</td><td>Смирнова</td>
-   </tr>
-                <tr align="center">
-    <td>8:55-9:40</td>
-    <td>Физика</td><td>Петрова</td><td>Русский язык</td><td>Иванова</td><td>Литература</td><td>Иванов</td><td>Математика</td><td>Николаева</td><td>История</td><td>Смирнова</td>
-   </tr>
-                <tr align="center">
-    <td>9:50-10:35</td>
-    <td>Физика</td><td>Петрова</td><td>Русский язык</td><td>Иванова</td><td>Литература</td><td>Иванов</td><td>Математика</td><td>Николаева</td><td>История</td><td>Смирнова</td>
-   </tr>
-                <tr>
-                    <td><input type="text" class="tableText form-control " value="8:55-9:40"/></td>
-                    <td><input type="text" class="tableText form-control" value="Биология"/></td>
-                    <td><input type="text" class="tableText form-control" value="Афанасова"/></td>
-                    <td><input type="text" class="tableText form-control" value="Физика"/></td>
-                    <td><input type="text" class="tableText form-control" value="Петрова"/></td>
-                    <td><input type="text" class="tableText form-control" value="Петрова"/></td>
-
-                    <td>
-                    </td>
-                    </tr>
-
-            </table>
-        </div>  
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>9:00-9:45</td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>10:00-10:45</td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>11:00-11:45</td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>12:00-12:45</td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>13:00-13:45</td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>14:00-14:45</td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>15:00-15:45</td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>16:00-16:45</td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="lessonDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+    <td>
+        <div class="teacherDrp dropdown">
+            <button class="btn btn-default" type="button">
+                <span>-</span>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </td>
+</tr>
+</tbody>
+</table>
+<ul id="lessonsList" class="dropdown-menu" role="menu">
+    <li class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">l</a></li>
+    <li class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">l action</a></li>
+    <li class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">l else here</a></li>
+    <li class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">l link</a></li>
+</ul>
+<ul id="teachersList" class="dropdown-menu" role="menu">
+    <li class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">t</a></li>
+    <li class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">t action</a></li>
+    <li class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">t else here</a></li>
+    <li class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">t link</a></li>
+</ul>
+</div>
+<div class="modal-footer">
+    <button type="button" id="cancelBtn" class="btn btn-default" data-dismiss="modal">Отмена</button>
+    <button type="button" id="saveBtn" class="btn btn-primary">Сохранить</button>
+</div>
+</div>
+</div>
 </div>
 </div>
