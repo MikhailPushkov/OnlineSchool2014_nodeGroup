@@ -45,7 +45,6 @@ h1 {
     margin: auto;
 }
 
-.loginPage
 
 .btnLogin {
     float: right;
@@ -92,42 +91,64 @@ h1 {
     text-align: center;
 }
 
+.buttonContainer {
+    position: relative;
+    height: 250px;
+    width: 350px;
+    margin: auto;
+    text-align: center;
+    color: #ffffff;
+}
+
 #dnevnik {
     position: absolute;
-    top: 180px;
-    right: 600px;
-    text-align: center;
+    top: 50px;
+    left: 0;
+   }
+
+#dnevnik img, #reting img {
+    height: 150px;
+    width: 150px;
 }
 
 #reting {
     position: absolute;
-    top: 190px;
-    right: 200px;
-    text-align: center;
-}
+    top: 50px;
+    right: 0;
+    }
 
 #logotip {
     position: relative;
     top: 2px;
     right: -100px;
+    left: 110px;
+
+}
+.profil {
+    position: relative;
+    text-align: left;
+}
+
+
+
+.profText {
+    padding-left: 130px;
+    color: #ffffff;
 
 }
 
 #imgFoto {
-    position: absolute;
+    top: 20px;
     height: 120px;
+    width: 120px;
     float: left;
+    left: 400px;
 }
 
-.profil {
-    position: relative;
-    width: 500px;
-    margin: auto;
+#fio {
+    display: inline-block;
 }
 
-.profText {
-    float: right;
-}
 
 .dnevnik * {
     text-align: center;
@@ -142,7 +163,6 @@ h1 {
 
 #succes {
     position: fixed;
-    text-outline: 10px;
     left: 33%;
     right: 33%;
     width: 34%;
