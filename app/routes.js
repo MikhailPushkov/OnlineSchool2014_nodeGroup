@@ -50,6 +50,7 @@ module.exports = function (app, passport) {
     app.get('/userItem/:id', isLoggedIn, User_route.findByItemId);
     app.get('/user/:id', isLoggedIn, User_route.findById);
     app.put('/user/:id', isLoggedIn, User_route.updateUser);
+    app.put('/userItem/:id', isLoggedIn, User_route.updateUserItem);
     app.delete('/user/:id', isLoggedIn, User_route.deleteUser);
 
     app.post('/teacher', isLoggedIn, Teacher_route.addTeacher);

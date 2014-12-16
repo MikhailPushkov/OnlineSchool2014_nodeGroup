@@ -93,6 +93,33 @@ exports.updateUser = function (req, res) {
     });
 };
 
+exports.updateUserItem = function (req, res) {
+    var _id = req.params.id;
+    var user = req.body;
+    var update_notif = user.update_notif;
+    User.findOne({ "itemId": _id }, function (err, subject) {
+        if (err) return res.send(404, "User not found");
+        if (update_notif) {
+            subject.set({
+                notif_last_checked: Date.now(),
+                notif_before_last_checked: user.notif_last_checked
+            });
+        } else {
+            console.log(user);
+            subject.set({
+                local: {login: user.login}
+            });
+        }
+
+        // You can only pass one param to the model's save method
+        subject.save(function (err, doc, numAffected) {
+            console.log(doc);
+            if (err) return console.error(err);
+            doc.local = user.local;
+            res.send(doc);
+        });
+    });
+};
 exports.deleteUser = function (req, res) {
     var id = req.params.id;
 
