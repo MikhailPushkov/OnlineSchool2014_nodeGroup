@@ -249,38 +249,38 @@ define([
                     this.showError("Не все поля заполненны.");
                     return false;
                 }
-//                // Остальные проверки записывайте здесь отдельными if-ами
-//                if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameTeacher").val())) {
-//                    this.showError("�?мя не должно содержать латинских символов и начинаться с заглавной буквы");
-//                    return false;
-//                }
-//                if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameTeacher").val())) {
-//                    this.showError("Фамилия не должна содержать латинских символов и начинаться с заглавной буквы");
-//                    return false;
-//                }
-//                if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicTeacher").val())) {
-//                    this.showError("Отчество не должно содержать латинских символов и начинаться с заглавной буквы");
-//                    return false;
-//                }
-//
-//                if (!/^8[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/.test($("#phoneTeacher").val())) {
-//                    this.showError("Не корректно введен телефон.Номер должен начинаться с 8");
-//                    return false;
-//                }
-//                if (!/.*@[A-Za-z]*\..*/.test($("#emailTeacher").val())) {
-//                    this.showError("Не корректно введен email");
-//                    return false;
-//                }
-//                if ($("#loginTeacher").val().length < 6 || $("#loginTeacher").val().length > 20) {
-//                    this.showError("Не корректно введен логин. Логин должен содержать от 6 до 20 символов");
-//                    return false;
-//                }
-//                if (!/^\s*(\w+)\s*$/.test($("#passTeacher").val())
-//                    || $("#passTeacher").val().length > 20
-//                    || $("#passTeacher").val().length < 6) {
-//                    this.showError("Не корректно введен пароль.Пароль должен содержать от 6 до 20 латинских букв и цифр");
-//                    return false;
-//                }
+                // Остальные проверки записывайте здесь отдельными if-ами
+                if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameTeacher").val())) {
+                    this.showError("�?мя не должно содержать латинских символов и начинаться с заглавной буквы");
+                    return false;
+                }
+                if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameTeacher").val())) {
+                    this.showError("Фамилия не должна содержать латинских символов и начинаться с заглавной буквы");
+                    return false;
+                }
+                if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicTeacher").val())) {
+                    this.showError("Отчество не должно содержать латинских символов и начинаться с заглавной буквы");
+                    return false;
+                }
+
+                if (!/^8[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/.test($("#phoneTeacher").val())) {
+                    this.showError("Не корректно введен телефон.Номер должен начинаться с 8");
+                    return false;
+                }
+                if (!/.*@[A-Za-z]*\..*/.test($("#emailTeacher").val())) {
+                    this.showError("Не корректно введен email");
+                    return false;
+                }
+                if ($("#loginTeacher").val().length < 6 || $("#loginTeacher").val().length > 20) {
+                    this.showError("Не корректно введен логин. Логин должен содержать от 6 до 20 символов");
+                    return false;
+                }
+                if (!/^\s*(\w+)\s*$/.test($("#passTeacher").val())
+                    || $("#passTeacher").val().length > 20
+                    || $("#passTeacher").val().length < 6) {
+                    this.showError("Не корректно введен пароль.Пароль должен содержать от 6 до 20 латинских букв и цифр");
+                    return false;
+                }
 
                 this.hideError();
                 return true;
@@ -295,7 +295,7 @@ define([
                     this.showError("Не все поля заполненны.");
                     return false;
                 }
-                /*// Остальные проверки записывайте здесь отдельными if-ами
+                // Остальные проверки записывайте здесь отдельными if-ами
 
                  if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameLearner").val())) {
                  this.showError("�?мя не должно содержать латинских символов и начинаться с заглавной буквы");
@@ -323,10 +323,8 @@ define([
                  this.showError("Не корректно введен пароль.Пароль должен содержать от 6 до 20 латинских букв и цифр");
                  return false;
                  }
-                 */
                 this.hideError();
                 return true;
-
             },
 
             render: function () {
