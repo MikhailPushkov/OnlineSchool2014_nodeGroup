@@ -87,12 +87,41 @@ define([
                 e.stopPropagation();
             },
 
-            showScheduleModal: function () {
-                //$('#modalWithSchedule').modal('show');
+            showScheduleModal: function (e) {
+                window.__editClass = e.currentTarget.id;
+                $.ajax({
+                    type: "GET",
+                    url: "/lesson"
+                }).done(function (lessons) {
+                        var list = $("#lessonsList").empty();
+                        lessons.forEach(function (lesson) {
+                            var row = '<li class="itemDropMenu" id="' + lesson._id + '" role="presentation"><a role="menuitem" tabindex="-1">' + lesson.lesson + '</a></li>';
+                            list.append(row);
+                        });
+                    });
+                $.ajax({
+                    type: "GET",
+                    url: "/teacher"
+                }).done(function (teachers) {
+                        var list = $("#teachersList").empty();
+                        teachers.forEach(function (teacher) {
+                            var row = '<li id="' + teacher._id + '" class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">' + teacher.lastName + " " + teacher.firstName[0].toUpperCase() + "." + teacher.patronymic[0].toUpperCase() + "." + '</a></li>';
+                            list.append(row);
+                        });
+                    });
             },
 
-            showScheduleMo98dal: function () {
+            saveSchedule: function () {
+                var startTime = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'];
+                var endTime = ['8:45', '9:45', '10:45', '11:45', '12:45', '13:45', '14:45', '15:45'];
+                var rows = $('modal-body tbody tr');
 
+                for (var i = 0; i < startTime.lengths; i++) {
+                    var row = $(rows[0]);
+                    var lessons = row.find('.lessonDrp');
+                    var teachers = row.find('.teacherDrp');
+
+                }
             },
 //====== scedule end =====
 
@@ -374,7 +403,7 @@ define([
                 }).done(function (classes) {
                         $("#scheduleContent").empty();
                         classes.forEach(function (c) {
-                            var row = '<a id="' + c._id + '" data-toggle="modal" data-target="#modalWithSchedule" class="list-group-item">'+ c.nameClass + '</a>';
+                            var row = '<a id="' + c._id + '" data-toggle="modal" data-target="#modalWithSchedule" class="list-group-item">' + c.nameClass + '</a>';
                             $("#scheduleContent").append(row);
                         });
                     });
@@ -769,6 +798,7 @@ define([
                         });
                 }
             }
+
         });
         return AdminPage;
     });
