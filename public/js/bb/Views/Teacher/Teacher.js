@@ -13,6 +13,13 @@ define([
 
             className: "Teacher",
 
+            events: {
+                "click #imgOtchet": "showOtchet",
+                "click #imgRaspisanie": "showRaspisanie",
+                "click #imgKlass": "showKlass",
+                "click #backButton": "goBack"
+            },
+
             template: Handlebars.compile(Template),
             initialize: function (options) {
                 this.user_logged_in = App.Session;
@@ -27,6 +34,20 @@ define([
             render: function () {
                 $(this.el).html(this.template(this.model.toJSON()));
                 return this;
+            },
+            showOtchet: function () {
+            },
+            showRaspisanie: function () {
+            },
+            showKlass: function () {
+                $('#Raspisanie').show();
+                $('.buttonContainer').hide();
+                $('#backButton').removeClass("hide");
+            },
+            goBack: function () {
+                $('#Raspisanie').hide();
+                $('.buttonContainer').show();
+                $('#backButton').addClass("hide");
             }
         });
         return Teacher;

@@ -38,17 +38,20 @@ define([
             showDnevnik: function () {
                 $('#dnevnikPage').show();
                 $('.buttonContainer').hide();
+                $('#backButton').removeClass("hide");
             },
 
             showReting: function () {
                 $('#ball').show();
                 $('.buttonContainer').hide();
+                $('#backButton').removeClass("hide");
             },
 
             goBack: function () {
                 $('#ball').hide();
                 $('#dnevnikPage').hide();
                 $('.buttonContainer').show();
+                $('#backButton').addClass("hide");
             }
         });
         return Learner;
