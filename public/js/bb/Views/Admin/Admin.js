@@ -1,12 +1,12 @@
 define([
-    'App',
-    'jquery',
-    'marionette',
-    'underscore',
-    'backbone',
-    'handlebars',
-    'text!bb/Templates/Admin/admin.html'
-],
+        'App',
+        'jquery',
+        'marionette',
+        'underscore',
+        'backbone',
+        'handlebars',
+        'text!bb/Templates/Admin/admin.html'
+    ],
     function (App, $, Marionette, _, Backbone, Handlebars, Template) {
 
         var AdminPage = Marionette.View.extend({
@@ -93,28 +93,28 @@ define([
                     type: "GET",
                     url: "/lesson"
                 }).done(function (lessons) {
-                        var list = $("#lessonsList").empty();
-                        lessons.forEach(function (lesson) {
-                            var row = '<li class="itemDropMenu" id="' + lesson._id + '" role="presentation"><a role="menuitem" tabindex="-1">' + lesson.lesson + '</a></li>';
-                            list.append(row);
-                        });
+                    var list = $("#lessonsList").empty();
+                    lessons.forEach(function (lesson) {
+                        var row = '<li class="itemDropMenu" id="' + lesson._id + '" role="presentation"><a role="menuitem" tabindex="-1">' + lesson.lesson + '</a></li>';
+                        list.append(row);
                     });
+                });
                 $.ajax({
                     type: "GET",
                     url: "/teacher"
                 }).done(function (teachers) {
-                        var list = $("#teachersList").empty();
-                        teachers.forEach(function (teacher) {
-                            var row = '<li id="' + teacher._id + '" class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">' + teacher.lastName + " " + teacher.firstName[0].toUpperCase() + "." + teacher.patronymic[0].toUpperCase() + "." + '</a></li>';
-                            list.append(row);
-                        });
+                    var list = $("#teachersList").empty();
+                    teachers.forEach(function (teacher) {
+                        var row = '<li id="' + teacher._id + '" class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">' + teacher.lastName + " " + teacher.firstName[0].toUpperCase() + "." + teacher.patronymic[0].toUpperCase() + "." + '</a></li>';
+                        list.append(row);
                     });
+                });
             },
 
             saveSchedule: function () {
                 var startTime = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'];
                 var endTime = ['8:45', '9:45', '10:45', '11:45', '12:45', '13:45', '14:45', '15:45'];
-                var rows = $('modal-body tbody tr');
+                var rows = $('.modal-body tbody tr');
 
                 for (var i = 0; i < startTime.lengths; i++) {
                     var row = $(rows[0]);
@@ -132,21 +132,21 @@ define([
                     url: "/" + self.selectedTab + '/' + e.currentTarget.parentElement.parentElement.id
                 }).done(function (item) {
 
-                        if (self.selectedTab === "teacher" || self.selectedTab === "learner") {
-                            $.ajax({
-                                type: "GET",
-                                url: "/userItem/" + e.currentTarget.parentElement.parentElement.id
-                            }).done(function (user) {
-                                    item.login = user.local.login;
-                                    item.password = user.local.password;
-                                    var selTap = self.selectedTab;
-                                    self["edit" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)](item);
-                                });
-                        } else {
+                    if (self.selectedTab === "teacher" || self.selectedTab === "learner") {
+                        $.ajax({
+                            type: "GET",
+                            url: "/userItem/" + e.currentTarget.parentElement.parentElement.id
+                        }).done(function (user) {
+                            item.login = user.local.login;
+                            item.password = user.local.password;
                             var selTap = self.selectedTab;
                             self["edit" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)](item);
-                        }
-                    });
+                        });
+                    } else {
+                        var selTap = self.selectedTab;
+                        self["edit" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)](item);
+                    }
+                });
             },
 
             removeBtnClick: function (e) {
@@ -155,17 +155,15 @@ define([
                     type: "DELETE",
                     url: "/" + self.selectedTab + '/' + e.currentTarget.parentElement.parentElement.id
                 }).done(function () {
-                        console.log("RemoveOk");
-                        $.ajax({
-                            type: "DELETE",
-                            url: "/user" + '/' + e.currentTarget.parentElement.parentElement.id
-                        }).done(function () {
-                                console.log("UserDeleting");
-                            });
-
-                        var selTap = self.selectedTab;
-                        self["load" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)]();
+                    $.ajax({
+                        type: "DELETE",
+                        url: "/user" + '/' + e.currentTarget.parentElement.parentElement.id
+                    }).done(function () {
                     });
+
+                    var selTap = self.selectedTab;
+                    self["load" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)]();
+                });
             },
 
             onSelectRow: function (e) {
@@ -240,6 +238,7 @@ define([
             },
 
             validateTeacher: function () {
+                var oldpass = $("#passTeacher").val();
                 if ($("#firstNameTeacher").val() === "" || $("#lastNameTeacher").val() === "" ||
                     $("#patronymicTeacher").val() === "" ||
                     $("#classTeacher").val() === "" ||
@@ -275,17 +274,19 @@ define([
                     this.showError("Не корректно введен логин. Логин должен содержать от 6 до 20 символов");
                     return false;
                 }
-                if (!/^\s*(\w+)\s*$/.test($("#passTeacher").val())
+                if (this.pass != oldpass && (!/^\s*(\w+)\s*$/.test($("#passTeacher").val())
                     || $("#passTeacher").val().length > 20
-                    || $("#passTeacher").val().length < 6) {
+                    || $("#passTeacher").val().length < 6)) {
                     this.showError("Не корректно введен пароль.Пароль должен содержать от 6 до 20 латинских букв и цифр");
                     return false;
                 }
+
 
                 this.hideError();
                 return true;
             },
             validateLearner: function () {
+                var oldpass = $("#passLearner").val();
                 if ($("#firstNameLearner").val() === "" ||
                     $("#lastNameLearner").val() === "" ||
                     $("#patronymicLearner").val() === "" ||
@@ -297,32 +298,32 @@ define([
                 }
                 // Остальные проверки записывайте здесь отдельными if-ами
 
-                 if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameLearner").val())) {
-                 this.showError("�?мя не должно содержать латинских символов и начинаться с заглавной буквы");
-                 return false;
-                 }
-                 if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameLearner").val())) {
-                 this.showError("Фамилия не должна содержать латинских символов и начинаться с заглавной буквы");
-                 return false;
-                 }
-                 if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicLearner").val())) {
-                 this.showError("Отчество не должно содержать латинских символов и начинаться с заглавной буквы");
-                 return false;
-                 }
-                 if (!/^[А-ЯЁа-я1-9.-]/.test($("#adressLearner").val()) || $("#adressLearner").val().length > 50) {
-                 this.showError("Адресс должен состоять из букв русского алфавита или цифр");
-                 return false;
-                 }
-                 if ($("#loginLearner").val().length < 6 || $("#loginLearner").val().length > 20) {
-                 this.showError("Не корректно введен логин. Логин должен содержать от 6 до 20 символов");
-                 return false;
-                 }
-                 if (!/^\s*(\w+)\s*$/.test($("#passLearner").val())
-                 || $("#passLearner").val().length > 20
-                 || $("#passLearner").val().length < 6) {
-                 this.showError("Не корректно введен пароль.Пароль должен содержать от 6 до 20 латинских букв и цифр");
-                 return false;
-                 }
+                if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameLearner").val())) {
+                    this.showError("�?мя не должно содержать латинских символов и начинаться с заглавной буквы");
+                    return false;
+                }
+                if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameLearner").val())) {
+                    this.showError("Фамилия не должна содержать латинских символов и начинаться с заглавной буквы");
+                    return false;
+                }
+                if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicLearner").val())) {
+                    this.showError("Отчество не должно содержать латинских символов и начинаться с заглавной буквы");
+                    return false;
+                }
+                if (!/^[А-ЯЁа-я1-9.-]/.test($("#adressLearner").val()) || $("#adressLearner").val().length > 50) {
+                    this.showError("Адресс должен состоять из букв русского алфавита или цифр");
+                    return false;
+                }
+                if ($("#loginLearner").val().length < 6 || $("#loginLearner").val().length > 20) {
+                    this.showError("Не корректно введен логин. Логин должен содержать от 6 до 20 символов");
+                    return false;
+                }
+                if (this.pass != oldpass && ( !/^\s*(\w+)\s*$/.test($("#passLearner").val())
+                    || $("#passLearner").val().length > 20
+                    || $("#passLearner").val().length < 6)) {
+                    this.showError("Не корректно введен пароль.Пароль должен содержать от 6 до 20 латинских букв и цифр");
+                    return false;
+                }
                 this.hideError();
                 return true;
             },
@@ -351,11 +352,11 @@ define([
                     type: "GET",
                     url: "/teacher"
                 }).done(function (teachers) {
-                        teachers.forEach(function (teacher) {
-                            var row = "<tr id='" + teacher._id + "'><td>" + teacher.lastName + "</td><td>" + teacher.firstName + "</td><td>" + teacher.patronymic + "</td><td>" + teacher.phone + "</td><td>" + teacher.email + "</tr>";
-                            $("#teacherTable tbody").append(row);
-                        });
+                    teachers.forEach(function (teacher) {
+                        var row = "<tr id='" + teacher._id + "'><td>" + teacher.lastName + "</td><td>" + teacher.firstName + "</td><td>" + teacher.patronymic + "</td><td>" + teacher.phone + "</td><td>" + teacher.email + "</tr>";
+                        $("#teacherTable tbody").append(row);
                     });
+                });
             },
             loadLesson: function () {
                 this.clearDataTable();
@@ -363,12 +364,12 @@ define([
                     type: "GET",
                     url: "/lesson"
                 }).done(function (lesson) {
-                        lesson.forEach(function (lesson) {
+                    lesson.forEach(function (lesson) {
 
-                            var row = "<tr id='" + lesson._id + "'><td>" + lesson.lesson + "</tr>";
-                            $("#lessonTable tbody").append(row);
-                        });
+                        var row = "<tr id='" + lesson._id + "'><td>" + lesson.lesson + "</tr>";
+                        $("#lessonTable tbody").append(row);
                     });
+                });
             },
             loadClass: function () {
                 this.clearDataTable();
@@ -376,11 +377,11 @@ define([
                     type: "GET",
                     url: "/class"
                 }).done(function (classes) {
-                        classes.forEach(function (classes) {
-                            var row = "<tr id='" + classes._id + "'><td>" + classes.nameClass + "</td><td>" + classes.teacherID + "</tr>";
-                            $("#classTable tbody").append(row);
-                        });
+                    classes.forEach(function (classes) {
+                        var row = "<tr id='" + classes._id + "'><td>" + classes.nameClass + "</td><td>" + classes.teacherID + "</tr>";
+                        $("#classTable tbody").append(row);
                     });
+                });
             },
             loadLearner: function () {
                 this.clearDataTable();
@@ -388,23 +389,23 @@ define([
                     type: "GET",
                     url: "/learner"
                 }).done(function (learner) {
-                        learner.forEach(function (learner) {
-                            var row = "<tr id='" + learner._id + "'><td>" + learner.lastName + "</td><td>" + learner.firstName + "</td><td>" + learner.patronymic + "</td><td>" + learner.class + "</td><td>" + learner.adress + "</td><td>" + learner.parents + "</tr>";
-                            $("#learnerTable tbody").append(row);
-                        });
+                    learner.forEach(function (learner) {
+                        var row = "<tr id='" + learner._id + "'><td>" + learner.lastName + "</td><td>" + learner.firstName + "</td><td>" + learner.patronymic + "</td><td>" + learner.class + "</td><td>" + learner.adress + "</td><td>" + learner.parents + "</tr>";
+                        $("#learnerTable tbody").append(row);
                     });
+                });
             },
             loadSchedule: function () {
                 $.ajax({
                     type: "GET",
                     url: "/class"
                 }).done(function (classes) {
-                        $("#scheduleContent").empty();
-                        classes.forEach(function (c) {
-                            var row = '<a id="' + c._id + '" data-toggle="modal" data-target="#modalWithSchedule" class="list-group-item">' + c.nameClass + '</a>';
-                            $("#scheduleContent").append(row);
-                        });
+                    $("#scheduleContent").empty();
+                    classes.forEach(function (c) {
+                        var row = '<a id="' + c._id + '" data-toggle="modal" data-target="#modalWithSchedule" class="list-group-item">' + c.nameClass + '</a>';
+                        $("#scheduleContent").append(row);
                     });
+                });
             },
 
             clearDataTable: function () {
@@ -441,7 +442,7 @@ define([
                 $("#parentLearner").val(learner.parents);
                 $("#adressLearner").val(learner.adress);
                 this.editId = learner._id;
-                this.pass =learner.password;
+                this.pass = learner.password;
             },
             editLesson: function (lesson) {
                 this.showCreateTable();
@@ -622,7 +623,6 @@ define([
                                 data: local,
                                 statusCode: {
                                     200: function (e) {
-                                        console.log(e);
                                     },
                                     500: onFail
                                 }
@@ -793,7 +793,7 @@ define([
                             500: onFail
                         }
                     }).done(function (response) {
-                        });
+                    });
                 }
             }
 
