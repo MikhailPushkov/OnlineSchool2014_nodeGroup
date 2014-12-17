@@ -66,15 +66,10 @@ h1 {
     color: white;
 }
 
-.hide {
-    display: none;
-}
-
 #imgOtchet {
     position: absolute;
     top: 50px;
     right: -120px;
-
 }
 
 #imgRaspisanie {
@@ -139,7 +134,6 @@ h1 {
 .profText {
     padding-left: 130px;
     color: #ffffff;
-
 }
 
 #imgFoto {
@@ -154,7 +148,6 @@ h1 {
     display: inline-block;
 }
 
-
 .dnevnik * {
     text-align: center;
 }
@@ -164,6 +157,12 @@ h1 {
     background-color: #ffffff;
     width: 45%;
     border: 2px;
+}
+
+#backButton {
+    position: absolute;
+    right: -5px;
+    top:-5px;
 }
 
 #succes {

@@ -176,9 +176,7 @@ define([
             },
 
             showSucces: function (succes) {
-                $("#succes").fadeIn(1000);
-                $("#succes").removeClass("hide").html(succes);
-                $("#succes").fadeOut(3000);
+                $("#succes").fadeIn(1000).removeClass("hide").html(succes).fadeOut(3000);
             },
 
             hideError: function () {
