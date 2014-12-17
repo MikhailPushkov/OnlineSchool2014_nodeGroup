@@ -43,6 +43,7 @@ h1 {
     padding: 15px;
     border: 5px solid #8B4513;
     margin: auto;
+    overflow: auto;
     }
 
 
