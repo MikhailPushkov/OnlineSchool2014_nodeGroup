@@ -37,15 +37,19 @@ define([
             },
             showOtchet: function () {
             },
-            showRaspisanie: function () {
-            },
             showKlass: function () {
-                $('#Raspisanie').show();
+                $('#klass').show();
+                $('.buttonContainer').hide();
+                $('#backButton').removeClass("hide");
+            },
+            showRaspisanie: function () {
+                $('#raspisanie').show();
                 $('.buttonContainer').hide();
                 $('#backButton').removeClass("hide");
             },
             goBack: function () {
-                $('#Raspisanie').hide();
+                $('#klass').hide();
+                $('#raspisanie').hide();
                 $('.buttonContainer').show();
                 $('#backButton').addClass("hide");
             }
