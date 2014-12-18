@@ -6,7 +6,8 @@ var mongoose = require('mongoose'),
         classId: String,
         "weekDay": Number,
         "room": String,
-        "lessonsOfTeacherId": String
+        "lessonsId": String,
+        "teacherId":String
     }),
     scheduledb = mongoose.model('Schedule', schedule);
 module.exports = scheduledb;

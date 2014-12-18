@@ -12,7 +12,6 @@ exports.findById = function (req, res) {
     });
 };
 
-
 exports.findAll = function (req, res) {
     var _id = req.query.user_id;
     var my_array = [];
@@ -33,10 +32,9 @@ exports.findAll = function (req, res) {
     });
 };
 
-
-exports.addschedule = function(req, res) {
+exports.addschedules = function(req, res) {
     var schedule = req.body;
-    var schedule_model = new schedule(schedule);
+    var schedule_model = new Schedule(schedule);
     schedule_model.save(function (err, new_schedule) {
         if (err) return console.error(err);
         res.send(new_schedule);
