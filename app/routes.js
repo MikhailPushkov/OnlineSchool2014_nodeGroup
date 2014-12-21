@@ -96,7 +96,8 @@ module.exports = function (app, passport) {
     app.delete('/lessonOfTeacher/:id', isLoggedIn, lessonOfTeacher_route.deletelessonOfTeacher);
     
     app.post('/schedule', isLoggedIn, schedule_route.addschedules);
-    app.get('/schedule', isLoggedIn, schedule_route.findAll);
+    app.post('/schedules', isLoggedIn, schedule_route.addSchedulesForClass);
+    app.get('/schedules/:id', isLoggedIn, schedule_route.getSchedulesByClass);
     app.get('/schedule/:id', isLoggedIn, schedule_route.findById);
     app.put('/schedule/:id', isLoggedIn, schedule_route.updateschedule);
     app.delete('/schedule/:id', isLoggedIn, schedule_route.deleteschedule);

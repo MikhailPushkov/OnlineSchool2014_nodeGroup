@@ -88,7 +88,21 @@ define([
             },
 
             showScheduleModal: function (e) {
+                $('#lessonDrp,#teacherDrp').attr("id", "").find('button').removeClass('btn-danger').find('span').html('-');
+                $('button.btn-danger');
+                var startTime = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'];
                 window.__editClass = e.currentTarget.id;
+                $.ajax({
+                    type: "GET",
+                    url: "/schedules/" + window.__editClass
+                }).done(function (schedules) {
+                        schedules.forEach(function (obj, i, arr) {
+                            var rowNum = startTime.indexOf(obj.startTime);
+                            var view = $($(".modal-body tbody tr")[rowNum]);
+                            $($(view.find('.lessonDrp')[obj.weekDay]).attr("id", obj.lessonId).find('span')[0]).html(obj.lesson.lesson);
+                            $($(view.find('.teacherDrp')[obj.weekDay]).attr("id", obj.teacherId).find('span')[0]).html(obj.teacher.lastName + " " + obj.teacher.firstName[0].toUpperCase() + "." + obj.teacher.patronymic[0].toUpperCase() + ".");
+                        });
+                    });
                 $.ajax({
                     type: "GET",
                     url: "/lesson"
@@ -116,12 +130,14 @@ define([
             },
 
             saveSchedule: function (e) {
+                var self = this;
+                var error = false;
                 var startTime = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'];
                 var endTime = ['8:45', '9:45', '10:45', '11:45', '12:45', '13:45', '14:45', '15:45'];
                 var rows = $('.modal-body tbody tr');
                 var items = [];
 
-                for (var i = 0; i < startTime.lengths; i++) {
+                for (var i = 0; i < startTime.length; i++) {
                     var row = $(rows[i]);
                     var lessons = row.find('.lessonDrp');
                     var teachers = row.find('.teacherDrp');
@@ -129,15 +145,33 @@ define([
                         var item = {
                             "startTime": startTime[i],
                             "endTime": endTime[i],
-                            "classId": __editClass,
+                            "classId": window.__editClass,
                             "weekDay": j,
                             "room": null,
-                            "lessonsId": lessons[0].id,
-                            "teacherId": teachers[0].id
+                            "lessonId": lessons[j].id,
+                            "teacherId": teachers[j].id
                         }
-                        if (item.lessonsId != "" && item.teacherId != "") items.push(item);
+
+                        if (item.lessonId && item.teacherId) {
+                            items.push(item);
+                        } else if (item.lessonId != item.teacherId) {
+                            item.lessonId ? $(teachers[j]).find("button").addClass("btn-danger") : $(lessons[j]).find("button").addClass("btn-danger");
+                            error = true;
+                        }
                     }
                 }
+                if (error) return;
+                $.ajax({
+                    type: "POST",
+                    url: "/schedules",
+                    data: {
+                        schedules: items,
+                        classId: window.__editClass
+                    }
+                }).done(function () {
+                        $('button.close').click();
+                        self.showSucces("Рассписание успешно изменено.")
+                    });
             },
 //====== scedule end =====
 
@@ -192,7 +226,7 @@ define([
             },
 
             showSucces: function (succes) {
-                $("#succes").fadeIn(1000).removeClass("hide").html(succes).fadeOut(3000);
+                $("#succes").removeClass("hide").fadeIn(500).html(succes).fadeOut(3000);
             },
 
             hideError: function () {

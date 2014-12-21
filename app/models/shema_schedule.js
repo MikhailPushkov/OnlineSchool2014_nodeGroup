@@ -1,12 +1,12 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     schedule = new Schema({
-        "startTime": Date,
-        "endTime": Date,
-        classId: String,
+        "startTime": String,
+        "endTime": String,
+        "classId": String,
         "weekDay": Number,
         "room": String,
-        "lessonsId": String,
+        "lessonId": String,
         "teacherId":String
     }),
     scheduledb = mongoose.model('Schedule', schedule);
