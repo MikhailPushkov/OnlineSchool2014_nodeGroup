@@ -1,12 +1,12 @@
 define([
-    'App',
-    'jquery',
-    'marionette',
-    'underscore',
-    'backbone',
-    'handlebars',
-    'text!bb/Templates/Admin/admin.html'
-],
+        'App',
+        'jquery',
+        'marionette',
+        'underscore',
+        'backbone',
+        'handlebars',
+        'text!bb/Templates/Admin/admin.html'
+    ],
     function (App, $, Marionette, _, Backbone, Handlebars, Template) {
 
         var AdminPage = Marionette.View.extend({
@@ -28,6 +28,9 @@ define([
                 "click #pushToServerLesson": "createLesson",
                 "click #pushToServerClass": "createClass",
                 "click .lessonDrp": "lessonDropdownClick",
+                "click #classDrp": "dropdownClickClass",
+                "click #classList .itemDropMenu": "classDropdownClick",
+
                 "click .teacherDrp": "teacherDropdownClick",
                 "click #scheduleContent a": "showScheduleModal",
                 "click #saveBtn": "saveSchedule"
@@ -48,7 +51,6 @@ define([
             lessonDropdownClick: function (e) {
                 this.dropdownClick("lessonsList", e);
             },
-
             teacherDropdownClick: function (e) {
                 this.dropdownClick("teachersList", e);
             },
@@ -96,37 +98,37 @@ define([
                     type: "GET",
                     url: "/schedules/" + window.__editClass
                 }).done(function (schedules) {
-                        schedules.forEach(function (obj, i, arr) {
-                            var rowNum = startTime.indexOf(obj.startTime);
-                            var view = $($(".modal-body tbody tr")[rowNum]);
-                            $($(view.find('.lessonDrp')[obj.weekDay]).attr("id", obj.lessonId).find('span')[0]).html(obj.lesson.lesson);
-                            $($(view.find('.teacherDrp')[obj.weekDay]).attr("id", obj.teacherId).find('span')[0]).html(obj.teacher.lastName + " " + obj.teacher.firstName[0].toUpperCase() + "." + obj.teacher.patronymic[0].toUpperCase() + ".");
-                        });
+                    schedules.forEach(function (obj, i, arr) {
+                        var rowNum = startTime.indexOf(obj.startTime);
+                        var view = $($(".modal-body tbody tr")[rowNum]);
+                        $($(view.find('.lessonDrp')[obj.weekDay]).attr("id", obj.lessonId).find('span')[0]).html(obj.lesson.lesson);
+                        $($(view.find('.teacherDrp')[obj.weekDay]).attr("id", obj.teacherId).find('span')[0]).html(obj.teacher.lastName + " " + obj.teacher.firstName[0].toUpperCase() + "." + obj.teacher.patronymic[0].toUpperCase() + ".");
                     });
+                });
                 $.ajax({
                     type: "GET",
                     url: "/lesson"
                 }).done(function (lessons) {
-                        var list = $("#lessonsList").empty();
-                        var row = '<li class="itemDropMenu" id="" role="presentation"><a role="menuitem" tabindex="-1">-</a></li>';
+                    var list = $("#lessonsList").empty();
+                    var row = '<li class="itemDropMenu" id="" role="presentation"><a role="menuitem" tabindex="-1">-</a></li>';
+                    list.append(row);
+                    lessons.forEach(function (lesson) {
+                        var row = '<li class="itemDropMenu" id="' + lesson._id + '" role="presentation"><a role="menuitem" tabindex="-1">' + lesson.lesson + '</a></li>';
                         list.append(row);
-                        lessons.forEach(function (lesson) {
-                            var row = '<li class="itemDropMenu" id="' + lesson._id + '" role="presentation"><a role="menuitem" tabindex="-1">' + lesson.lesson + '</a></li>';
-                            list.append(row);
-                        });
                     });
+                });
                 $.ajax({
                     type: "GET",
                     url: "/teacher"
                 }).done(function (teachers) {
-                        var list = $("#teachersList").empty();
-                        var row = '<li id="" class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">-</a></li>';
+                    var list = $("#teachersList").empty();
+                    var row = '<li id="" class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">-</a></li>';
+                    list.append(row);
+                    teachers.forEach(function (teacher) {
+                        var row = '<li id="' + teacher._id + '" class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">' + teacher.lastName + " " + teacher.firstName[0].toUpperCase() + "." + teacher.patronymic[0].toUpperCase() + "." + '</a></li>';
                         list.append(row);
-                        teachers.forEach(function (teacher) {
-                            var row = '<li id="' + teacher._id + '" class="itemDropMenu" role="presentation"><a role="menuitem" tabindex="-1">' + teacher.lastName + " " + teacher.firstName[0].toUpperCase() + "." + teacher.patronymic[0].toUpperCase() + "." + '</a></li>';
-                            list.append(row);
-                        });
                     });
+                });
             },
 
             saveSchedule: function (e) {
@@ -169,11 +171,30 @@ define([
                         classId: window.__editClass
                     }
                 }).done(function () {
-                        $('button.close').click();
-                        self.showSucces("Рассписание успешно изменено.")
-                    });
+                    $('button.close').click();
+                    self.showSucces("Рассписание успешно изменено.")
+                });
             },
 //====== scedule end =====
+            dropdownClickClass: function (listSelector, e) {
+                $.ajax({
+                    type: "GET",
+                    url: "/class"
+                }).done(function (classes) {
+                    var list = $("#classList").empty();
+                    var row = '<li class="itemDropMenu" id="" role="presentation"><a role="menuitem" tabindex="-1">-</a></li>';
+                    list.append(row);
+                    classes.forEach(function (classes) {
+                        var row = '<li class="itemDropMenu" id="' + classes._id + '"role="presentation"><a role="menuitem" tabindex="-1">' + classes.nameClass + '</a></li>';
+                        list.append(row);
+                    });
+                });
+            },
+
+            classDropdownClick: function (e) {
+                var el = e.currentTarget;
+                $($('#classDrp').attr("_id", el.id).find('span')[0]).html($(e.currentTarget).find('a').html());
+            },
 
             editBtnClick: function (e) {
                 var self = this;
@@ -182,21 +203,21 @@ define([
                     url: "/" + self.selectedTab + '/' + e.currentTarget.parentElement.parentElement.id
                 }).done(function (item) {
 
-                        if (self.selectedTab === "teacher" || self.selectedTab === "learner") {
-                            $.ajax({
-                                type: "GET",
-                                url: "/userItem/" + e.currentTarget.parentElement.parentElement.id
-                            }).done(function (user) {
-                                    item.login = user.local.login;
-                                    item.password = user.local.password;
-                                    var selTap = self.selectedTab;
-                                    self["edit" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)](item);
-                                });
-                        } else {
+                    if (self.selectedTab === "teacher" || self.selectedTab === "learner") {
+                        $.ajax({
+                            type: "GET",
+                            url: "/userItem/" + e.currentTarget.parentElement.parentElement.id
+                        }).done(function (user) {
+                            item.login = user.local.login;
+                            item.password = user.local.password;
                             var selTap = self.selectedTab;
                             self["edit" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)](item);
-                        }
-                    });
+                        });
+                    } else {
+                        var selTap = self.selectedTab;
+                        self["edit" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)](item);
+                    }
+                });
             },
 
             removeBtnClick: function (e) {
@@ -205,15 +226,15 @@ define([
                     type: "DELETE",
                     url: "/" + self.selectedTab + '/' + e.currentTarget.parentElement.parentElement.id
                 }).done(function () {
-                        $.ajax({
-                            type: "DELETE",
-                            url: "/user" + '/' + e.currentTarget.parentElement.parentElement.id
-                        }).done(function () {
-                            });
-
-                        var selTap = self.selectedTab;
-                        self["load" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)]();
+                    $.ajax({
+                        type: "DELETE",
+                        url: "/user" + '/' + e.currentTarget.parentElement.parentElement.id
+                    }).done(function () {
                     });
+
+                    var selTap = self.selectedTab;
+                    self["load" + selTap[0].toUpperCase() + selTap.substr(1, selTap.length - 1)]();
+                });
             },
 
             onSelectRow: function (e) {
@@ -298,20 +319,20 @@ define([
                 }
                 // Остальные проверки записывайте здесь отдельными if-ами
                 if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameTeacher").val())) {
-                    this.showError("�?мя не должно содержать латинских символов и начинаться с заглавной буквы");
+                    this.showError("Имя должно содержать русские буквы и начинаться с заглавной буквы");
                     return false;
                 }
                 if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameTeacher").val())) {
-                    this.showError("Фамилия не должна содержать латинских символов и начинаться с заглавной буквы");
+                    this.showError("Фамилия должна содержать русские буквы и начинаться с заглавной буквы");
                     return false;
                 }
                 if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicTeacher").val())) {
-                    this.showError("Отчество не должно содержать латинских символов и начинаться с заглавной буквы");
+                    this.showError("Отчество должно содержать русские буквы и начинаться с заглавной буквы");
                     return false;
                 }
 
                 if (!/^8[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/.test($("#phoneTeacher").val())) {
-                    this.showError("Не корректно введен телефон.Номер должен начинаться с 8");
+                    this.showError("Не корректно введен телефон. Номер должен состоять из 11 цифр, Номер должен начинаться с 8");
                     return false;
                 }
                 if (!/.*@[A-Za-z]*\..*/.test($("#emailTeacher").val())) {
@@ -347,19 +368,19 @@ define([
                 // Остальные проверки записывайте здесь отдельными if-ами
 
                 if (!/^[А-ЯЁ][а-яё]+$/.test($("#firstNameLearner").val())) {
-                    this.showError("�?мя не должно содержать латинских символов и начинаться с заглавной буквы");
+                    this.showError("Имя должно содержать русские буквы и начинаться с заглавной буквы");
                     return false;
                 }
                 if (!/^[А-ЯЁ][а-яё]+$/.test($("#lastNameLearner").val())) {
-                    this.showError("Фамилия не должна содержать латинских символов и начинаться с заглавной буквы");
+                    this.showError("Фамилия должно содержать русские буквы и начинаться с заглавной буквы");
                     return false;
                 }
                 if (!/^[А-ЯЁ][а-яё]+$/.test($("#patronymicLearner").val())) {
-                    this.showError("Отчество не должно содержать латинских символов и начинаться с заглавной буквы");
+                    this.showError("Отчество должно содержать русские буквы и начинаться с заглавной буквы");
                     return false;
                 }
                 if (!/^[А-ЯЁа-я1-9.-]/.test($("#adressLearner").val()) || $("#adressLearner").val().length > 50) {
-                    this.showError("Адресс должен состоять из букв русского алфавита или цифр");
+                    this.showError("Адресс должен состоять из букв русского алфавита или цифр и не должен превышать 50 символов");
                     return false;
                 }
                 if ($("#loginLearner").val().length < 6 || $("#loginLearner").val().length > 20) {
@@ -400,11 +421,11 @@ define([
                     type: "GET",
                     url: "/teacher"
                 }).done(function (teachers) {
-                        teachers.forEach(function (teacher) {
-                            var row = "<tr id='" + teacher._id + "'><td>" + teacher.lastName + "</td><td>" + teacher.firstName + "</td><td>" + teacher.patronymic + "</td><td>" + teacher.phone + "</td><td>" + teacher.email + "</tr>";
-                            $("#teacherTable tbody").append(row);
-                        });
+                    teachers.forEach(function (teacher) {
+                        var row = "<tr id='" + teacher._id + "'><td>" + teacher.lastName + "</td><td>" + teacher.firstName + "</td><td>" + teacher.patronymic + "</td><td>" + teacher.phone + "</td><td>" + teacher.email + "</tr>";
+                        $("#teacherTable tbody").append(row);
                     });
+                });
             },
             loadLesson: function () {
                 this.clearDataTable();
@@ -412,12 +433,12 @@ define([
                     type: "GET",
                     url: "/lesson"
                 }).done(function (lesson) {
-                        lesson.forEach(function (lesson) {
+                    lesson.forEach(function (lesson) {
 
-                            var row = "<tr id='" + lesson._id + "'><td>" + lesson.lesson + "</tr>";
-                            $("#lessonTable tbody").append(row);
-                        });
+                        var row = "<tr id='" + lesson._id + "'><td>" + lesson.lesson + "</tr>";
+                        $("#lessonTable tbody").append(row);
                     });
+                });
             },
             loadClass: function () {
                 this.clearDataTable();
@@ -425,35 +446,48 @@ define([
                     type: "GET",
                     url: "/class"
                 }).done(function (classes) {
-                        classes.forEach(function (classes) {
-                            var row = "<tr id='" + classes._id + "'><td>" + classes.nameClass + "</td><td>" + classes.teacherID + "</tr>";
-                            $("#classTable tbody").append(row);
-                        });
+                    classes.forEach(function (classes) {
+                        var row = "<tr id='" + classes._id + "'><td>" + classes.nameClass + "</td><td>" + classes.teacherID + "</tr>";
+                        $("#classTable tbody").append(row);
                     });
+                });
             },
             loadLearner: function () {
+
+
                 this.clearDataTable();
                 $.ajax({
                     type: "GET",
                     url: "/learner"
                 }).done(function (learner) {
-                        learner.forEach(function (learner) {
+
+
+                    learner.forEach(function (learner) {
+
+                        $.ajax({
+                            type: "GET",
+                            url: "/class/" + learner.class
+                        }).done(function (classes) {
+                            learner.class = classes.nameClass;
+
                             var row = "<tr id='" + learner._id + "'><td>" + learner.lastName + "</td><td>" + learner.firstName + "</td><td>" + learner.patronymic + "</td><td>" + learner.class + "</td><td>" + learner.adress + "</td><td>" + learner.parents + "</tr>";
                             $("#learnerTable tbody").append(row);
                         });
+
                     });
+                });
             },
             loadSchedule: function () {
                 $.ajax({
                     type: "GET",
                     url: "/class"
                 }).done(function (classes) {
-                        $("#scheduleContent").empty();
-                        classes.forEach(function (c) {
-                            var row = '<a id="' + c._id + '" data-toggle="modal" data-target="#modalWithSchedule" class="list-group-item">' + c.nameClass + '</a>';
-                            $("#scheduleContent").append(row);
-                        });
+                    $("#scheduleContent").empty();
+                    classes.forEach(function (c) {
+                        var row = '<a id="' + c._id + '" data-toggle="modal" data-target="#modalWithSchedule" class="list-group-item">' + c.nameClass + '</a>';
+                        $("#scheduleContent").append(row);
                     });
+                });
             },
 
             clearDataTable: function () {
@@ -537,53 +571,53 @@ define([
                             500: onFail
                         }
                     }).done(function (response) {
-                            var pass = self.pass;
-                            var user = {  login: $('#loginTeacher').val(),
-                                password: $('#passTeacher').val()
+                        var pass = self.pass;
+                        var user = {  login: $('#loginTeacher').val(),
+                            password: $('#passTeacher').val()
+                        };
+                        if (pass == oldpass) {
+                            var local = {  login: $('#loginTeacher').val()
                             };
-                            if (pass == oldpass) {
-                                var local = {  login: $('#loginTeacher').val()
-                                };
-                                $.ajax({
+                            $.ajax({
 
-                                    type: "PUT",
-                                    url: "/userItem/" + itemId,
-                                    data: local,
-                                    statusCode: {
-                                        200: function (e) {
-                                        },
-                                        500: onFail
-                                    }
-                                })
-                            }
-                            else {
+                                type: "PUT",
+                                url: "/userItem/" + itemId,
+                                data: local,
+                                statusCode: {
+                                    200: function (e) {
+                                    },
+                                    500: onFail
+                                }
+                            })
+                        }
+                        else {
+                            $.ajax({
+                                type: "DELETE",
+                                url: "/user" + '/' + itemId
+                            }).done(function () {
                                 $.ajax({
-                                    type: "DELETE",
-                                    url: "/user" + '/' + itemId
-                                }).done(function () {
+                                    type: "POST",
+                                    url: "/signup",
+                                    data: user
+                                })
+                                    .done(function (user) {
+                                        user.role = 'teacher';
+                                        user.itemId = itemId;
                                         $.ajax({
-                                            type: "POST",
-                                            url: "/signup",
-                                            data: user
+                                            url: '/user/' + user._id,
+                                            method: 'PUT',
+                                            data: user,
+                                            statusCode: {
+                                                200: function (e) {
+                                                },
+                                                500: onFail
+                                            }
                                         })
-                                            .done(function (user) {
-                                                user.role = 'teacher';
-                                                user.itemId = itemId;
-                                                $.ajax({
-                                                    url: '/user/' + user._id,
-                                                    method: 'PUT',
-                                                    data: user,
-                                                    statusCode: {
-                                                        200: function (e) {
-                                                        },
-                                                        500: onFail
-                                                    }
-                                                })
-                                            })
-                                            .fail(onFail);
-                                    });
-                            }
-                        })
+                                    })
+                                    .fail(onFail);
+                            });
+                        }
+                    })
                         .fail(onFail);
                     this.editId = null;
                 } else {
@@ -592,34 +626,34 @@ define([
                         url: "/teacher",
                         data: teacher
                     }).done(function (response) {
-                            $.ajax({
-                                type: "POST",
-                                url: "/signup",
-                                data: {
-                                    login: $('#loginTeacher').val(),
-                                    password: $('#passTeacher').val()
-                                }
-                            })
-                                .done(function (user) {
-                                    user.role = 'teacher';
-                                    user.itemId = response._id;
-                                    $.ajax({
-                                        url: '/user/' + user._id,
-                                        method: 'PUT',
-                                        data: user,
-                                        statusCode: {
-                                            200: function (e) {
-                                                self.loadTeacher();
-                                                $('#createBtn').removeClass("hide");
-                                                $('#createTableTeacher').addClass("hide");
-                                                onSucces("Учитель успешно создан");
-                                            },
-                                            500: onFail
-                                        }
-                                    })
-                                })
-                                .fail(onFail);
+                        $.ajax({
+                            type: "POST",
+                            url: "/signup",
+                            data: {
+                                login: $('#loginTeacher').val(),
+                                password: $('#passTeacher').val()
+                            }
                         })
+                            .done(function (user) {
+                                user.role = 'teacher';
+                                user.itemId = response._id;
+                                $.ajax({
+                                    url: '/user/' + user._id,
+                                    method: 'PUT',
+                                    data: user,
+                                    statusCode: {
+                                        200: function (e) {
+                                            self.loadTeacher();
+                                            $('#createBtn').removeClass("hide");
+                                            $('#createTableTeacher').addClass("hide");
+                                            onSucces("Учитель успешно создан");
+                                        },
+                                        500: onFail
+                                    }
+                                })
+                            })
+                            .fail(onFail);
+                    })
                         .fail(onFail);
                 }
             },
@@ -637,9 +671,9 @@ define([
                     "firstName": $("#firstNameLearner").val(),
                     "lastName": $('#lastNameLearner').val(),
                     "patronymic": $("#patronymicLearner").val(),
-                    "class": $("#classLearner").val(),
+                    "class": $("#classDrp").attr("_id"),
                     "adress": $("#adressLearner").val(),
-                    "parents": ["adsfsadfasf", "asdfasfasdf"]
+                    "parents": $("#parentLearner").val()
                 };
                 if (this.editId) {
                     var itemId = this.editId;
@@ -657,53 +691,53 @@ define([
                             500: onFail
                         }
                     }).done(function (response) {
-                            var pass = self.pass;
-                            var user = {  login: $('#loginLearner').val(),
-                                password: $('#passLearner').val()
+                        var pass = self.pass;
+                        var user = {  login: $('#loginLearner').val(),
+                            password: $('#passLearner').val()
+                        };
+                        if (pass == oldpass) {
+                            var local = {  login: $('#loginLearner').val()
                             };
-                            if (pass == oldpass) {
-                                var local = {  login: $('#loginLearner').val()
-                                };
-                                $.ajax({
+                            $.ajax({
 
-                                    type: "PUT",
-                                    url: "/userItem/" + itemId,
-                                    data: local,
-                                    statusCode: {
-                                        200: function (e) {
-                                        },
-                                        500: onFail
-                                    }
-                                })
-                            }
-                            else {
+                                type: "PUT",
+                                url: "/userItem/" + itemId,
+                                data: local,
+                                statusCode: {
+                                    200: function (e) {
+                                    },
+                                    500: onFail
+                                }
+                            })
+                        }
+                        else {
+                            $.ajax({
+                                type: "DELETE",
+                                url: "/user" + '/' + itemId
+                            }).done(function () {
                                 $.ajax({
-                                    type: "DELETE",
-                                    url: "/user" + '/' + itemId
-                                }).done(function () {
+                                    type: "POST",
+                                    url: "/signup",
+                                    data: user
+                                })
+                                    .done(function (user) {
+                                        user.role = 'learner';
+                                        user.itemId = itemId;
                                         $.ajax({
-                                            type: "POST",
-                                            url: "/signup",
-                                            data: user
+                                            url: '/user/' + user._id,
+                                            method: 'PUT',
+                                            data: user,
+                                            statusCode: {
+                                                200: function (e) {
+                                                },
+                                                500: onFail
+                                            }
                                         })
-                                            .done(function (user) {
-                                                user.role = 'learner';
-                                                user.itemId = itemId;
-                                                $.ajax({
-                                                    url: '/user/' + user._id,
-                                                    method: 'PUT',
-                                                    data: user,
-                                                    statusCode: {
-                                                        200: function (e) {
-                                                        },
-                                                        500: onFail
-                                                    }
-                                                })
-                                            })
-                                            .fail(onFail);
-                                    });
-                            }
-                        })
+                                    })
+                                    .fail(onFail);
+                            });
+                        }
+                    })
                         .fail(onFail);
                     this.loadLearner();
                     this.editId = null;
@@ -714,33 +748,33 @@ define([
                         url: "/learner",
                         data: learner
                     }).done(function (response) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/signup",
+                            data: {
+                                login: $('#loginLearner').val(),
+                                password: $('#passLearner').val()
+                            }
+                        }).done(function (user) {
+                            user.role = 'learner';
+                            user.itemId = response._id;
                             $.ajax({
-                                type: "POST",
-                                url: "/signup",
-                                data: {
-                                    login: $('#loginLearner').val(),
-                                    password: $('#passLearner').val()
+                                url: '/user/' + user._id,
+                                method: 'PUT',
+                                data: user,
+                                statusCode: {
+                                    200: function (e) {
+                                        self.loadLearner();
+                                        $('#createBtn').removeClass("hide");
+                                        $('#createTableLearner').addClass("hide");
+                                        onSucces("Ученик успешно создан");
+                                    },
+                                    500: onFail
                                 }
-                            }).done(function (user) {
-                                    user.role = 'learner';
-                                    user.itemId = response._id;
-                                    $.ajax({
-                                        url: '/user/' + user._id,
-                                        method: 'PUT',
-                                        data: user,
-                                        statusCode: {
-                                            200: function (e) {
-                                                self.loadLearner();
-                                                $('#createBtn').removeClass("hide");
-                                                $('#createTableLearner').addClass("hide");
-                                                onSucces("Ученик успешно создан");
-                                            },
-                                            500: onFail
-                                        }
-                                    })
-                                })
-                                .fail(onFail);
+                            })
                         })
+                            .fail(onFail);
+                    })
                         .fail(onFail);
                 }
             },
@@ -771,7 +805,7 @@ define([
                             500: onFail
                         }
                     }).done(function (response) {
-                        })
+                    })
                         .fail(onFail);
                     this.editId = null;
                 }
@@ -790,7 +824,7 @@ define([
                             500: onFail
                         }
                     }).done(function (response) {
-                        });
+                    });
                 }
             },
             createClass: function () {
@@ -821,7 +855,7 @@ define([
                             500: onFail
                         }
                     }).done(function (response) {
-                        })
+                    })
                         .fail(onFail);
                     this.loadClass();
                     this.editId = null;
@@ -841,7 +875,7 @@ define([
                             500: onFail
                         }
                     }).done(function (response) {
-                        });
+                    });
                 }
             }
 

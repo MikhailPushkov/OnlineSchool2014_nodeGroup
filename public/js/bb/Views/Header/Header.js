@@ -57,8 +57,14 @@ define([
                     }
 
                     if (role == 'learner'){
+                        $.ajax({
+                            type: "GET",
+                            url: "/class/" + item.class
+                        }).done(function (classes) {
+                            $(self.el).find('#class').removeClass("hide").html(classes.nameClass);
+                        });
+
                         $(self.el).find('#role').removeClass("hide").html("Ученик");
-                        $(self.el).find('#class').removeClass("hide").html(item.class);
                         $(self.el).find('#imgFoto').removeClass("hide");
                         return;
                     }

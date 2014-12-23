@@ -17,7 +17,7 @@ var deleteSchedulesForClass = function (classid, onsuccess) {
 
 exports.findById = function (req, res) {
     var id = req.params.id;
-    schedule.findOne({ _id: id }, function (err, schedule) {
+    Schedule.findOne({ _id: id }, function (err, schedule) {
         if (err) return res.send(404, "schedule not found");
         res.send(schedule);
     });

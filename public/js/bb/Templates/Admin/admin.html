@@ -79,7 +79,18 @@
                 <td><input id="lastNameLearner" type="text" class="form-control"/></td>
                 <td><input id="firstNameLearner" type="text" class="form-control"/></td>
                 <td><input id="patronymicLearner" type="text" class="form-control"/></td>
-                <td><input id="classLearner" type="text" class="form-control"/></td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="classDrp" data-toggle="dropdown" aria-expanded="true">
+                            <span>-</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul id="classList" class="dropdown-menu" role="menu" aria-labelledby="classDrp">
+
+                        </ul>
+                    </div>
+                </td>
+
                 <td><input id="parentLearner" type="text" class="form-control"/></td>
                 <td><input id="adressLearner" type="text" class="form-control"/></td>
                 <td><input id="loginLearner" type="text" class="form-control"/></td>
@@ -91,6 +102,7 @@
                 </td>
             </tr>
         </table>
+
         <table id="learnerTable" class="itemsTable table table-bordered table-striped table-hover"
                style="background-color: #ffffff">
             <thead>
@@ -1099,7 +1111,7 @@
         </div>
     </td>
     <td>
-        <div class="teacherDrp dropdown">
+        <div class="ClassDrp dropdown">
             <button class="btn btn-default" type="button">
                 <span>-</span>
                 <span class="caret"></span>

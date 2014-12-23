@@ -36,9 +36,31 @@ define([
             },
 
             showDnevnik: function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/learner/" + this.model.attributes.itemId
+                }).done(function (item) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/schedules/" + item.class
+                    }).done(function (schedule) {
+
+
+                        schedule.forEach(function (schedule) {
+
+
+                        });
+
+
+                    });
+                });
+
+
                 $('#dnevnikPage').show();
                 $('.buttonContainer').hide();
                 $('#backButton').removeClass("hide");
+
+
             },
 
             showReting: function () {
@@ -53,6 +75,7 @@ define([
                 $('.buttonContainer').show();
                 $('#backButton').addClass("hide");
             }
+
         });
         return Learner;
     });
