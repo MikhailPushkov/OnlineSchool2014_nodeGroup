@@ -36,6 +36,9 @@ define([
             },
 
             showDnevnik: function () {
+                var week = ["Понедельник", "Вторник","Среда","Четверг","Пятница", "Суббота"];
+                var startTime = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00','16:00'];
+
                 $.ajax({
                     type: "GET",
                     url: "/learner/" + this.model.attributes.itemId
@@ -44,14 +47,27 @@ define([
                         type: "GET",
                         url: "/schedules/" + item.class
                     }).done(function (schedule) {
+                      //  console.log(schedule);
+                        $("#dnevnikContainer").empty();
+                        for (var wi = 0; wi < week.length; wi++) {
+                            $("#dnevnikContainer").append('<table class="dnevnik" style="margin-right:20px;" rules="all"><col width="120" align="center"><col width="150" valign="top"><col width="300"><col width="50" align="center"><col width="50" align="center"><tr><th colspan="100%" align="center">' + week[wi] + '</th></tr><tr align="center"><th>№</th><th>Предмет</th><th>Домашнее задание</th><th>Оценка</th><th>Посещ-ть</th></tr></table>');
+                            for (var li = 0; li < startTime.length; li++) {
+                                var curLes = {id:0};
+                                   schedule.forEach(function (s) {
+                                    if (s.weekDay == wi && s.startTime == startTime[li]) {
+                                        curLes = s;
 
+                                        $($("#dnevnikContainer .dnevnik")[wi]).append('<tr align="center"><td>' + curLes.startTime + "-" + curLes.endTime + '</td><td>' +  curLes.lesson.lesson +  "" + '</td><td></td><td></td><td></td></tr>');
 
-                        schedule.forEach(function (schedule) {
+                                      //  $($("#dnevnikContainer .dnevnik")[wi]).append('<tr align="center"><td>' + curLes.startTime + "-" + curLes.endTime + '</td><td>' +  curLes.lesson.lesson +  "" + '</td><td>стр.10 №5</td><td>4</td><td></td></tr>');
+                                    }
+                                });
+                                if(curLes.id ==0 ) {
+                                    $($("#dnevnikContainer .dnevnik")[wi]).append('<tr align="center"><td>' + '</td><td>' + "" + '</td><td>-</td><td></td><td></td></tr>');
+                                }//  $($("#dnevnikContainer .dnevnik")[li]).append('<tr align="center"><td>' + curLes ? curLes.startTime : "" + '</td><td>' + curLes ? curLes.lesson.lesson : "" + '</td><td>стр.10 №5</td><td>4</td><td></td></tr>');
 
-
-                        });
-
-
+                            }
+                        }
                     });
                 });
 
