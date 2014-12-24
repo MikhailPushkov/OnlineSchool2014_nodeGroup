@@ -56,17 +56,17 @@ exports.getSchedulesByClass = function (req, res) {
     var classId = req.params.id ;
     if (classId) {
         Schedule.find({ 'classId': classId }, function (err, collection) {
+            var number = collection.length;
             collection.forEach(function (o, i, arr) {
                 o = JSON.parse(JSON.stringify(o));
                 teacher.findOne({ _id: o.teacherId }, function (err, teacher) {
                     if (err) return res.send(404, "Teacher not found");
-
                     o.teacher = JSON.parse(JSON.stringify(teacher));
                     lesson.findOne({ _id: o.lessonId }, function (err, les) {
                         if (err) return res.send(404, "Lesson not found");
                         o.lesson = JSON.parse(JSON.stringify(les));
                         arr[i] = o;
-                        if (i == (arr.length - 1)) {
+                        if (!(--number)) {
                             res.send(collection);
                         }
                     });
