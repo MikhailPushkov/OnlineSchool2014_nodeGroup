@@ -36,6 +36,9 @@ define([
                 return this;
             },
             showOtchet: function () {
+                $('#otchet').show();
+                $('.buttonContainer').hide();
+                $('#backButton').removeClass("hide");
             },
             showKlass: function () {
                 $('#klass').show();
@@ -50,6 +53,7 @@ define([
             goBack: function () {
                 $('#klass').hide();
                 $('#raspisanie').hide();
+                $('#otchet').hide();
                 $('.buttonContainer').show();
                 $('#backButton').addClass("hide");
             }
